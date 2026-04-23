@@ -1,0 +1,69 @@
+# ─── SECRETS & CREDENTIALS ───────────────────────
+# Jamais pousser ces fichiers sur GitHub !
+.env
+.env.local
+.env.production
+secrets/
+*.key
+*.pem
+*.p12
+service-account*.json
+
+# ─── PYTHON ──────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ─── AIRFLOW ─────────────────────────────────────
+airflow/logs/*
+airflow.db
+airflow.cfg
+standalone_admin_password.txt
+
+# ─── DBT ─────────────────────────────────────────
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+
+# ─── TERRAFORM ───────────────────────────────────
+# tfstate contient l'état de ton infra GCP — très sensible
+infra/terraform/.terraform/
+infra/terraform/*.tfstate
+infra/terraform/*.tfstate.backup
+infra/terraform/*.tfvars
+infra/terraform/override.tf
+infra/terraform/crash.log
+
+# ─── DOCKER ──────────────────────────────────────
+# Pas les images locales
+*.tar
+
+# ─── JUPYTER NOTEBOOKS ───────────────────────────
+# Les outputs des notebooks (trop lourds)
+notebooks/.ipynb_checkpoints/
+
+# ─── SYSTÈME D'EXPLOITATION ──────────────────────
+.DS_Store          # Mac
+Thumbs.db          # Windows
+desktop.ini        # Windows
+*.swp              # Vim
+
+# ─── IDE & ÉDITEURS ──────────────────────────────
+.vscode/
+.idea/
+*.iml
+
+# ─── LOGS GÉNÉRAUX ───────────────────────────────
+*.log
+logs/
