@@ -76,18 +76,7 @@ services:
       - ./airflow/plugins:/opt/airflow/plugins
       - ./airflow/config:/opt/airflow/config
       - ./airflow/logs:/opt/airflow/logs
-    command: >
-      bash -c "
-        airflow db migrate &&
-        airflow users create
-          --username admin
-          --password admin
-          --firstname Admin
-          --lastname User
-          --role Admin
-          --email admin@example.com &&
-        echo 'Airflow initialise avec succes !'
-      "
+    command: ["bash", "-c", "airflow db init && airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com && echo 'Airflow initialise avec succes !'"]
     networks:
       - price_network
 
