@@ -1,26 +1,15 @@
-# ─────────────────────────────────────────────────────
-# Docker Compose — Price Intelligence Platform
-# Lance tous les services du projet en local
-# ─────────────────────────────────────────────────────
-
-# ─── VOLUMES ──────────────────────────────────────────
 volumes:
   postgres_data:
   airflow_logs:
   nifi_data:
   bigtable_data:
 
-# ─── NETWORKS ─────────────────────────────────────────
 networks:
   price_network:
     driver: bridge
 
-# ─── SERVICES ─────────────────────────────────────────
 services:
 
-  # ══════════════════════════════════════════════════
-  # SERVICE 1 : PostgreSQL
-  # ══════════════════════════════════════════════════
   postgres:
     image: postgres:15
     container_name: price_postgres
@@ -41,9 +30,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # ══════════════════════════════════════════════════
-  # SERVICE 2 : Bigtable Emulator
-  # ══════════════════════════════════════════════════
   bigtable-emulator:
     image: gcr.io/google.com/cloudsdktool/cloud-sdk:emulators
     container_name: price_bigtable_emulator
@@ -57,9 +43,6 @@ services:
     networks:
       - price_network
 
-  # ══════════════════════════════════════════════════
-  # SERVICE 3 : Airflow Init
-  # ══════════════════════════════════════════════════
   airflow-init:
     image: apache/airflow:2.8.1
     container_name: price_airflow_init
@@ -76,13 +59,10 @@ services:
       - ./airflow/plugins:/opt/airflow/plugins
       - ./airflow/config:/opt/airflow/config
       - ./airflow/logs:/opt/airflow/logs
-    command: ["bash", "-c", "airflow db init && airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com && echo 'Airflow initialise avec succes !'"]
+    command: ["bash", "-c", "airflow db init && airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com"]
     networks:
       - price_network
 
-  # ══════════════════════════════════════════════════
-  # SERVICE 4 : Airflow Webserver
-  # ══════════════════════════════════════════════════
   airflow-webserver:
     image: apache/airflow:2.8.1
     container_name: price_airflow_webserver
@@ -110,9 +90,6 @@ services:
     networks:
       - price_network
 
-  # ══════════════════════════════════════════════════
-  # SERVICE 5 : Airflow Scheduler
-  # ══════════════════════════════════════════════════
   airflow-scheduler:
     image: apache/airflow:2.8.1
     container_name: price_airflow_scheduler
@@ -137,9 +114,6 @@ services:
     networks:
       - price_network
 
-  # ══════════════════════════════════════════════════
-  # SERVICE 6 : Apache NiFi
-  # ══════════════════════════════════════════════════
   nifi:
     image: apache/nifi:1.24.0
     container_name: price_nifi
@@ -149,33 +123,31 @@ services:
       SINGLE_USER_CREDENTIALS_USERNAME: ${NIFI_USERNAME}
       SINGLE_USER_CREDENTIALS_PASSWORD: ${NIFI_PASSWORD}
       BIGTABLE_EMULATOR_HOST: bigtable-emulator:8086
+      NIFI_JVM_HEAP_INIT: 512m
+      NIFI_JVM_HEAP_MAX: 1g
     volumes:
       - nifi_data:/opt/nifi/nifi-current/data
       - ./nifi/templates:/opt/nifi/nifi-current/conf/templates
-      - ./nifi/conf:/opt/nifi/nifi-current/conf
       - ./nifi/logs:/opt/nifi/nifi-current/logs
     ports:
       - "8443:8443"
     networks:
       - price_network
 
-  # ══════════════════════════════════════════════════
-  # SERVICE 7 : Streamlit App
-  # ══════════════════════════════════════════════════
-  #app:
-  #  build:
-    #  context: ./app
-    #  dockerfile: Dockerfile
-    #container_name: price_app
-   # restart: unless-stopped
-   # environment:
-    #  APP_ENV: ${APP_ENV}
-     # BIGTABLE_EMULATOR_HOST: ${BIGTABLE_EMULATOR_HOST}
-     # BIGTABLE_PROJECT_ID: ${BIGTABLE_PROJECT_ID}
-     # BIGTABLE_INSTANCE_ID: ${BIGTABLE_INSTANCE_ID}
-  #  volumes:
-     # - ./app:/app
-   # ports:
-      #- "8501:8501"
-  #  networks:
-     # - price_network
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: price_app
+    restart: unless-stopped
+    environment:
+      APP_ENV: ${APP_ENV}
+      BIGTABLE_EMULATOR_HOST: ${BIGTABLE_EMULATOR_HOST}
+      BIGTABLE_PROJECT_ID: ${BIGTABLE_PROJECT_ID}
+      BIGTABLE_INSTANCE_ID: ${BIGTABLE_INSTANCE_ID}
+    volumes:
+      - ./app:/app
+    ports:
+      - "8501:8501"
+    networks:
+      - price_network
