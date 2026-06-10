@@ -1,0 +1,32 @@
+name: Lint Code
+
+on:
+  push:
+    branches: [ develop, main, feature/* ]
+  pull_request:
+    branches: [ develop, main ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install linting tools
+        run: |
+          pip install pylint flake8
+
+      - name: Run flake8
+        run: |
+          flake8 . --max-line-length=120 --exclude=.terraform,.git
+
+- name: Run pylint
+        run: |
+          pylint scrapers/ app/ airflow/dags/ --fail-under=7.0 || true
