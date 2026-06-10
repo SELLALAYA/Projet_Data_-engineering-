@@ -18,9 +18,10 @@ provider "google" {
 # GCS BUCKET — Terraform State
 # ─────────────────────────────────────────
 resource "google_storage_bucket" "terraform_state" {
-  name          = "price-intelligence-terraform-state"
-  location      = var.region
-  force_destroy = true
+  name                        = "tf-state-project-32a82952"
+  location                    = var.region
+  force_destroy               = true
+  uniform_bucket_level_access = true
 
   versioning {
     enabled = true
@@ -94,9 +95,8 @@ resource "google_composer_environment" "airflow" {
     software_config {
       image_version = "composer-2-airflow-2"
     }
-
     node_config {
-      machine_type = "e2-medium"
+      service_account = google_service_account.app_sa.email
     }
   }
 }

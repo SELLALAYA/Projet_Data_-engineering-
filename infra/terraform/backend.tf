@@ -1,6 +1,5 @@
 terraform {
-  backend "gcs" {
-    bucket = "price-intelligence-terraform-state"
-    prefix = "terraform/state"
+  backend "local" {
+    path = "terraform.tfstate"
   }
 }

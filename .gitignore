@@ -44,7 +44,10 @@ infra/terraform/*.tfstate.backup
 infra/terraform/*.tfvars
 infra/terraform/override.tf
 infra/terraform/crash.log
-
+infra/terraform/*.json
+*terraform-sa-key.json
+UsersHpterraform-sa-key.json
+infra/terraform/terraform.tfstate*
 # ─── DOCKER ──────────────────────────────────────
 # Pas les images locales
 *.tar
