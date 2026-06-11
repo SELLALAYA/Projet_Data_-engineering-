@@ -1,0 +1,50 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: []
+
+rule_files:
+  - "alerts.yml"
+
+scrape_configs:
+  # ─────────────────────────────────────────
+  # STREAMLIT APP
+  # ─────────────────────────────────────────
+  - job_name: 'price-intelligence-app'
+    static_configs:
+      - targets: ['price-intelligence-app:8501']
+    metrics_path: '/metrics'
+
+  # ─────────────────────────────────────────
+  # NIFI
+  # ─────────────────────────────────────────
+  - job_name: 'nifi'
+    static_configs:
+      - targets: ['nifi:8443']
+    metrics_path: '/nifi-api/system-diagnostics'
+
+  # ─────────────────────────────────────────
+  # KUBERNETES NODES
+  # ─────────────────────────────────────────
+  - job_name: 'kubernetes-nodes'
+    kubernetes_sd_configs:
+      - role: node
+    scheme: https
+    tls_config:
+      insecure_skip_verify: true
+    bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+
+  # ─────────────────────────────────────────
+  # KUBERNETES PODS
+  # ─────────────────────────────────────────
+  - job_name: 'kubernetes-pods'
+    kubernetes_sd_configs:
+      - role: pod
+    relabel_configs:
+      - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+        action: keep
+        regex: true
