@@ -1,0 +1,42 @@
+version: 2
+
+sources:
+  - name: price_intelligence_dbt
+    database: project-32a82952-90fa-4dd7-b9c
+    schema: price_intelligence_dbt
+    tables:
+      - name: prices_raw
+
+models:
+  - name: stg_prices
+    description: "Staging layer - raw data normalized from seed"
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+      - name: price
+        tests:
+          - not_null
+
+  - name: prices_cleaned
+    description: "Cleaned layer - validated and deduplicated"
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+          - unique:
+              config:
+                severity: warn
+      - name: price
+        tests:
+          - not_null
+
+  - name: prices_aggregated
+    description: "Aggregated layer - analytics ready by source and category"
+    columns:
+      - name: source
+        tests:
+          - not_null
+      - name: total_products
+        tests:
+          - not_null

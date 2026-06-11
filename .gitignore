@@ -1,5 +1,4 @@
 # ─── SECRETS & CREDENTIALS ───────────────────────
-# Jamais pousser ces fichiers sur GitHub !
 .env
 .env.local
 .env.production
@@ -8,6 +7,10 @@ secrets/
 *.pem
 *.p12
 service-account*.json
+gcp-credentials*.json
+credentials.json
+*-credentials*.json
+secret/
 
 # ─── PYTHON ──────────────────────────────────────
 __pycache__/
@@ -37,7 +40,6 @@ dbt/dbt_packages/
 dbt/logs/
 
 # ─── TERRAFORM ───────────────────────────────────
-# tfstate contient l'état de ton infra GCP — très sensible
 infra/terraform/.terraform/
 infra/terraform/*.tfstate
 infra/terraform/*.tfstate.backup
@@ -46,24 +48,26 @@ infra/terraform/override.tf
 infra/terraform/crash.log
 
 # ─── DOCKER ──────────────────────────────────────
-# Pas les images locales
 *.tar
 
-# ─── JUPYTER NOTEBOOKS ───────────────────────────
-# Les outputs des notebooks (trop lourds)
+# ─── JUPYTER ─────────────────────────────────────
 notebooks/.ipynb_checkpoints/
 
-# ─── SYSTÈME D'EXPLOITATION ──────────────────────
-.DS_Store          # Mac
-Thumbs.db          # Windows
-desktop.ini        # Windows
-*.swp              # Vim
+# ─── OS ──────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
 
-# ─── IDE & ÉDITEURS ──────────────────────────────
+# ─── IDE ─────────────────────────────────────────
 .vscode/
 .idea/
 *.iml
 
-# ─── LOGS GÉNÉRAUX ───────────────────────────────
+# ─── LOGS ────────────────────────────────────────
 *.log
 logs/
+
+# ─── NODE ────────────────────────────────────────
+node_modules/
+app/frontend/dist/

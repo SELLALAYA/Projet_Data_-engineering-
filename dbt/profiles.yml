@@ -1,0 +1,18 @@
+price_intelligence:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth-secrets
+      project: project-32a82952-90fa-4dd7-b9c
+      dataset: price_intelligence_dbt
+      threads: 4
+      timeout_seconds: 300
+      location: US
+      refresh_token: "{{ env_var('DBT_REFRESH_TOKEN') }}"
+      client_id: "{{ env_var('DBT_CLIENT_ID') }}"
+      client_secret: "{{ env_var('DBT_CLIENT_SECRET') }}"
+      token_uri: "https://oauth2.googleapis.com/token"
+      scopes:
+        - "https://www.googleapis.com/auth/bigquery"
+        - "https://www.googleapis.com/auth/cloud-platform"
