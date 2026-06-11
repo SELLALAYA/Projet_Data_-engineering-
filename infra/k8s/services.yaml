@@ -1,0 +1,34 @@
+# ─────────────────────────────────────────
+# STREAMLIT APP SERVICE
+# ─────────────────────────────────────────
+apiVersion: v1
+kind: Service
+metadata:
+  name: price-intelligence-app
+  namespace: default
+spec:
+  selector:
+    app: price-intelligence-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8501
+  type: LoadBalancer
+
+---
+# ─────────────────────────────────────────
+# NIFI SERVICE
+# ─────────────────────────────────────────
+apiVersion: v1
+kind: Service
+metadata:
+  name: nifi
+  namespace: default
+spec:
+  selector:
+    app: nifi
+  ports:
+    - protocol: TCP
+      port: 8443
+      targetPort: 8443
+  type: ClusterIP

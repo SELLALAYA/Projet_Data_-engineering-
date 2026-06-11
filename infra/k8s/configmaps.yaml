@@ -1,0 +1,27 @@
+# ─────────────────────────────────────────
+# APP CONFIG
+# ─────────────────────────────────────────
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: default
+data:
+  APP_ENV: "production"
+  GCP_REGION: "europe-west1"
+  BIGTABLE_INSTANCE_ID: "price-intelligence-bt"
+  GKE_CLUSTER_NAME: "price-intelligence-gke"
+  LOG_LEVEL: "INFO"
+
+---
+# ─────────────────────────────────────────
+# NIFI CONFIG
+# ─────────────────────────────────────────
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nifi-config
+  namespace: default
+data:
+  NIFI_WEB_HTTPS_PORT: "8443"
+  NIFI_CLUSTER_IS_NODE: "false"
