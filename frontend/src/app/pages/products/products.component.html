@@ -1,0 +1,234 @@
+<div class="page-wrapper container-premium">
+  <header class="hero-section animate-fade-in">
+    <div class="hero-header-content">
+      <div class="hero-info">
+        <div class="hero-badge">Asset Inventory</div>
+        <h1 class="hero-title">Global Product Database</h1>
+        <p class="hero-sub">
+          Cross-source market tracking — <strong>{{ totalCount | number }}</strong> unique financial assets indexed across Morocco.
+        </p>
+      </div>
+      <div class="hero-actions">
+        <button class="btn-premium btn-premium-primary" (click)="exportCSV()">
+          <i class="bi bi-download"></i> Export Data (CSV)
+        </button>
+      </div>
+    </div>
+    <div class="stat-highlights mt-5">
+      <div class="stat-mini-card" *ngFor="let stat of sourceStats">
+        <div class="stat-icon-wrap" [ngClass]="'icon-' + stat.color">
+          <i class="bi" [ngClass]="stat.icon"></i>
+        </div>
+        <div class="stat-details">
+          <span class="stat-count">{{ stat.count | number }}</span>
+          <span class="stat-name">{{ stat.name }}</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="controls-section animate-fade-in">
+    <!-- SEARCH & PRIMARY FILTERS -->
+    <div class="search-primary-bar">
+      <div class="search-container-premium">
+        <i class="bi bi-search"></i>
+        <input type="text" class="input-premium"
+               placeholder="Search by asset name, brand, or model..."
+               [(ngModel)]="searchTerm"
+               (ngModelChange)="onSearchChange($event)"
+               (keyup.enter)="onFilterChange()">
+      </div>
+
+      <div class="view-toggle-premium">
+        <button class="toggle-btn" [class.active]="isGridView" (click)="isGridView = true">
+          <i class="bi bi-grid-3x3-gap"></i>
+        </button>
+        <button class="toggle-btn" [class.active]="!isGridView" (click)="isGridView = false">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="filter-ecosystem mt-4">
+      <div class="filter-column">
+        <label class="filter-header-label">Market Segments</label>
+        <div class="source-selector">
+          <div class="source-chip"
+               *ngFor="let s of sources"
+               [class.active]="selectedSource === s"
+               (click)="selectSource(s)">
+            {{ s === 'All' ? 'Global Market' : s }}
+          </div>
+        </div>
+      </div>
+
+      <div class="filter-column">
+        <label class="filter-header-label">Categories</label>
+        <div class="category-strip">
+          <div class="category-tag"
+               *ngFor="let c of categories"
+               [class.active]="selectedCategory === c"
+               (click)="selectCategory(c)">
+            {{ c === 'All' ? 'All Verticals' : c }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="advanced-params-bar mt-4 pt-4 border-top">
+      <div class="param-group">
+        <label class="param-label">Financial Variance (MAD)</label>
+        <div class="price-input-group">
+          <input type="number" class="input-premium mini" [(ngModel)]="minPrice" placeholder="Min">
+          <span class="separator"></span>
+          <input type="number" class="input-premium mini" [(ngModel)]="maxPrice" placeholder="Max">
+          <button class="btn-premium btn-premium-primary mini" (click)="onFilterChange()">Apply</button>
+        </div>
+      </div>
+
+      <div class="param-group">
+        <label class="param-label">Sort Strategy</label>
+        <select class="input-premium mini-select" [(ngModel)]="sortBy" (change)="onFilterChange()">
+          <option value="newest">Recent Scrapes</option>
+          <option value="price_asc">Price: Low to High</option>
+          <option value="price_desc">Price: High to Low</option>
+          <option value="discount_pct">Peak Discount %</option>
+          <option value="rating">User Rating</option>
+        </select>
+      </div>
+
+      <div class="param-group ms-auto">
+        <label class="param-label">Results / Page</label>
+        <select class="input-premium mini-select" [(ngModel)]="pageSize" (change)="onFilterChange()">
+          <option [ngValue]="20">20 Items</option>
+          <option [ngValue]="50">50 Items</option>
+          <option [ngValue]="100">100 Items</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <div class="results-meta-bar mb-4">
+    <div class="results-summary">
+      Showing <strong>{{ (currentPage - 1) * pageSize + 1 }}-{{ Math.min(currentPage * pageSize, totalCount) }}</strong> of <strong>{{ totalCount | number }}</strong> entities
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="loading-state-premium py-5">
+    <div class="loader-ring"></div>
+    <p>Calibrating Market View...</p>
+  </div>
+
+  <div *ngIf="!loading">
+    <!-- GRID VIEW -->
+    <div class="product-grid-premium animate-fade-in" *ngIf="isGridView">
+      <div class="asset-card" *ngFor="let p of products">
+        <div class="asset-visual">
+          <img *ngIf="p.image_url" [src]="p.image_url" [alt]="p.name"
+               (error)="onImageError($event)" class="asset-img">
+          <div *ngIf="!p.image_url" class="asset-placeholder">
+             <i class="bi bi-image"></i>
+          </div>
+          <div class="asset-source-badge" [attr.data-source]="p.source">{{ p.source }}</div>
+        </div>
+        <div class="asset-content">
+          <div class="asset-meta-tags">
+            <span class="category-pill">{{ p.category }}</span>
+          </div>
+          <h3 class="asset-title" [title]="p.name">{{ p.name }}</h3>
+          <div class="asset-pricing">
+            <div class="price-main">{{ p.price | number:'1.0-0' }} <span class="currency">MAD</span></div>
+            <div class="price-secondary" *ngIf="p.old_price > p.price">
+              <span class="old">{{ p.old_price | number:'1.0-0' }}</span>
+              <span class="discount-delta">-{{ p.discount_pct | number:'1.0-0' }}%</span>
+            </div>
+          </div>
+          <div class="asset-footer">
+            <button class="btn-premium btn-premium-outline w-100" (click)="openProductLink(p)">View Full Store Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIST VIEW -->
+    <div class="table-container-premium animate-fade-in" *ngIf="!isGridView">
+      <table class="table-premium">
+        <thead>
+          <tr>
+            <th>Entity Specification</th>
+            <th>Market Segment</th>
+            <th>Financial Valuation</th>
+            <th>Performance</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of products" class="asset-row">
+            <td>
+              <div class="table-asset-info">
+                <div class="table-asset-thumb">
+                  <img *ngIf="p.image_url" [src]="p.image_url" [alt]="p.name" (error)="onImageError($event)">
+                </div>
+                <div class="table-asset-text">
+                  <div class="asset-main-name">{{ p.name | slice:0:70 }}{{ p.name.length > 70 ? '...' : '' }}</div>
+                  <div class="asset-sub-text">{{ p.category }}</div>
+                </div>
+              </div>
+            </td>
+            <td><span class="source-tag-premium" [attr.data-source]="p.source">{{ p.source }}</span></td>
+            <td>
+              <div class="table-price-primary">{{ p.price | number:'1.0-0' }} MAD</div>
+              <div class="table-price-secondary" *ngIf="p.old_price > p.price">
+                <span class="old-val">{{ p.old_price | number:'1.0-0' }} MAD</span>
+                <span class="discount-val">{{ p.discount_pct | number:'1.0-0' }}% reduction</span>
+              </div>
+            </td>
+            <td>
+              <div class="performance-metric">
+                <i class="bi bi-star-fill text-warning" *ngIf="p.rating"></i>
+                <span class="metric-val">{{ p.rating || 'N/A' }}</span>
+              </div>
+            </td>
+            <td>
+              <button class="btn-premium btn-premium-outline py-2 px-3" (click)="openProductLink(p)">
+                Analysis
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- EMPTY STATE -->
+    <div class="empty-state-premium animate-fade-in" *ngIf="products.length === 0">
+      <div class="empty-icon-wrap">
+        <i class="bi bi-search"></i>
+      </div>
+      <h3 class="empty-title">Zero Matches Found</h3>
+      <p class="empty-msg">No entities align with your current parameter matrix.</p>
+      <button class="btn-premium btn-premium-primary" (click)="searchTerm=''; selectedSource='All'; selectedCategory='All'; onFilterChange()">Reset System Filters</button>
+    </div>
+  </div>
+
+  <!-- PAGINATION -->
+  <footer class="pagination-container-premium mt-5" *ngIf="totalPages > 1 && !loading">
+    <div class="pagination-summary">
+      Page <strong>{{ currentPage }}</strong> of <strong>{{ totalPages }}</strong>
+    </div>
+    <div class="pagination-controls">
+      <button class="control-btn" (click)="prevPage()" [disabled]="currentPage === 1">
+        <i class="bi bi-chevron-left"></i>
+      </button>
+      <div class="page-numbers">
+        <button class="page-link" [class.active]="currentPage === 1" (click)="currentPage=1; loadProducts()">1</button>
+        <span class="dots" *ngIf="currentPage > 3">...</span>
+        <button class="page-link active" *ngIf="currentPage > 1 && currentPage < totalPages">{{ currentPage }}</button>
+        <span class="dots" *ngIf="currentPage < totalPages - 2">...</span>
+        <button class="page-link" [class.active]="currentPage === totalPages" (click)="currentPage=totalPages; loadProducts()">{{ totalPages }}</button>
+      </div>
+      <button class="control-btn" (click)="nextPage()" [disabled]="currentPage === totalPages">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </footer>
+</div>

@@ -1,0 +1,139 @@
+<div class="container-fluid py-4">
+  <div class="row mb-4 align-items-center">
+    <div class="col-md-8">
+      <h2 class="fw-bold mb-1">Price Intelligence Platform</h2>
+      <p class="text-secondary mb-0">Real-time e-commerce price monitoring · Morocco</p>
+    </div>
+    <div class="col-md-4 text-md-end mt-3 mt-md-0">
+      <button class="btn btn-primary" (click)="triggerPipeline()">
+        <i class="bi bi-play-fill"></i> Trigger Pipeline
+      </button>
+    </div>
+  </div>
+
+  <div class="d-flex flex-wrap gap-2 mb-4">
+    <span class="badge border border-secondary text-secondary">Scrapy</span>
+    <i class="bi bi-arrow-right text-secondary mt-1" style="font-size: 12px;"></i>
+    <span class="badge border border-secondary text-secondary">NiFi</span>
+    <i class="bi bi-arrow-right text-secondary mt-1" style="font-size: 12px;"></i>
+    <span class="badge border border-secondary text-secondary">Bigtable</span>
+    <i class="bi bi-arrow-right text-secondary mt-1" style="font-size: 12px;"></i>
+    <span class="badge border border-secondary text-secondary">Airflow</span>
+    <i class="bi bi-arrow-right text-secondary mt-1" style="font-size: 12px;"></i>
+    <span class="badge border border-secondary text-secondary">dbt</span>
+    <i class="bi bi-arrow-right text-secondary mt-1" style="font-size: 12px;"></i>
+    <span class="badge border border-secondary text-secondary">BigQuery</span>
+  </div>
+
+  <div *ngIf="loading" class="text-center py-5">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="!loading">
+    <div class="row g-4 mb-4">
+      <div class="col-md-3">
+        <div class="card h-100 kpi-card">
+          <div class="card-body">
+            <h6 class="text-secondary">Total Products</h6>
+            <h3 class="fw-bold text-orange mb-0">{{ stats?.total_products | number }}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card h-100 kpi-card">
+          <div class="card-body">
+            <h6 class="text-secondary">Average Price</h6>
+            <h3 class="fw-bold mb-0">{{ stats?.avg_price | number:'1.2-2' }} MAD</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card h-100 kpi-card">
+          <div class="card-body">
+            <h6 class="text-secondary">Average Discount</h6>
+            <h3 class="fw-bold mb-0 text-success">{{ stats?.avg_discount | number:'1.1-1' }}%</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card h-100 kpi-card">
+          <div class="card-body">
+            <h6 class="text-secondary">Active Sources</h6>
+            <h3 class="fw-bold mb-0">{{ stats?.active_sources }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+      <div class="col-md-8">
+        <div class="card h-100">
+          <div class="card-header border-bottom-0 bg-transparent pt-3">
+            <h6 class="mb-0 fw-bold">Products by Source</h6>
+          </div>
+          <div class="card-body pb-4" style="height: 300px;">
+            <canvas baseChart
+              [data]="barChartData"
+              [options]="barChartOptions"
+              [type]="barChartType">
+            </canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-header border-bottom-0 bg-transparent pt-3">
+            <h6 class="mb-0 fw-bold">Category Distribution</h6>
+          </div>
+          <div class="card-body pb-4" style="height: 300px;">
+            <canvas baseChart
+              [data]="doughnutChartData"
+              [options]="doughnutChartOptions"
+              [type]="doughnutChartType">
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-header border-bottom border-secondary bg-transparent pt-3 pb-2">
+        <h6 class="mb-0 fw-bold">Top 10 Discounts</h6>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover mb-0 align-middle">
+            <thead>
+              <tr>
+                <th class="ps-4">Product Name</th>
+                <th>Price (MAD)</th>
+                <th>Original Price</th>
+                <th>Discount %</th>
+                <th>Source</th>
+                <th>Category</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of topDiscounts">
+                <td class="ps-4" style="max-width: 300px;">
+                  <div class="text-truncate" [title]="p.name">{{ p.name }}</div>
+                </td>
+                <td class="fw-bold">{{ p.price | number:'1.2-2' }}</td>
+                <td class="text-decoration-line-through text-secondary">{{ p.old_price | number:'1.2-2' }}</td>
+                <td>
+                  <span class="badge" [ngClass]="{'badge-red': p.discount_pct > 30, 'badge-orange': p.discount_pct <= 30 && p.discount_pct > 10, 'bg-secondary': p.discount_pct <= 10}">
+                    {{ p.discount_pct | number:'1.1-1' }}%
+                  </span>
+                </td>
+                <td><span class="badge border border-secondary text-secondary">{{ p.source }}</span></td>
+                <td>{{ p.category }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

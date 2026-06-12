@@ -1,0 +1,112 @@
+<div class="page-wrapper container-premium">
+  <!-- Header Section -->
+  <header class="alerts-header animate-fade-in">
+    <div class="header-content">
+      <div class="header-badge">Real-time Monitoring</div>
+      <h1 class="header-title">Market Variance Alerts</h1>
+      <p class="header-subtitle">Automated detection of critical price drops and liquidation events across all retailers.</p>
+    </div>
+    <div class="header-summary-card">
+      <div class="summary-icon"><i class="bi bi-lightning-charge"></i></div>
+      <div class="summary-details">
+        <span class="count">{{ filteredAlerts.length }}</span>
+        <span class="label">Live Volatility Events</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Filters Bar -->
+  <section class="filters-container-premium mb-5 animate-fade-in">
+    <div class="filter-group">
+      <span class="filter-label">Market Channel</span>
+      <div class="source-toggle">
+        <button class="toggle-btn" 
+                *ngFor="let source of sources" 
+                [class.active]="selectedSource === source"
+                (click)="selectedSource = source; onFilterChange()">
+          {{ source === 'All' ? 'Global Stream' : source }}
+        </button>
+      </div>
+    </div>
+    
+    <div class="filter-group ms-auto">
+      <span class="filter-label">Prioritization</span>
+      <select class="input-premium mini-select" [(ngModel)]="sortBy" (change)="onFilterChange()">
+        <option value="highest">Peak Variance %</option>
+        <option value="recent">Chronological (Newest)</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- Error Message -->
+  <div *ngIf="error" class="error-notification-premium animate-fade-in">
+    <div class="error-icon"><i class="bi bi-shield-exclamation"></i></div>
+    <div class="error-content">
+      <h3 class="error-title">Data Stream Interruption</h3>
+      <p class="error-msg">{{ error }}</p>
+    </div>
+    <button class="btn-premium btn-premium-primary" (click)="loadAlerts()">Re-establish Connection</button>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="loading" class="loading-state-premium">
+    <div class="loader-bars">
+      <span></span><span></span><span></span>
+    </div>
+    <p>Scanning Market Liquidity...</p>
+  </div>
+
+  <!-- Alerts Grid -->
+  <div class="row g-4" *ngIf="!loading && !error">
+    <div class="col-md-6 col-lg-4 col-xl-3 animate-fade-in" *ngFor="let alert of filteredAlerts">
+      <div class="card-premium alert-card-premium h-100">
+        <!-- Visual Container -->
+        <div class="alert-visual">
+          <div class="variance-badge">
+            -{{ alert.discount_pct | number:'1.0-0' }}%
+          </div>
+          
+          <img [src]="alert.image_url" [alt]="alert.name" class="alert-img" 
+               onerror="this.src='assets/placeholder.png'">
+          
+          <div class="source-tag" [attr.data-source]="alert.source">{{ alert.source }}</div>
+        </div>
+
+        <div class="alert-content">
+          <span class="category-meta">{{ alert.category }}</span>
+          <h3 class="alert-title" [title]="alert.name">{{ alert.name }}</h3>
+          
+          <!-- Pricing Block -->
+          <div class="valuation-block">
+            <div class="price-stack">
+              <span class="old-valuation">{{ alert.old_price | number:'1.0-0' }} MAD</span>
+              <span class="current-valuation">{{ alert.price | number:'1.0-0' }} <small>MAD</small></span>
+            </div>
+            <div class="savings-tag">
+               Delta: {{ (alert.old_price - alert.price) | number:'1.0-0' }} MAD
+            </div>
+          </div>
+
+          <button (click)="openProductLink(alert)" class="btn-premium btn-premium-primary w-100 mt-3">
+            Analyze Deal <i class="bi bi-arrow-up-right"></i>
+          </button>
+        </div>
+        
+        <div class="alert-footer">
+          <div class="timestamp">
+            <i class="bi bi-clock"></i> Captured {{ alert.scraped_at | date:'MMM d, HH:mm' }}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Empty State -->
+    <div class="col-12" *ngIf="filteredAlerts.length === 0">
+      <div class="empty-state-card">
+        <div class="empty-icon"><i class="bi bi-check2-circle"></i></div>
+        <h3 class="empty-title">Equilibrium Reached</h3>
+        <p class="empty-msg">No significant market variances align with your current filter matrix.</p>
+      </div>
+    </div>
+  </div>
+</div>
