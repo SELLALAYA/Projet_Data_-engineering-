@@ -35,3 +35,13 @@ jobs:
         with:
           name: coverage-report
           path: coverage.xml
+
+      - name: Install Great Expectations
+        run: |
+          pip install great_expectations
+
+      - name: Run data quality checks
+        run: |
+          python tests/data_quality/expectations_prices.py || true
+          python tests/data_quality/expectations_metadata.py || true
+          path: coverage.xml
