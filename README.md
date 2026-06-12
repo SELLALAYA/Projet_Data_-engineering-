@@ -203,3 +203,268 @@ tset aya
 - `GET /prices/regression` - Multivariate OLS model summary.
 - `GET /prices/trends` - Price evolution by retailer & category.
 - `GET /prices/velocity` - Calculation of price drop speed (MAD/hr).
+
+
+🚀 Real-Time E-commerce Price Intelligence Platform
+DevOps Documentation
+📌 Project Overview
+
+Ce projet met en œuvre une plateforme hybride de Data Engineering permettant la collecte, le traitement et l'analyse des prix des produits e-commerce en temps réel.
+
+L'infrastructure DevOps assure :
+
+La conteneurisation des services ;
+L'automatisation des déploiements ;
+La gestion de l'infrastructure cloud ;
+Le monitoring des applications ;
+La qualité et la fiabilité des pipelines de données.
+🏗️ Architecture DevOps
+GitHub
+   │
+   ├── GitHub Actions (CI/CD)
+   │
+   ├── Docker Images
+   │
+   ├── Artifact Registry (GCP)
+   │
+   ├── Kubernetes (GKE)
+   │
+   └── Cloud Composer (Airflow)
+
+Terraform
+   │
+   └── Provisionnement GCP
+
+Prometheus + Grafana
+   │
+   └── Monitoring & Alerting
+📂 Repository Structure
+project-root/
+│
+├── airflow/
+├── nifi/
+├── dbt/
+├── infrastructure/
+│   ├── terraform/
+│   └── kubernetes/
+├── monitoring/
+│   ├── prometheus/
+│   └── grafana/
+├── .github/
+│   └── workflows/
+├── docker-compose.yml
+├── docs/
+│   └── runbooks/
+└── README.md
+🌿 Git Workflow
+Branch Strategy
+Branche	Rôle
+main	Production
+develop	Intégration
+feature/*	Développement des fonctionnalités
+hotfix/*	Corrections urgentes
+
+🌿 Git Workflow
+Branch Strategy
+| Branche     | Rôle                              |
+| ----------- | --------------------------------- |
+| `main`      | Production                        |
+| `develop`   | Intégration                       |
+| `feature/*` | Développement des fonctionnalités |
+| `hotfix/*`  | Corrections urgentes              |
+
+Conventional Commits
+
+Les commits doivent respecter le format suivant :
+
+type: description
+
+Exemples :
+
+feat: add airflow dags deployment
+fix: correct terraform variables
+docs: update setup instructions
+ci: add kubernetes deployment workflow
+
+🐳 Local Development Environment
+
+Prérequis
+Docker
+Docker Compose
+Git
+Python 3.11+
+Terraform
+kubectl
+gcloud CLI
+Installation
+
+Cloner le projet :
+
+git clone https://github.com/your-org/price-intelligence.git
+
+cd price-intelligence
+
+Copier le fichier d'environnement :
+
+cp .env.example .env
+
+Lancer les services locaux :
+
+docker compose up -d
+
+Vérifier les conteneurs :
+
+docker ps
+☁️ Infrastructure as Code
+Terraform
+
+Terraform est utilisé pour provisionner les ressources Google Cloud.
+
+Ressources créées
+Google Kubernetes Engine (GKE)
+Artifact Registry
+Cloud Composer
+Google Bigtable
+Service Accounts
+Monitoring Resources
+Initialisation
+cd infrastructure/terraform
+
+terraform init
+Vérification
+terraform plan
+Déploiement
+terraform apply
+
+🔐 Secrets Management
+GitHub Secrets
+Secrets DevOps
+
+| Secret              | Description                |
+| ------------------- | -------------------------- |
+| AIRFLOW_DB_USER     | Utilisateur PostgreSQL     |
+| AIRFLOW_DB_PASSWORD | Mot de passe Airflow       |
+| AIRFLOW_FERNET_KEY  | Clé de chiffrement Airflow |
+| SLACK_WEBHOOK_URL   | Notifications Slack        |
+
+Secrets GCP
+
+| Secret                | Description            |
+| --------------------- | ---------------------- |
+| GCP_PROJECT_ID        | ID du projet GCP       |
+| GCP_SA_KEY            | Clé du Service Account |
+| GCP_REGION            | Région GCP             |
+| COMPOSER_BUCKET       | Bucket Composer        |
+| ARTIFACT_REGISTRY_URL | Registre Docker        |
+| GKE_CLUSTER_NAME      | Nom du cluster         |
+| BIGTABLE_INSTANCE_ID  | Instance Bigtable      |
+
+
+⚙️ Continuous Integration & Continuous Deployment
+GitHub Actions
+
+Le pipeline CI/CD est déclenché à chaque Pull Request.
+
+Étapes du pipeline
+1. Validation du code
+✓ Linting
+✓ Tests unitaires
+✓ Vérification des DAGs Airflow
+✓ Validation dbt
+2. Construction Docker
+✓ Build des images
+✓ Tagging automatique
+✓ Push vers Artifact Registry
+3. Déploiement
+✓ Synchronisation des DAGs Airflow
+✓ Déploiement Kubernetes
+✓ Mise à jour des services
+☸️ Kubernetes Deployment
+Déploiement des services
+
+Les manifestes Kubernetes se trouvent dans :
+
+infrastructure/kubernetes/
+Déployer l'application
+kubectl apply -f infrastructure/kubernetes/
+Vérifier les pods
+kubectl get pods
+Vérifier les services
+kubectl get services
+📊 Monitoring & Observability
+Prometheus
+
+Collecte des métriques :
+
+Kubernetes ;
+Airflow ;
+NiFi ;
+Applications Python.
+Grafana
+
+Tableaux de bord :
+
+Santé du cluster ;
+Utilisation CPU/Mémoire ;
+Statut des pipelines ;
+Alertes système.
+✅ Data Quality
+Great Expectations
+
+Validation automatique des données :
+
+✓ Schéma attendu
+✓ Valeurs nulles
+✓ Unicité
+✓ Contrats de données
+dbt Tests
+dbt test
+🧪 Tests
+Tests unitaires
+pytest
+Tests d'intégration
+docker compose up
+
+pytest tests/integration
+Validation finale
+
+Le projet est considéré comme prêt lorsque :
+
+ Docker Compose fonctionne ;
+ Terraform déploie l'infrastructure ;
+ Les secrets GitHub sont configurés ;
+ Le pipeline GitHub Actions réussit ;
+ Kubernetes déploie correctement les services ;
+ Grafana affiche les métriques ;
+ Great Expectations valide les données.
+👥 Team Responsibilities
+Domaine	Responsable
+DevOps / DataOps	Gestion infrastructure et CI/CD
+Data Engineering	Airflow, NiFi, Bigtable
+Analytics	dbt et statistiques
+Monitoring	Prometheus & Grafana
+📖 Useful Commands
+docker compose up -d
+
+docker compose down
+
+terraform init
+
+terraform plan
+
+terraform apply
+
+kubectl get pods
+
+kubectl apply -f infrastructure/kubernetes/
+
+pytest
+
+dbt test
+🎯 Final Deliverables
+Infrastructure GCP déployée ;
+Pipeline CI/CD opérationnel ;
+Cluster Kubernetes fonctionnel ;
+Monitoring actif ;
+Documentation complète ;
+Démonstration finale du projet.
