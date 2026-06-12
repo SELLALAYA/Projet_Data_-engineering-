@@ -1,0 +1,338 @@
+.dashboard-wrapper {
+  padding-top: 2rem;
+  padding-bottom: 5rem;
+}
+
+/* Hero Section */
+.hero-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  background: white;
+  padding: 3rem;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-main);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--primary-soft) 0%, transparent 70%);
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--success-soft);
+  color: var(--success);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.hero-date-panel {
+  text-align: right;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-date-panel .day {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.hero-date-panel .date {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* KPI Grid */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.kpi-card {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.kpi-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.kpi-icon-container {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.bg-soft-orange { background: var(--primary-soft); color: var(--primary); }
+.bg-soft-green { background: var(--success-soft); color: var(--success); }
+.bg-soft-blue { background: var(--info-soft); color: var(--info); }
+.bg-soft-red { background: var(--danger-soft); color: var(--danger); }
+
+.kpi-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.kpi-value {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.kpi-unit {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-left: 0.25rem;
+}
+
+.kpi-footer {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Section Header */
+.section-header-premium {
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+/* Source Grid */
+.source-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.source-card-mini {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.source-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badge-orange {
+  background: var(--primary-soft);
+  color: var(--primary);
+  border: 1px solid var(--primary-border);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--success);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: var(--success);
+  border-radius: 50%;
+}
+
+.dot.pulse {
+  animation: pulse-success 2s infinite;
+}
+
+@keyframes pulse-success {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.source-body .main-stat {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 800;
+}
+
+.source-body .unit {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-left: 0.5rem;
+}
+
+.source-body .sub-stat {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* Charts Section */
+.charts-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+}
+
+.chart-card-dashboard {
+  padding: 2rem;
+}
+
+.card-header-premium {
+  margin-bottom: 2rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.card-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+.chart-content {
+  height: 300px;
+  position: relative;
+}
+
+/* Top Discounts Table */
+.view-all-link {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.table-card-premium {
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-main);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.interactive-row {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.index-badge {
+  width: 28px;
+  height: 28px;
+  background: var(--bg-page);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--text-muted);
+}
+
+.asset-name {
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.asset-category {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.source-tag {
+  padding: 0.35rem 0.7rem;
+  background: var(--bg-page);
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.price-current {
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.price-old {
+  font-size: 0.8rem;
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.variance-pill {
+  padding: 0.4rem 0.75rem;
+  background: var(--danger-soft);
+  color: var(--danger);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.source-tag[data-source="jumia.ma"] { color: #f68b1e; }
+.source-tag[data-source="avito.ma"] { color: #ff0000; }
+.source-tag[data-source="amazon.com"] { color: #000000; }
+.source-tag[data-source="connecto.ma"] { color: #003399; }

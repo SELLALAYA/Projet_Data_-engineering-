@@ -1,0 +1,24 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.env
+.vscode
+.git
+.gitignore
+Dockerfile
+.dockerignore
+credentials.json
+# Exclude test scripts
+test_*.py
+check_*.py
+fix_*.py
+audit_*.py
+quick_audit.py
+count_*.py
+reimport_*.py
+update_*.py
+verify_*.py
+debug_*.py
+import_*.py
+add_*.py

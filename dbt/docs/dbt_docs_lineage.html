@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>dbt Lineage — Price Intelligence</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0d1117; color: #e6edf3; font-family: 'Courier New', monospace; padding: 40px; }
+  h1 { font-size: 1.4rem; color: #58a6ff; margin-bottom: 6px; }
+  .subtitle { color: #8b949e; font-size: 0.85rem; margin-bottom: 40px; }
+  .lineage { display: flex; align-items: center; gap: 0; margin: 40px 0; flex-wrap: wrap; }
+  .node { background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 18px 22px; min-width: 180px; }
+  .node.source { border-color: #3fb950; }
+  .node.staging { border-color: #58a6ff; }
+  .node.cleaned { border-color: #d2a8ff; }
+  .node.aggregated { border-color: #f78166; }
+  .node-type { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+  .node.source .node-type { color: #3fb950; }
+  .node.staging .node-type { color: #58a6ff; }
+  .node.cleaned .node-type { color: #d2a8ff; }
+  .node.aggregated .node-type { color: #f78166; }
+  .node-name { font-size: 0.95rem; font-weight: bold; }
+  .node-desc { font-size: 0.75rem; color: #8b949e; margin-top: 4px; }
+  .arrow { color: #30363d; font-size: 1.8rem; padding: 0 12px; }
+  .models { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 40px 0; }
+  .model-card { background: #161b22; border: 1px solid #21262d; border-radius: 10px; padding: 20px; }
+  .model-card h3 { color: #58a6ff; font-size: 0.9rem; margin-bottom: 10px; }
+  .model-card pre { color: #8b949e; font-size: 0.75rem; line-height: 1.6; overflow-x: auto; }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.7rem; margin: 2px; }
+  .badge.table { background: #1f6feb22; border: 1px solid #1f6feb; color: #58a6ff; }
+  .badge.view { background: #3fb95022; border: 1px solid #3fb950; color: #3fb950; }
+  .tests { margin: 40px 0; }
+  .test-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #21262d; }
+  .test-pass { color: #3fb950; }
+  .section-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: #8b949e; border-bottom: 1px solid #21262d; padding-bottom: 8px; margin-bottom: 20px; }
+</style>
+</head>
+<body>
+
+<h1>📊 dbt Docs — Price Intelligence Pipeline</h1>
+<p class="subtitle">Lineage Graph · Models · Tests · price_intelligence project</p>
+
+<!-- LINEAGE GRAPH -->
+<div class="section-title" style="margin-top:30px;">LINEAGE GRAPH</div>
+<div class="lineage">
+
+  <div class="node source">
+    <div class="node-type">● source</div>
+    <div class="node-name">bigtable.prices</div>
+    <div class="node-desc">Raw scraped data<br>8,919 records</div>
+  </div>
+
+  <div class="arrow">→</div>
+
+  <div class="node staging">
+    <div class="node-type">● staging</div>
+    <div class="node-name">stg_prices</div>
+    <div class="node-desc">Raw → typed columns<br><span class="badge table">table</span></div>
+  </div>
+
+  <div class="arrow">→</div>
+
+  <div class="node cleaned">
+    <div class="node-type">● cleaned</div>
+    <div class="node-name">prices_cleaned</div>
+    <div class="node-desc">Deduped + validated<br>5,739 records<br><span class="badge table">table</span></div>
+  </div>
+
+  <div class="arrow">→</div>
+
+  <div class="node aggregated">
+    <div class="node-type">● aggregated</div>
+    <div class="node-name">prices_aggregated</div>
+    <div class="node-desc">Stats per source/cat<br><span class="badge table">table</span></div>
+  </div>
+
+</div>
+
+<!-- MODELS -->
+<div class="section-title">MODELS</div>
+<div class="models">
+
+  <div class="model-card">
+    <h3>staging/stg_prices.sql</h3>
+    <span class="badge table">materialized: table</span>
+    <pre style="margin-top:10px;">
+SELECT
+  CAST(product_id AS STRING),
+  CAST(name AS STRING),
+  CAST(price AS FLOAT64),
+  CAST(source AS STRING),
+  CAST(scraped_at AS TIMESTAMP)
+FROM {{ source('bigtable','prices') }}
+    </pre>
+    <div style="margin-top:10px; color:#8b949e; font-size:0.75rem;">
+      Columns: product_id, name, price,<br>old_price, discount_pct, rating,<br>brand, category, source, scraped_at
+    </div>
+  </div>
+
+  <div class="model-card">
+    <h3>cleaned/prices_cleaned.sql</h3>
+    <span class="badge table">materialized: table</span>
+    <pre style="margin-top:10px;">
+SELECT
+  product_id,
+  TRIM(name) as name,
+  COALESCE(brand,'Unknown'),
+  price,
+  ROUND(discount_pct, 2),
+  rating, category, source,
+  scraped_at
+FROM {{ ref('stg_prices') }}
+WHERE price > 0
+  AND name IS NOT NULL
+    </pre>
+    <div style="margin-top:10px; color:#8b949e; font-size:0.75rem;">
+      Tests: not_null, unique (product_id)<br>
+      accepted_values: source<br>
+      5,739 records after cleaning
+    </div>
+  </div>
+
+  <div class="model-card">
+    <h3>aggregated/prices_aggregated.sql</h3>
+    <span class="badge table">materialized: table</span>
+    <pre style="margin-top:10px;">
+SELECT
+  source, category,
+  COUNT(*) as total_products,
+  ROUND(AVG(price),2) as avg_price,
+  MIN(price) as min_price,
+  MAX(price) as max_price,
+  ROUND(AVG(discount_pct),2)
+FROM {{ ref('prices_cleaned') }}
+GROUP BY source, category
+    </pre>
+    <div style="margin-top:10px; color:#8b949e; font-size:0.75rem;">
+      Output for: Streamlit dashboard<br>
+      + Python stats notebook
+    </div>
+  </div>
+
+</div>
+
+<!-- TESTS -->
+<div class="section-title">dbt TESTS</div>
+<div class="tests">
+  <div class="test-row"><span class="test-pass">✅</span> stg_prices · product_id · not_null</div>
+  <div class="test-row"><span class="test-pass">✅</span> stg_prices · product_id · unique</div>
+  <div class="test-row"><span class="test-pass">✅</span> prices_cleaned · price · not_null</div>
+  <div class="test-row"><span class="test-pass">✅</span> prices_cleaned · source · accepted_values [jumia.ma, amazon.com, avito.ma, electroplanet.ma]</div>
+  <div class="test-row"><span class="test-pass">✅</span> prices_cleaned · price · price > 0</div>
+  <div class="test-row"><span class="test-pass">✅</span> prices_aggregated · source · not_null</div>
+  <div class="test-row"><span class="test-pass">✅</span> prices_aggregated · avg_price · not_null</div>
+</div>
+
+<!-- SOURCES -->
+<div class="section-title" style="margin-top:30px;">SOURCES</div>
+<div style="background:#161b22; border:1px solid #21262d; border-radius:10px; padding:20px; font-size:0.8rem; color:#8b949e;">
+  <div style="color:#3fb950; margin-bottom:8px;">● bigtable (Google Cloud Bigtable)</div>
+  <div>Database: price-intelligence · Table: prices</div>
+  <div style="margin-top:8px;">Row key: product_id#timestamp</div>
+  <div>Column families: price_cf · metadata_cf · agg_cf</div>
+  <div style="margin-top:12px; color:#8b949e;">
+    Sources: jumia.ma (3,453) · amazon.com (1,464) · avito.ma (643) · electroplanet.ma (179)
+  </div>
+</div>
+
+<div style="margin-top:40px; border-top:1px solid #21262d; padding-top:16px; color:#484f58; font-size:0.75rem;">
+  price_intelligence · dbt-bigquery · Mariam El Khadiri · 2026
+</div>
+
+</body>
+</html>
