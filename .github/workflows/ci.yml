@@ -33,6 +33,7 @@ jobs:
           pip install dbt-postgres great-expectations pandas psycopg2-binary sqlalchemy
       - name: Run dbt
         run: |
+          cd dbt
           dbt debug --no-version-check
           dbt run --no-version-check
           dbt test --no-version-check
