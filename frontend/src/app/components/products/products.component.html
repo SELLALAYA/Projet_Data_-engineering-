@@ -1,0 +1,103 @@
+<div class="container-fluid py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold mb-0">Products List</h2>
+    <button class="btn btn-outline-secondary text-white" (click)="exportCSV()">
+      <i class="bi bi-download me-1"></i> Export CSV
+    </button>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label text-secondary small">Search</label>
+          <div class="input-group">
+            <span class="input-group-text bg-transparent border-secondary text-secondary">
+              <i class="bi bi-search"></i>
+            </span>
+            <input type="text" class="form-control" placeholder="Search by name..." 
+                   [(ngModel)]="searchTerm" (keyup.enter)="onFilterChange()">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label text-secondary small">Source</label>
+          <select class="form-select" [(ngModel)]="selectedSource" (change)="onFilterChange()">
+            <option *ngFor="let source of sources" [value]="source">{{ source }}</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label text-secondary small">Category</label>
+          <select class="form-select" [(ngModel)]="selectedCategory" (change)="onFilterChange()">
+            <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+          </select>
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+          <button class="btn btn-primary w-100" (click)="onFilterChange()">Apply Filters</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="text-center py-5">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div class="card" *ngIf="!loading">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover mb-0 align-middle">
+          <thead>
+            <tr>
+              <th class="ps-4">Product Name</th>
+              <th>Price (MAD)</th>
+              <th>Old Price</th>
+              <th>Discount</th>
+              <th>Rating</th>
+              <th>Category</th>
+              <th>Source</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of paginatedProducts">
+              <td class="ps-4" style="max-width: 300px;">
+                <div class="text-truncate" [title]="p.name">{{ p.name }}</div>
+              </td>
+              <td><span class="badge badge-orange text-white">{{ p.price | number:'1.2-2' }}</span></td>
+              <td class="text-decoration-line-through text-secondary">{{ p.old_price | number:'1.2-2' }}</td>
+              <td>
+                <span class="badge badge-red" *ngIf="p.discount_pct">
+                  <i class="bi bi-arrow-down-short"></i>{{ p.discount_pct | number:'1.1-1' }}%
+                </span>
+                <span class="text-secondary small" *ngIf="!p.discount_pct">-</span>
+              </td>
+              <td>
+                <div class="text-warning" *ngIf="p.rating">
+                  <i class="bi bi-star-fill me-1"></i>{{ p.rating }}
+                </div>
+                <span class="text-secondary small" *ngIf="!p.rating">No rating</span>
+              </td>
+              <td>{{ p.category }}</td>
+              <td><span class="badge border border-secondary text-secondary">{{ p.source }}</span></td>
+            </tr>
+            <tr *ngIf="paginatedProducts.length === 0">
+              <td colspan="7" class="text-center py-4 text-secondary">No products found matching your criteria.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <div class="card-footer bg-transparent border-top border-secondary d-flex justify-content-between align-items-center py-3" *ngIf="totalPages > 0">
+      <span class="text-secondary small">
+        Showing {{ (currentPage - 1) * pageSize + 1 }} to {{ Math.min(currentPage * pageSize, filteredProducts.length) }} of {{ filteredProducts.length }} entries
+      </span>
+      <div class="btn-group">
+        <button class="btn btn-sm btn-outline-secondary text-white" (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+        <button class="btn btn-sm btn-secondary" disabled>Page {{ currentPage }} of {{ totalPages }}</button>
+        <button class="btn btn-sm btn-outline-secondary text-white" (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
