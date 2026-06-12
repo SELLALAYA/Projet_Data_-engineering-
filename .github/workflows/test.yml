@@ -44,3 +44,4 @@ jobs:
         run: |
           python tests/data_quality/expectations_prices.py || true
           python tests/data_quality/expectations_metadata.py || true
+          path: coverage.xml

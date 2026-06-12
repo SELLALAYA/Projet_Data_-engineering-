@@ -1,0 +1,58 @@
+name: Deploy to GKE
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'app/**'
+      - 'infra/k8s/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v1
+        with:
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Get GKE credentials
+        uses: google-github-actions/get-gke-credentials@v1
+        with:
+          cluster_name: ${{ secrets.GKE_CLUSTER_NAME }}
+          location: europe-west1-b
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Build Docker image
+        run: |
+          docker build -t europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/price-intelligence-registry/price-intelligence-app:${{ github.sha }} ./app
+
+      - name: Configure Docker for Artifact Registry
+        run: |
+          gcloud auth configure-docker europe-west1-docker.pkg.dev
+
+      - name: Push Docker image
+        run: |
+          docker push europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/price-intelligence-registry/price-intelligence-app:${{ github.sha }}
+
+      - name: Deploy to GKE
+        run: |
+          kubectl set image deployment/price-intelligence-app price-intelligence-app=europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/price-intelligence-registry/price-intelligence-app:${{ github.sha }} -n default
+
+      - name: Verify deployment
+        run: |
+          kubectl rollout status deployment/price-intelligence-app -n default

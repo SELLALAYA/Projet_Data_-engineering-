@@ -1,0 +1,47 @@
+<nav class="navbar-premium">
+  <div class="container-premium nav-content">
+    <div class="nav-brand" routerLink="/dashboard">
+      <div class="brand-logo">
+        <i class="bi bi-graph-up-arrow"></i>
+      </div>
+      <span class="brand-text">Price Intel</span>
+    </div>
+
+    <div class="nav-links" *ngIf="authService.isLoggedIn()">
+      <a routerLink="/" class="nav-link-premium">
+        <i class="bi bi-house"></i> Home
+      </a>
+      <a routerLink="/dashboard" routerLinkActive="active" class="nav-link-premium">
+        <i class="bi bi-speedometer2"></i> Dashboard
+      </a>
+      <a routerLink="/products" routerLinkActive="active" class="nav-link-premium">
+        <i class="bi bi-box-seam"></i> Inventory
+      </a>
+      <a routerLink="/alerts" routerLinkActive="active" class="nav-link-premium">
+        <i class="bi bi-bell"></i> Alerts
+        <span class="nav-badge" *ngIf="alertCount > 0">{{ alertCount }}</span>
+      </a>
+      <a routerLink="/analysis" routerLinkActive="active" class="nav-link-premium" *ngIf="authService.isAdmin()">
+        <i class="bi bi-bar-chart-line"></i> Strategic Analysis
+      </a>
+    </div>
+
+    <div class="nav-user" *ngIf="authService.isLoggedIn()">
+      <div class="user-profile">
+        <div class="user-avatar">{{ userName ? userName[0].toUpperCase() : 'U' }}</div>
+        <div class="user-info">
+          <span class="user-name">{{ userName }}</span>
+          <span class="user-role">{{ authService.isAdmin() ? 'Administrator' : 'Analyst' }}</span>
+        </div>
+      </div>
+      <button class="btn-logout" (click)="onLogout()">
+        <i class="bi bi-box-arrow-right"></i>
+      </button>
+    </div>
+
+    <div class="nav-auth" *ngIf="!authService.isLoggedIn()">
+      <button class="btn-premium btn-premium-outline" routerLink="/login">Sign In</button>
+      <button class="btn-premium btn-premium-primary" routerLink="/register">Get Started</button>
+    </div>
+  </div>
+</nav>

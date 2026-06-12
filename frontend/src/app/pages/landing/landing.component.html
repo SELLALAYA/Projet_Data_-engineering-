@@ -1,0 +1,217 @@
+<div class="landing-wrapper">
+  <!-- NAVIGATION -->
+  <nav class="landing-nav container">
+    <div class="nav-brand" routerLink="/">
+      <div class="brand-logo"><i class="fas fa-chart-line"></i></div>
+      <div class="brand-text">Price Intel</div>
+    </div>
+    <div class="nav-actions">
+      <a routerLink="/" class="nav-anchor">Platform</a>
+      <a routerLink="/" class="nav-anchor">Solutions</a>
+      <a routerLink="/" class="nav-anchor">Enterprise</a>
+      <a routerLink="/login" class="nav-anchor">Sign In</a>
+      <a routerLink="/login" class="btn btn-primary">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header class="landing-hero container py-large">
+    <div class="hero-content animate-slide-up">
+      <div class="hero-badge">Enterprise Platform</div>
+      <h1 class="hero-title">
+        The Future of <br>
+        <span class="text-gradient">Market Intelligence</span>
+      </h1>
+      <p class="hero-subtitle">
+        Leverage real-time data, predictive analytics, and automated pricing alerts to dominate your market segment. Engineered for scale.
+      </p>
+      <div class="hero-cta">
+        <a routerLink="/dashboard" class="btn btn-primary btn-xl shadow-pulse">Explore Dashboard</a>
+        <a routerLink="/products" class="btn btn-secondary btn-xl">View Inventory</a>
+      </div>
+      <div class="hero-metrics">
+        <div class="m-item">
+          <span class="m-val">6.3K+</span>
+          <span class="m-lbl">Assets Indexed</span>
+        </div>
+        <div class="m-divider"></div>
+        <div class="m-item">
+          <span class="m-val">99.9%</span>
+          <span class="m-lbl">Data Accuracy</span>
+        </div>
+        <div class="m-divider"></div>
+        <div class="m-item">
+          <span class="m-val">&lt;50ms</span>
+          <span class="m-lbl">Query Latency</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual animate-float">
+      <div class="ambient-glow"></div>
+      
+      <div class="category-showcase-container" *ngIf="!loading && topAlerts.length > 0">
+        <!-- Best Alert 1 -->
+        <div class="showcase-card it-main dynamic-alert img-bg-it"
+             [style.backgroundImage]="topAlerts[0].image_url ? 'url(' + topAlerts[0].image_url + ')' : null"
+             (click)="openProductLink(topAlerts[0])"
+             (mousedown)="$event.preventDefault()">
+          <div class="alert-overlay">
+            <span class="discount-pill">-{{topAlerts[0].discount_pct | number:'1.0-0'}}%</span>
+            <div class="alert-info-mini">
+              <span class="src">{{topAlerts[0].source}}</span>
+              <p class="name">{{topAlerts[0].name | slice:0:30}}...</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Best Alert 2 -->
+        <div class="showcase-card mobile-sub dynamic-alert img-bg-mobile"
+             *ngIf="topAlerts[1]"
+             [style.backgroundImage]="topAlerts[1].image_url ? 'url(' + topAlerts[1].image_url + ')' : null"
+             (click)="openProductLink(topAlerts[1])"
+             (mousedown)="$event.preventDefault()">
+          <div class="alert-overlay">
+            <span class="discount-pill">-{{topAlerts[1].discount_pct | number:'1.0-0'}}%</span>
+          </div>
+        </div>
+
+        <!-- Best Alert 3 -->
+        <div class="showcase-card home-sub dynamic-alert img-bg-home"
+             *ngIf="topAlerts[2]"
+             [style.backgroundImage]="topAlerts[2].image_url ? 'url(' + topAlerts[2].image_url + ')' : null"
+             (click)="openProductLink(topAlerts[2])"
+             (mousedown)="$event.preventDefault()">
+          <div class="alert-overlay">
+            <span class="discount-pill">-{{topAlerts[2].discount_pct | number:'1.0-0'}}%</span>
+          </div>
+        </div>
+        
+        <div class="data-blip blip-1">Hot Deals Live</div>
+        <div class="data-blip blip-2">Sync: Real-time</div>
+      </div>
+
+      <!-- Fallback if loading or no data -->
+      <div class="category-showcase-container" *ngIf="loading || topAlerts.length === 0">
+        <div class="showcase-card it-main img-bg-it"></div>
+        <div class="showcase-card mobile-sub img-bg-mobile"></div>
+        <div class="showcase-card home-sub img-bg-home"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONCEPT SECTION -->
+  <section class="concept-section container py-large">
+    <div class="section-meta text-center mb-5 animate-slide-up">
+      <h2 class="section-title-premium">Unprecedented Control</h2>
+      <p class="section-subtitle-premium">Advanced infrastructure designed to process vast market data into actionable strategic insights instantly.</p>
+    </div>
+    
+    <div class="features-grid-premium">
+      <div class="feature-card-large animate-slide-up" style="animation-delay: 0.1s;">
+        <div class="f-icon-wrap bg-primary-soft text-primary"><i class="fas fa-bolt"></i></div>
+        <h3>Real-time Alerts</h3>
+        <p>Immediate notifications on critical price drops and liquidation events across all tracked market sources.</p>
+        <ul class="f-list">
+          <li><i class="fas fa-check-circle"></i> Custom variance thresholds</li>
+          <li><i class="fas fa-check-circle"></i> Multi-channel notifications</li>
+        </ul>
+      </div>
+      <div class="feature-card-large animate-slide-up" style="animation-delay: 0.2s;">
+        <div class="f-icon-wrap bg-primary-soft text-primary"><i class="fas fa-database"></i></div>
+        <h3>Global Inventory</h3>
+        <p>Comprehensive cross-source database tracking thousands of items with historical price variance models.</p>
+        <ul class="f-list">
+          <li><i class="fas fa-check-circle"></i> Seamless API integration</li>
+          <li><i class="fas fa-check-circle"></i> Advanced filter matrix</li>
+        </ul>
+      </div>
+      <div class="feature-card-large animate-slide-up" style="animation-delay: 0.3s;">
+        <div class="f-icon-wrap bg-primary-soft text-primary"><i class="fas fa-chart-pie"></i></div>
+        <h3>Strategic Analytics</h3>
+        <p>Deep-dive statistical analysis, regression models, and market composition tracking for corporate planning.</p>
+        <ul class="f-list">
+          <li><i class="fas fa-check-circle"></i> BigQuery powered</li>
+          <li><i class="fas fa-check-circle"></i> Predictive algorithms</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- VERTICALS SECTION -->
+  <section class="container py-large">
+    <div class="section-meta text-center mb-5">
+      <h2 class="section-title-premium">Tracked Verticals</h2>
+      <p class="section-subtitle-premium">Our crawler network continuously indexes these key market segments.</p>
+    </div>
+    
+    <div class="verticals-grid">
+      <div class="vertical-card">
+        <div class="v-img-placeholder icon-it"></div>
+        <div>
+          <span class="v-badge">High Volume</span>
+          <h4>Informatique</h4>
+          <p>Laptops, components, and enterprise networking hardware.</p>
+        </div>
+      </div>
+      <div class="vertical-card">
+        <div class="v-img-placeholder icon-phone"></div>
+        <div>
+          <span class="v-badge">High Volatility</span>
+          <h4>Smartphones</h4>
+          <p>Mobile devices, tablets, and smart wearables.</p>
+        </div>
+      </div>
+      <div class="vertical-card">
+        <div class="v-img-placeholder icon-home"></div>
+        <div>
+          <span class="v-badge">Stable Asset</span>
+          <h4>Electroménager</h4>
+          <p>Household appliances and high-tech consumer electronics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="container py-large">
+    <div class="cta-card border-radius-xl">
+      <div>
+        <h2 class="cta-title">Ready to command your market?</h2>
+        <p class="cta-text">Join top-tier organizations using Price Intel to maintain their competitive edge and optimize pricing strategies.</p>
+        <div class="cta-actions">
+          <a routerLink="/login" class="btn btn-primary btn-xl">Request Demo</a>
+          <a routerLink="/dashboard" class="btn btn-outline-light btn-xl">Documentation</a>
+        </div>
+      </div>
+      <div class="cta-visual">
+        <i class="fas fa-shield-alt"></i>
+        <span>SOC 2 Compliant</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="landing-footer-premium container">
+    <div class="footer-top">
+      <div class="nav-brand">
+        <div class="brand-logo"><i class="fas fa-chart-line"></i></div>
+        <div class="brand-text">Price Intel</div>
+      </div>
+      <div class="footer-links">
+        <a href="#">Platform</a>
+        <a href="#">API Documentation</a>
+        <a href="#">Security</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Price Intelligence Corp. All rights reserved.</p>
+      <div class="footer-meta">
+        <span>System Status: Operational</span>
+        <div class="dot-sep"></div>
+        <span>Data Stream: Active</span>
+      </div>
+    </div>
+  </footer>
+</div>

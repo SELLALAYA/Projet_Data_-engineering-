@@ -1,0 +1,169 @@
+<div class="dashboard-wrapper container-premium">
+
+  <!-- HERO SECTION -->
+  <header class="hero-section animate-fade-in">
+    <div class="hero-content">
+      <div class="hero-badge">System Status: Operational</div>
+      <h1 class="hero-title">Market Intelligence Overview</h1>
+      <p class="hero-sub">
+        Welcome back, <span class="text-primary fw-bold">{{ userName }}</span>. You are currently monitoring <strong>{{ totalProducts | number }}</strong> unique market data points across Morocco's primary retailers.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-premium btn-premium-primary pulse-primary" routerLink="/alerts">
+          <i class="bi bi-bell"></i>
+          Active Alerts: {{ alertCount }}
+        </button>
+        <button class="btn-premium btn-premium-outline" routerLink="/products">
+          Inventory Explorer
+        </button>
+      </div>
+    </div>
+    <div class="hero-date-panel">
+      <div class="day">{{ currentDay }}</div>
+      <div class="date">{{ currentDate }}</div>
+    </div>
+  </header>
+
+  <!-- KPI GRID -->
+  <div class="kpi-grid">
+    <div class="card-premium kpi-card">
+      <div class="kpi-header">
+        <div class="kpi-icon-container bg-soft-orange">
+          <i class="bi bi-layers"></i>
+        </div>
+        <span class="kpi-label">Market Inventory</span>
+      </div>
+      <h3 class="kpi-value">{{ totalProducts | number }}</h3>
+      <div class="kpi-footer">
+        <span class="text-success"><i class="bi bi-arrow-up-right"></i> +2.4%</span>
+        <span class="text-muted">vs last update</span>
+      </div>
+    </div>
+
+    <div class="card-premium kpi-card">
+      <div class="kpi-header">
+        <div class="kpi-icon-container bg-soft-green">
+          <i class="bi bi-percent"></i>
+        </div>
+        <span class="kpi-label">Optimal Discount</span>
+      </div>
+      <h3 class="kpi-value text-success">
+        {{ bestDeal ? '-' + (bestDeal.discount_pct | number:'1.0-0') + '%' : '0%' }}
+      </h3>
+      <div class="kpi-footer">
+        <span class="text-muted text-truncate d-block">{{ bestDeal ? (bestDeal.name | slice:0:30) + '...' : 'Scanning...' }}</span>
+      </div>
+    </div>
+
+    <div class="card-premium kpi-card">
+      <div class="kpi-header">
+        <div class="kpi-icon-container bg-soft-blue">
+          <i class="bi bi-graph-up-arrow"></i>
+        </div>
+        <span class="kpi-label">Price Index (Avg)</span>
+      </div>
+      <h3 class="kpi-value">
+        {{ avgPrice | number:'1.0-0' }} <span class="kpi-unit">MAD</span>
+      </h3>
+      <div class="kpi-footer">
+        <span class="text-muted">Weighted cross-source index</span>
+      </div>
+    </div>
+
+    <div class="card-premium kpi-card">
+      <div class="kpi-header">
+        <div class="kpi-icon-container bg-soft-red">
+          <i class="bi bi-lightning-charge"></i>
+        </div>
+        <span class="kpi-label">Critical Alerts</span>
+      </div>
+      <h3 class="kpi-value text-danger">{{ alertCount }}</h3>
+      <div class="kpi-footer">
+        <span class="text-muted">Require immediate review</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOURCE GRID -->
+  <div class="section-header-premium">
+    <h2 class="section-title">Retailer Distribution</h2>
+  </div>
+  <div class="source-grid">
+    <div class="card-premium source-card-mini" *ngFor="let s of stats">
+      <div class="source-header">
+        <span class="badge-premium badge-orange">{{ s.source }}</span>
+        <div class="status-indicator">
+          <span class="dot pulse"></span> LIVE
+        </div>
+      </div>
+      <div class="source-body">
+        <div class="main-stat">
+          <span class="val">{{ s.total_products | number }}</span>
+          <span class="unit">units</span>
+        </div>
+        <div class="sub-stat">Avg: {{ s.avg_price | number:'1.0-0' }} MAD</div>
+      </div>
+      <div class="source-footer">
+        <button class="btn-premium btn-premium-outline w-100" (click)="navigateToSource(s.source)">
+          Analyze Stream
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHARTS SECTION -->
+  <div class="charts-row mt-5">
+    <div class="card-premium chart-card-dashboard">
+      <div class="card-header-premium">
+        <h3 class="card-title">Retailer Price Index</h3>
+        <p class="card-subtitle">Comparison of mean prices by retailer</p>
+      </div>
+      <div class="chart-content">
+        <canvas baseChart [data]="barChartData" [options]="barChartOptions" [type]="'bar'"></canvas>
+      </div>
+    </div>
+    <div class="card-premium chart-card-dashboard">
+      <div class="card-header-premium">
+        <h3 class="card-title">Inventory Composition</h3>
+        <p class="card-subtitle">Global market share by source</p>
+      </div>
+      <div class="chart-content">
+        <canvas baseChart [data]="doughnutChartData" [options]="doughnutChartOptions" [type]="'doughnut'"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP DISCOUNTS -->
+  <div class="section-header-premium mt-5 d-flex justify-content-between align-items-center">
+    <h2 class="section-title">High-Impact Price Drops</h2>
+    <a routerLink="/products" class="view-all-link">Review Full Inventory <i class="bi bi-arrow-right"></i></a>
+  </div>
+  <div class="table-card-premium">
+    <table class="table-premium">
+      <thead>
+        <tr>
+          <th style="width: 80px;">Idx</th>
+          <th>Asset Specification</th>
+          <th>Market Source</th>
+          <th>Financials</th>
+          <th>Variance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of topDiscounts; let i = index" (click)="openProductLink(item)" class="interactive-row">
+          <td><span class="index-badge">{{ i + 1 }}</span></td>
+          <td>
+            <div class="asset-name">{{ item.name | slice:0:60 }}{{ item.name.length > 60 ? '...' : '' }}</div>
+            <div class="asset-category">{{ item.category }}</div>
+          </td>
+          <td><span class="source-tag" [attr.data-source]="item.source">{{ item.source }}</span></td>
+          <td>
+            <div class="price-current">{{ item.price | number:'1.0-0' }} MAD</div>
+            <div class="price-old">{{ item.old_price | number:'1.0-0' }} MAD</div>
+          </td>
+          <td><span class="variance-pill">-{{ item.discount_pct | number:'1.0-0' }}%</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
