@@ -194,6 +194,9 @@ Ce pipeline fournit une base rigoureuse et reproductible pour piloter le pricing
 Pour toute question technique ou besoin d'adaptation pour la soutenance, indiquer le notebook ou le modèle dbt concerné (`dbt/models/marts/*` ou `notebooks/*`).
 
 
+## Structure du projet
+Voir docs/architecture/ pour les diagrammes.
+tset aya
 - `GET /prices` - List active products within target verticals.
 - `GET /prices/stats` - High-level market metrics.
 - `GET /prices/alerts` - Strategic price drops > 10%.
