@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Lire le message du commit
+commit_msg=$(cat "$1")
+
+# La règle : le message doit commencer par un type valide suivi de ": "
+pattern="^(feat|fix|chore|ci|docs|test|refactor)(\(.+\))?: .{1,100}"
+
+# Vérifier si le message respecte la règle
+if ! echo "$commit_msg" | grep -qE "$pattern"; then
+  echo ""
+  echo "================================================"
+  echo "ERREUR : Message de commit invalide !"
+  echo "================================================"
+  echo ""
+  echo "Format requis : type: description"
+  echo ""
+  echo "Types valides :"
+  echo "  feat:     nouvelle fonctionnalite"
+  echo "  fix:      correction de bug"
+  echo "  chore:    tache technique"
+  echo "  ci:       modification CI/CD"
+  echo "  docs:     documentation"
+  echo "  test:     ajout de tests"
+  echo "  refactor: refactoring du code"
+  echo ""
+  echo "Exemples valides :"
+  echo "  feat: add amazon price scraper"
+  echo "  fix: correct airflow dag timeout"
+  echo "  chore: update docker dependencies"
+  echo "  docs: update README setup guide"
+  echo ""
+  echo "Ton message invalide etait : $commit_msg"
+  echo "================================================"
+  exit 1
+fi
