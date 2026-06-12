@@ -6,11 +6,14 @@ on:
     paths:
       - 'app/**'
       - 'infra/k8s/**'
-      - '.github/workflows/deploy-gke.yml'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
       - name: Checkout code
@@ -19,21 +22,20 @@ jobs:
       - name: Authenticate to GCP
         uses: google-github-actions/auth@v1
         with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
 
       - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
-      - name: Get GKE cluster credentials
-        run: |
-          gcloud container clusters get-credentials price-intelligence-gke \
-            --zone europe-west1-b \
-            --project ${{ secrets.GCP_PROJECT_ID }}
-
-      - name: Setup kubectl
-        uses: azure/setup-kubectl@v3
+      - name: Get GKE credentials
+        uses: google-github-actions/get-gke-credentials@v1
+        with:
+          cluster_name: ${{ secrets.GKE_CLUSTER_NAME }}
+          location: europe-west1-b
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
 
       - name: Build Docker image
         run: |
@@ -47,11 +49,9 @@ jobs:
         run: |
           docker push europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/price-intelligence-registry/price-intelligence-app:${{ github.sha }}
 
-      - name: Update deployment image
+      - name: Deploy to GKE
         run: |
-          kubectl set image deployment/price-intelligence-app \
-            price-intelligence-app=europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/price-intelligence-registry/price-intelligence-app:${{ github.sha }} \
-            -n default
+          kubectl set image deployment/price-intelligence-app price-intelligence-app=europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/price-intelligence-registry/price-intelligence-app:${{ github.sha }} -n default
 
       - name: Verify deployment
         run: |

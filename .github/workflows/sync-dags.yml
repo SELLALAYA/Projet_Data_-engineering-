@@ -5,11 +5,14 @@ on:
     branches: [ develop, main ]
     paths:
       - 'airflow/dags/**'
-      - '.github/workflows/sync-dags.yml'
 
 jobs:
   sync-dags:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
       - name: Checkout code
@@ -18,25 +21,18 @@ jobs:
       - name: Authenticate to GCP
         uses: google-github-actions/auth@v1
         with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
 
       - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
-      - name: Get Composer DAGs bucket
-        id: get-bucket
-        run: |
-          BUCKET=$(gcloud composer environments describe price-intelligence-composer \
-            --location europe-west1 \
-            --format='value(config.dagGcsPrefix)' | sed 's|gs://||' | cut -d'/' -f1)
-          echo "bucket=$BUCKET" >> $GITHUB_OUTPUT
-
       - name: Upload DAGs to Composer
         run: |
-          gsutil -m cp -r airflow/dags/* gs://${{ steps.get-bucket.outputs.bucket }}/dags/
+          gsutil -m cp -r airflow/dags/* gs://europe-west1-price-intellig-2e16956c-bucket/dags/
 
       - name: Verify DAGs uploaded
         run: |
-          gsutil ls gs://${{ steps.get-bucket.outputs.bucket }}/dags/
+          gsutil ls gs://europe-west1-price-intellig-2e16956c-bucket/dags/
