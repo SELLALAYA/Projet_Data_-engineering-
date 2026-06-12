@@ -204,8 +204,7 @@ tset aya
 - `GET /prices/trends` - Price evolution by retailer & category.
 - `GET /prices/velocity` - Calculation of price drop speed (MAD/hr).
 
-
-🚀 Real-Time E-commerce Price Intelligence Platform
+                PARTIE_DEVOPS  
 DevOps Documentation
 📌 Project Overview
 
@@ -218,7 +217,9 @@ L'automatisation des déploiements ;
 La gestion de l'infrastructure cloud ;
 Le monitoring des applications ;
 La qualité et la fiabilité des pipelines de données.
+
 🏗️ Architecture DevOps
+
 GitHub
    │
    ├── GitHub Actions (CI/CD)
@@ -238,7 +239,6 @@ Terraform
 Prometheus + Grafana
    │
    └── Monitoring & Alerting
-📂 Repository Structure
 project-root/
 │
 ├── airflow/
@@ -256,13 +256,6 @@ project-root/
 ├── docs/
 │   └── runbooks/
 └── README.md
-🌿 Git Workflow
-Branch Strategy
-Branche	Rôle
-main	Production
-develop	Intégration
-feature/*	Développement des fonctionnalités
-hotfix/*	Corrections urgentes
 
 🌿 Git Workflow
 Branch Strategy
@@ -273,7 +266,7 @@ Branch Strategy
 | `feature/*` | Développement des fonctionnalités |
 | `hotfix/*`  | Corrections urgentes              |
 
-Conventional Commits
+Conventional Commits:
 
 Les commits doivent respecter le format suivant :
 
@@ -337,6 +330,7 @@ Déploiement
 terraform apply
 
 🔐 Secrets Management
+
 GitHub Secrets
 Secrets DevOps
 
@@ -367,15 +361,18 @@ Le pipeline CI/CD est déclenché à chaque Pull Request.
 
 Étapes du pipeline
 1. Validation du code
+
 ✓ Linting
 ✓ Tests unitaires
 ✓ Vérification des DAGs Airflow
 ✓ Validation dbt
 2. Construction Docker
+
 ✓ Build des images
 ✓ Tagging automatique
 ✓ Push vers Artifact Registry
 3. Déploiement
+
 ✓ Synchronisation des DAGs Airflow
 ✓ Déploiement Kubernetes
 ✓ Mise à jour des services
@@ -408,7 +405,9 @@ Santé du cluster ;
 Utilisation CPU/Mémoire ;
 Statut des pipelines ;
 Alertes système.
+
 ✅ Data Quality
+
 Great Expectations
 
 Validation automatique des données :
@@ -437,13 +436,17 @@ Le projet est considéré comme prêt lorsque :
  Kubernetes déploie correctement les services ;
  Grafana affiche les métriques ;
  Great Expectations valide les données.
+
 👥 Team Responsibilities
+
 Domaine	Responsable
 DevOps / DataOps	Gestion infrastructure et CI/CD
 Data Engineering	Airflow, NiFi, Bigtable
 Analytics	dbt et statistiques
 Monitoring	Prometheus & Grafana
+
 📖 Useful Commands
+
 docker compose up -d
 
 docker compose down
@@ -462,6 +465,7 @@ pytest
 
 dbt test
 🎯 Final Deliverables
+
 Infrastructure GCP déployée ;
 Pipeline CI/CD opérationnel ;
 Cluster Kubernetes fonctionnel ;
