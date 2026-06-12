@@ -1,0 +1,50 @@
+groups:
+  - name: price-intelligence-alerts
+    rules:
+      # ─────────────────────────────────────
+      # POD DOWN
+      # ─────────────────────────────────────
+      - alert: PodDown
+        expr: kube_pod_status_phase{phase="Failed"} > 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Pod {{ $labels.pod }} est down"
+          description: "Le pod {{ $labels.pod }} est en état Failed"
+
+      # ─────────────────────────────────────
+      # HIGH CPU
+      # ─────────────────────────────────────
+      - alert: HighCPUUsage
+        expr: rate(container_cpu_usage_seconds_total[5m]) > 0.8
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "CPU élevé sur {{ $labels.pod }}"
+          description: "CPU > 80% depuis 5 minutes"
+
+      # ─────────────────────────────────────
+      # HIGH MEMORY
+      # ─────────────────────────────────────
+      - alert: HighMemoryUsage
+        expr: container_memory_usage_bytes > 450000000
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Mémoire élevée sur {{ $labels.pod }}"
+          description: "Mémoire > 450MB depuis 5 minutes"
+
+      # ─────────────────────────────────────
+      # PRICE CHANGE ALERT
+      # ─────────────────────────────────────
+      - alert: LargePriceChange
+        expr: abs(price_change_percentage) > 10
+        for: 0m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Changement de prix > 10%"
+          description: "Prix changé de {{ $value }}%"

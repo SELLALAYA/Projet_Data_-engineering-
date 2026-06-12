@@ -1,0 +1,15 @@
+version: 2
+
+seeds:
+  - name: prices_raw
+    config:
+      column_types:
+        name: string
+        price: float64
+        old_price: float64
+        discount_pct: float64
+        rating: string
+        currency: string
+        category: string
+        source: string
+        scraped_at: string
