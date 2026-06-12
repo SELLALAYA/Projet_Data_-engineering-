@@ -1,0 +1,42 @@
+{
+  "generated_at": "2026-04-21T12:11:14.082187+00:00",
+  "total_products": 5739,
+  "by_source": {
+    "jumia.ma": 3453,
+    "avito.ma": 643,
+    "amazon.com": 1464,
+    "electroplanet.ma": 179
+  },
+  "by_category": {
+    "Téléphones & Smartphones": 1779,
+    "Informatique": 2736,
+    "Électroménager": 1224
+  },
+  "top_brands": {
+    "HP": 804,
+    "Samsung": 381,
+    "Dell": 341,
+    "Lenovo": 290,
+    "Apple": 229,
+    "Nokia": 206,
+    "Autre": 138,
+    "Xiaomi": 120,
+    "Honor": 99,
+    "Realme": 80,
+    "MSI": 67,
+    "Taurus": 65,
+    "Tecno": 64,
+    "Asus": 63,
+    "Acer": 59
+  },
+  "price_imputed": 2045,
+  "rating_imputed": 4961,
+  "images_na": 0,
+  "urls_na": 0,
+  "price_stats": {
+    "min": 9.0,
+    "max": 15115.0,
+    "mean": 2059.17,
+    "median": 1499.0
+  }
+}

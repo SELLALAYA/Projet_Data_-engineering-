@@ -1,0 +1,18 @@
+[2026-05-24T11:31:32.619+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_avito scheduled__2026-05-24T00:00:00+00:00 [queued]>
+[2026-05-24T11:31:33.072+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_avito scheduled__2026-05-24T00:00:00+00:00 [queued]>
+[2026-05-24T11:31:33.244+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-24T11:31:34.666+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_avito> on 2026-05-24 00:00:00+00:00
+[2026-05-24T11:31:35.223+0000] {standard_task_runner.py:60} INFO - Started process 11002 to run task
+[2026-05-24T11:31:35.423+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_avito', 'scheduled__2026-05-24T00:00:00+00:00', '--job-id', '1880', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmp3q89lgd7']
+[2026-05-24T11:31:36.147+0000] {standard_task_runner.py:88} INFO - Job 1880: Subtask scrape_avito
+[2026-05-24T11:31:47.362+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_avito scheduled__2026-05-24T00:00:00+00:00 [running]> on host 91e0d3a0a233
+[2026-05-24T11:31:50.201+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_avito' AIRFLOW_CTX_EXECUTION_DATE='2026-05-24T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-05-24T00:00:00+00:00'
+[2026-05-24T11:31:50.508+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-24T11:31:50.588+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            cd /opt/*** && export PYTHONPATH=/opt/*** && export GOOGLE_APPLICATION_CREDENTIALS=/opt/***/gcp-credentials-new.json\n            mkdir -p data/raw\n            scrapy crawl avito_ma -s LOG_LEVEL=WARNING -s ROBOTSTXT_OBEY=False || echo "Avito done"\n        ']
+[2026-05-24T11:31:50.663+0000] {subprocess.py:86} INFO - Output:
+[2026-05-24T11:31:51.231+0000] {subprocess.py:93} INFO - /usr/bin/bash: line 4: scrapy: command not found
+[2026-05-24T11:31:51.271+0000] {subprocess.py:93} INFO - Avito done
+[2026-05-24T11:31:51.394+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-05-24T11:31:53.528+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=scrape_avito, execution_date=20260524T000000, start_date=20260524T113132, end_date=20260524T113153
+[2026-05-24T11:31:54.077+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-05-24T11:31:54.566+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,35 @@
+[2026-06-11T19:12:41.082+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.dbt_run manual__2026-06-11T19:09:14+00:00 [queued]>
+[2026-06-11T19:12:41.155+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.dbt_run manual__2026-06-11T19:09:14+00:00 [queued]>
+[2026-06-11T19:12:41.161+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-06-11T19:12:41.307+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): dbt_run> on 2026-06-11 19:09:14+00:00
+[2026-06-11T19:12:41.377+0000] {standard_task_runner.py:60} INFO - Started process 2760 to run task
+[2026-06-11T19:12:41.667+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'dbt_run', 'manual__2026-06-11T19:09:14+00:00', '--job-id', '2018', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmp9r4_rv7v']
+[2026-06-11T19:12:41.799+0000] {standard_task_runner.py:88} INFO - Job 2018: Subtask dbt_run
+[2026-06-11T19:12:42.541+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.dbt_run manual__2026-06-11T19:09:14+00:00 [running]> on host 91e0d3a0a233
+[2026-06-11T19:12:43.413+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='dbt_run' AIRFLOW_CTX_EXECUTION_DATE='2026-06-11T19:09:14+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-06-11T19:09:14+00:00'
+[2026-06-11T19:12:43.454+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-06-11T19:12:43.486+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            set -e\n            cd /opt/***/dbt\n            export GOOGLE_APPLICATION_CREDENTIALS=/opt/***/gcp-credentials-new.json\n            /home/***/.local/bin/dbt run --full-refresh --profiles-dir . --project-dir .\n            echo dbt done\n        ']
+[2026-06-11T19:12:43.546+0000] {subprocess.py:86} INFO - Output:
+[2026-06-11T19:12:51.925+0000] {subprocess.py:93} INFO - [0m19:12:51  Running with dbt=1.8.7
+[2026-06-11T19:12:55.661+0000] {subprocess.py:93} INFO - [0m19:12:55  Registered adapter: bigquery=1.8.3
+[2026-06-11T19:12:59.688+0000] {subprocess.py:93} INFO - [0m19:12:59  Found 3 models, 1 seed, 7 data tests, 1 source, 479 macros
+[2026-06-11T19:12:59.697+0000] {subprocess.py:93} INFO - [0m19:12:59
+[2026-06-11T19:13:00.249+0000] {subprocess.py:93} INFO - [0m19:13:00
+[2026-06-11T19:13:00.254+0000] {subprocess.py:93} INFO - [0m19:13:00  Finished running  in 0 hours 0 minutes and 0.55 seconds (0.55s).
+[2026-06-11T19:13:00.260+0000] {subprocess.py:93} INFO - [0m19:13:00  Encountered an error:
+[2026-06-11T19:13:00.262+0000] {subprocess.py:93} INFO - Runtime Error
+[2026-06-11T19:13:00.264+0000] {subprocess.py:93} INFO -   Unable to generate access token, if you're using impersonate_service_account, make sure your initial account has the "roles/iam.serviceAccountTokenCreator" role on the account you are trying to impersonate.
+[2026-06-11T19:13:00.266+0000] {subprocess.py:93} INFO - 
+[2026-06-11T19:13:00.269+0000] {subprocess.py:93} INFO -   ('invalid_scope: Bad Request', {'error': 'invalid_scope', 'error_description': 'Bad Request'})
+[2026-06-11T19:13:05.967+0000] {subprocess.py:97} INFO - Command exited with return code 2
+[2026-06-11T19:13:06.032+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 428, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 2.
+[2026-06-11T19:13:06.047+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=price_intelligence_pipeline, task_id=dbt_run, execution_date=20260611T190914, start_date=20260611T191241, end_date=20260611T191306
+[2026-06-11T19:13:06.098+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 2018 for task dbt_run (Bash command failed. The command returned a non-zero exit code 2.; 2760)
+[2026-06-11T19:13:06.162+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-06-11T19:13:06.243+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

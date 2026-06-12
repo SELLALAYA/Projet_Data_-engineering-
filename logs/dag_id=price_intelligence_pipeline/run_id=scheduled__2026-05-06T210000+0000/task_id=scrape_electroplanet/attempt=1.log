@@ -1,0 +1,93 @@
+[2026-05-06T22:00:01.472+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_electroplanet scheduled__2026-05-06T21:00:00+00:00 [queued]>
+[2026-05-06T22:00:01.493+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_electroplanet scheduled__2026-05-06T21:00:00+00:00 [queued]>
+[2026-05-06T22:00:01.494+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-06T22:00:01.550+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_electroplanet> on 2026-05-06 21:00:00+00:00
+[2026-05-06T22:00:01.567+0000] {standard_task_runner.py:60} INFO - Started process 24692 to run task
+[2026-05-06T22:00:01.578+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_electroplanet', 'scheduled__2026-05-06T21:00:00+00:00', '--job-id', '639', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpo7i0tc9h']
+[2026-05-06T22:00:01.584+0000] {standard_task_runner.py:88} INFO - Job 639: Subtask scrape_electroplanet
+[2026-05-06T22:00:01.792+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_electroplanet scheduled__2026-05-06T21:00:00+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-06T22:00:02.096+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_electroplanet' AIRFLOW_CTX_EXECUTION_DATE='2026-05-06T21:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-05-06T21:00:00+00:00'
+[2026-05-06T22:00:02.108+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-06T22:00:02.111+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            cd /opt/***\n            mkdir -p data/raw\n            export DISPLAY=:99\n            python3 scrapers/spiders/electroplanet_ma.py || echo "Electroplanet done with warnings"\n        ']
+[2026-05-06T22:00:02.141+0000] {subprocess.py:86} INFO - Output:
+[2026-05-06T22:00:07.409+0000] {subprocess.py:93} INFO - 
+[2026-05-06T22:00:07.411+0000] {subprocess.py:93} INFO - [Electroplanet] Scraping : smartphones
+[2026-05-06T22:00:07.431+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-06T22:00:07.432+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connection.py", line 174, in _new_conn
+[2026-05-06T22:00:07.433+0000] {subprocess.py:93} INFO -     conn = connection.create_connection(
+[2026-05-06T22:00:07.434+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/util/connection.py", line 72, in create_connection
+[2026-05-06T22:00:07.436+0000] {subprocess.py:93} INFO -     for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+[2026-05-06T22:00:07.442+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/socket.py", line 918, in getaddrinfo
+[2026-05-06T22:00:07.443+0000] {subprocess.py:93} INFO -     for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+[2026-05-06T22:00:07.446+0000] {subprocess.py:93} INFO - socket.gaierror: [Errno -5] No address associated with hostname
+[2026-05-06T22:00:07.448+0000] {subprocess.py:93} INFO - 
+[2026-05-06T22:00:07.449+0000] {subprocess.py:93} INFO - During handling of the above exception, another exception occurred:
+[2026-05-06T22:00:07.452+0000] {subprocess.py:93} INFO - 
+[2026-05-06T22:00:07.458+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-06T22:00:07.460+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 715, in urlopen
+[2026-05-06T22:00:07.466+0000] {subprocess.py:93} INFO -     httplib_response = self._make_request(
+[2026-05-06T22:00:07.477+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 404, in _make_request
+[2026-05-06T22:00:07.482+0000] {subprocess.py:93} INFO -     self._validate_conn(conn)
+[2026-05-06T22:00:07.492+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 1058, in _validate_conn
+[2026-05-06T22:00:07.495+0000] {subprocess.py:93} INFO -     conn.connect()
+[2026-05-06T22:00:07.497+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connection.py", line 363, in connect
+[2026-05-06T22:00:07.499+0000] {subprocess.py:93} INFO -     self.sock = conn = self._new_conn()
+[2026-05-06T22:00:07.502+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connection.py", line 186, in _new_conn
+[2026-05-06T22:00:07.503+0000] {subprocess.py:93} INFO -     raise NewConnectionError(
+[2026-05-06T22:00:07.509+0000] {subprocess.py:93} INFO - urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x78985c4cd580>: Failed to establish a new connection: [Errno -5] No address associated with hostname
+[2026-05-06T22:00:07.513+0000] {subprocess.py:93} INFO - 
+[2026-05-06T22:00:07.520+0000] {subprocess.py:93} INFO - During handling of the above exception, another exception occurred:
+[2026-05-06T22:00:07.533+0000] {subprocess.py:93} INFO - 
+[2026-05-06T22:00:07.538+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-06T22:00:07.543+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/requests/adapters.py", line 486, in send
+[2026-05-06T22:00:07.544+0000] {subprocess.py:93} INFO -     resp = conn.urlopen(
+[2026-05-06T22:00:07.545+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 799, in urlopen
+[2026-05-06T22:00:07.546+0000] {subprocess.py:93} INFO -     retries = retries.increment(
+[2026-05-06T22:00:07.549+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/util/retry.py", line 592, in increment
+[2026-05-06T22:00:07.555+0000] {subprocess.py:93} INFO -     raise MaxRetryError(_pool, url, error or ResponseError(cause))
+[2026-05-06T22:00:07.556+0000] {subprocess.py:93} INFO - urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='chromedriver.storage.googleapis.com', port=443): Max retries exceeded with url: /LATEST_RELEASE (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x78985c4cd580>: Failed to establish a new connection: [Errno -5] No address associated with hostname'))
+[2026-05-06T22:00:07.566+0000] {subprocess.py:93} INFO - 
+[2026-05-06T22:00:07.567+0000] {subprocess.py:93} INFO - During handling of the above exception, another exception occurred:
+[2026-05-06T22:00:07.569+0000] {subprocess.py:93} INFO - 
+[2026-05-06T22:00:07.570+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-06T22:00:07.573+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/core/http.py", line 32, in get
+[2026-05-06T22:00:07.583+0000] {subprocess.py:93} INFO -     resp = requests.get(
+[2026-05-06T22:00:07.587+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/requests/api.py", line 73, in get
+[2026-05-06T22:00:07.590+0000] {subprocess.py:93} INFO -     return request("get", url, params=params, **kwargs)
+[2026-05-06T22:00:07.593+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/requests/api.py", line 59, in request
+[2026-05-06T22:00:07.595+0000] {subprocess.py:93} INFO -     return session.request(method=method, url=url, **kwargs)
+[2026-05-06T22:00:07.596+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/requests/sessions.py", line 589, in request
+[2026-05-06T22:00:07.599+0000] {subprocess.py:93} INFO -     resp = self.send(prep, **send_kwargs)
+[2026-05-06T22:00:07.604+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/requests/sessions.py", line 703, in send
+[2026-05-06T22:00:07.607+0000] {subprocess.py:93} INFO -     r = adapter.send(request, **kwargs)
+[2026-05-06T22:00:07.610+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/requests/adapters.py", line 519, in send
+[2026-05-06T22:00:07.615+0000] {subprocess.py:93} INFO -     raise ConnectionError(e, request=request)
+[2026-05-06T22:00:07.622+0000] {subprocess.py:93} INFO - requests.exceptions.ConnectionError: HTTPSConnectionPool(host='chromedriver.storage.googleapis.com', port=443): Max retries exceeded with url: /LATEST_RELEASE (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x78985c4cd580>: Failed to establish a new connection: [Errno -5] No address associated with hostname'))
+[2026-05-06T22:00:07.624+0000] {subprocess.py:93} INFO - 
+[2026-05-06T22:00:07.634+0000] {subprocess.py:93} INFO - During handling of the above exception, another exception occurred:
+[2026-05-06T22:00:07.635+0000] {subprocess.py:93} INFO - 
+[2026-05-06T22:00:07.636+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-06T22:00:07.637+0000] {subprocess.py:93} INFO -   File "scrapers/spiders/electroplanet_ma.py", line 162, in <module>
+[2026-05-06T22:00:07.638+0000] {subprocess.py:93} INFO -     scrape_electroplanet()
+[2026-05-06T22:00:07.639+0000] {subprocess.py:93} INFO -   File "scrapers/spiders/electroplanet_ma.py", line 73, in scrape_electroplanet
+[2026-05-06T22:00:07.640+0000] {subprocess.py:93} INFO -     driver = get_driver()
+[2026-05-06T22:00:07.643+0000] {subprocess.py:93} INFO -   File "scrapers/spiders/electroplanet_ma.py", line 63, in get_driver
+[2026-05-06T22:00:07.644+0000] {subprocess.py:93} INFO -     return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=opts)
+[2026-05-06T22:00:07.645+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/chrome.py", line 40, in install
+[2026-05-06T22:00:07.652+0000] {subprocess.py:93} INFO -     driver_path = self._get_driver_binary_path(self.driver)
+[2026-05-06T22:00:07.656+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/core/manager.py", line 40, in _get_driver_binary_path
+[2026-05-06T22:00:07.659+0000] {subprocess.py:93} INFO -     file = self._download_manager.download_file(driver.get_driver_download_url(os_type))
+[2026-05-06T22:00:07.661+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/drivers/chrome.py", line 32, in get_driver_download_url
+[2026-05-06T22:00:07.665+0000] {subprocess.py:93} INFO -     driver_version_to_download = self.get_driver_version_to_download()
+[2026-05-06T22:00:07.669+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/core/driver.py", line 48, in get_driver_version_to_download
+[2026-05-06T22:00:07.682+0000] {subprocess.py:93} INFO -     return self.get_latest_release_version()
+[2026-05-06T22:00:07.684+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/drivers/chrome.py", line 70, in get_latest_release_version
+[2026-05-06T22:00:07.685+0000] {subprocess.py:93} INFO -     resp = self._http_client.get(url=latest_release_url)
+[2026-05-06T22:00:07.694+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/core/http.py", line 35, in get
+[2026-05-06T22:00:07.705+0000] {subprocess.py:93} INFO -     raise exceptions.ConnectionError(f"Could not reach host. Are you offline?")
+[2026-05-06T22:00:07.710+0000] {subprocess.py:93} INFO - requests.exceptions.ConnectionError: Could not reach host. Are you offline?
+[2026-05-06T22:00:07.712+0000] {subprocess.py:93} INFO - Electroplanet done with warnings
+[2026-05-06T22:00:07.714+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-05-06T22:00:07.904+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=scrape_electroplanet, execution_date=20260506T210000, start_date=20260506T220001, end_date=20260506T220007
+[2026-05-06T22:00:08.044+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-05-06T22:00:08.265+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

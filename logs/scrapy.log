@@ -1,0 +1,272 @@
+2026-03-29 18:06:49 [scrapy.utils.log] INFO: Scrapy 2.11.2 started (bot: price_intelligence)
+2026-03-29 18:06:49 [scrapy.utils.log] INFO: Versions: lxml 6.0.2.0, libxml2 2.11.9, cssselect 1.4.0, parsel 1.11.0, w3lib 2.4.1, Twisted 25.5.0, Python 3.14.0 (tags/v3.14.0:ebf955d, Oct  7 2025, 10:15:03) [MSC v.1944 64 bit (AMD64)], pyOpenSSL 26.0.0 (OpenSSL 3.5.5 27 Jan 2026), cryptography 46.0.6, Platform Windows-11-10.0.26200-SP0
+2026-03-29 18:06:49 [scrapy.addons] INFO: Enabled addons:
+[]
+2026-03-29 18:06:49 [py.warnings] WARNING: C:\Users\Administrateur\Downloads\price_intelligence_jumia (1)\price_intelligence\venv\Lib\site-packages\scrapy\utils\request.py:254: ScrapyDeprecationWarning: '2.6' is a deprecated value for the 'REQUEST_FINGERPRINTER_IMPLEMENTATION' setting.
+
+It is also the default value. In other words, it is normal to get this warning if you have not defined a value for the 'REQUEST_FINGERPRINTER_IMPLEMENTATION' setting. This is so for backward compatibility reasons, but it will change in a future version of Scrapy.
+
+See the documentation of the 'REQUEST_FINGERPRINTER_IMPLEMENTATION' setting for information on how to handle this deprecation.
+  return cls(crawler)
+
+2026-03-29 18:06:49 [scrapy.extensions.telnet] INFO: Telnet Password: a24b6c5be91f92e2
+2026-03-29 18:06:49 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.logstats.LogStats']
+2026-03-29 18:06:49 [scrapy.crawler] INFO: Overridden settings:
+{'BOT_NAME': 'price_intelligence',
+ 'CONCURRENT_REQUESTS': 4,
+ 'CONCURRENT_REQUESTS_PER_DOMAIN': 2,
+ 'DOWNLOAD_DELAY': 2,
+ 'LOG_FILE': 'logs/scrapy.log',
+ 'LOG_LEVEL': 'INFO',
+ 'NEWSPIDER_MODULE': 'scrapers.spiders',
+ 'RETRY_HTTP_CODES': [429, 500, 502, 503, 504],
+ 'RETRY_TIMES': 3,
+ 'ROBOTSTXT_OBEY': True,
+ 'SPIDER_MODULES': ['scrapers.spiders'],
+ 'TWISTED_REACTOR': 'twisted.internet.asyncioreactor.AsyncioSelectorReactor',
+ 'USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+               '(KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'}
+2026-03-29 18:06:50 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware',
+ 'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2026-03-29 18:06:50 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2026-03-29 18:06:50 [scrapy.middleware] INFO: Enabled item pipelines:
+['scrapers.pipelines.AddMetadataPipeline',
+ 'scrapers.pipelines.JsonExportPipeline']
+2026-03-29 18:06:50 [scrapy.core.engine] INFO: Spider opened
+2026-03-29 18:06:50 [jumia_ma] INFO: Export → data/raw/jumia_ma.json
+2026-03-29 18:06:50 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2026-03-29 18:06:50 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+2026-03-29 18:06:53 [jumia_ma] INFO: [Téléphones & Smartphones] 55 produits — https://www.jumia.ma/telephones-smartphones/
+2026-03-29 18:06:56 [jumia_ma] INFO: [Téléphones & Smartphones] 48 produits — https://www.jumia.ma/tablettes-tactiles/
+2026-03-29 18:06:59 [jumia_ma] INFO: [Informatique] 70 produits — https://www.jumia.ma/pc-portables/
+2026-03-29 18:07:01 [jumia_ma] INFO: [Informatique] 54 produits — https://www.jumia.ma/ordinateurs-pc/
+2026-03-29 18:07:04 [jumia_ma] INFO: [Informatique] 55 produits — https://www.jumia.ma/ecrans-d-ordinateurs/
+2026-03-29 18:07:07 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=2
+2026-03-29 18:07:08 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/tablettes-tactiles/?page=2
+2026-03-29 18:07:11 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/pc-portables/?page=2
+2026-03-29 18:07:13 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=2
+2026-03-29 18:07:16 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ecrans-d-ordinateurs/?page=2
+2026-03-29 18:07:19 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=3
+2026-03-29 18:07:21 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/tablettes-tactiles/?page=3
+2026-03-29 18:07:23 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/pc-portables/?page=3
+2026-03-29 18:07:25 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=3
+2026-03-29 18:07:28 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ecrans-d-ordinateurs/?page=3
+2026-03-29 18:07:31 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=4
+2026-03-29 18:07:33 [jumia_ma] INFO: [Téléphones & Smartphones] 21 produits — https://www.jumia.ma/tablettes-tactiles/?page=4
+2026-03-29 18:07:35 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/pc-portables/?page=4
+2026-03-29 18:07:38 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=4
+2026-03-29 18:07:40 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ecrans-d-ordinateurs/?page=4
+2026-03-29 18:07:43 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=5
+2026-03-29 18:07:45 [jumia_ma] INFO: [Électroménager] 40 produits — https://www.jumia.ma/gros-electromenager/
+2026-03-29 18:07:48 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/pc-portables/?page=5
+2026-03-29 18:07:49 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=5
+2026-03-29 18:07:50 [scrapy.extensions.logstats] INFO: Crawled 25 pages (at 25 pages/min), scraped 941 items (at 941 items/min)
+2026-03-29 18:07:52 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ecrans-d-ordinateurs/?page=5
+2026-03-29 18:07:55 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=6
+2026-03-29 18:07:57 [jumia_ma] INFO: [Électroménager] 40 produits — https://www.jumia.ma/gros-electromenager/?page=2
+2026-03-29 18:08:00 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/pc-portables/?page=6
+2026-03-29 18:08:03 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=6
+2026-03-29 18:08:06 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ecrans-d-ordinateurs/?page=6
+2026-03-29 18:08:07 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=7
+2026-03-29 18:08:10 [jumia_ma] INFO: [Électroménager] 40 produits — https://www.jumia.ma/gros-electromenager/?page=3
+2026-03-29 18:08:12 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/pc-portables/?page=7
+2026-03-29 18:08:14 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=7
+2026-03-29 18:08:17 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ecrans-d-ordinateurs/?page=7
+2026-03-29 18:08:19 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=8
+2026-03-29 18:08:21 [jumia_ma] INFO: [Électroménager] 34 produits — https://www.jumia.ma/gros-electromenager/?page=4
+2026-03-29 18:08:23 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/pc-portables/?page=8
+2026-03-29 18:08:27 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=8
+2026-03-29 18:08:29 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ecrans-d-ordinateurs/?page=8
+2026-03-29 18:08:32 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=9
+2026-03-29 18:08:35 [jumia_ma] INFO: [Électroménager] 62 produits — https://www.jumia.ma/air-fryers/
+2026-03-29 18:08:37 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/pc-portables/?page=9
+2026-03-29 18:08:38 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=9
+2026-03-29 18:08:40 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ecrans-d-ordinateurs/?page=9
+2026-03-29 18:08:42 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=10
+2026-03-29 18:08:45 [jumia_ma] INFO: [Électroménager] 40 produits — https://www.jumia.ma/air-fryers/?page=2
+2026-03-29 18:08:48 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/pc-portables/?page=10
+2026-03-29 18:08:50 [scrapy.extensions.logstats] INFO: Crawled 49 pages (at 24 pages/min), scraped 1895 items (at 954 items/min)
+2026-03-29 18:08:51 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=10
+2026-03-29 18:08:53 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ecrans-d-ordinateurs/?page=10
+2026-03-29 18:08:56 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=11
+2026-03-29 18:08:58 [jumia_ma] INFO: [Électroménager] 40 produits — https://www.jumia.ma/air-fryers/?page=3
+2026-03-29 18:09:02 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/pc-portables/?page=11
+2026-03-29 18:09:04 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=11
+2026-03-29 18:09:06 [jumia_ma] INFO: [Informatique] 9 produits — https://www.jumia.ma/ecrans-d-ordinateurs/?page=11
+2026-03-29 18:09:08 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=12
+2026-03-29 18:09:11 [jumia_ma] INFO: [Électroménager] 40 produits — https://www.jumia.ma/air-fryers/?page=4
+2026-03-29 18:09:14 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/pc-portables/?page=12
+2026-03-29 18:09:16 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=12
+2026-03-29 18:09:19 [jumia_ma] INFO: [Électroménager] 55 produits — https://www.jumia.ma/micro-onde/
+2026-03-29 18:09:21 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=13
+2026-03-29 18:09:24 [jumia_ma] INFO: [Électroménager] 40 produits — https://www.jumia.ma/air-fryers/?page=5
+2026-03-29 18:09:27 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/pc-portables/?page=13
+2026-03-29 18:09:29 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=13
+2026-03-29 18:09:31 [jumia_ma] INFO: [Électroménager] 40 produits — https://www.jumia.ma/micro-onde/?page=2
+2026-03-29 18:09:34 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=14
+2026-03-29 18:09:36 [jumia_ma] INFO: [Électroménager] 40 produits — https://www.jumia.ma/air-fryers/?page=6
+2026-03-29 18:09:39 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/pc-portables/?page=14
+2026-03-29 18:09:41 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=14
+2026-03-29 18:09:44 [jumia_ma] INFO: [Électroménager] 17 produits — https://www.jumia.ma/micro-onde/?page=3
+2026-03-29 18:09:47 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=15
+2026-03-29 18:09:50 [scrapy.extensions.logstats] INFO: Crawled 72 pages (at 23 pages/min), scraped 2761 items (at 866 items/min)
+2026-03-29 18:09:50 [jumia_ma] INFO: [Électroménager] 40 produits — https://www.jumia.ma/air-fryers/?page=7
+2026-03-29 18:09:52 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/pc-portables/?page=15
+2026-03-29 18:09:54 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=15
+2026-03-29 18:09:57 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=16
+2026-03-29 18:09:59 [jumia_ma] INFO: [Électroménager] 40 produits — https://www.jumia.ma/air-fryers/?page=8
+2026-03-29 18:10:01 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/pc-portables/?page=16
+2026-03-29 18:10:04 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=16
+2026-03-29 18:10:06 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=17
+2026-03-29 18:10:08 [jumia_ma] INFO: [Électroménager] 15 produits — https://www.jumia.ma/air-fryers/?page=9
+2026-03-29 18:10:11 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/pc-portables/?page=17
+2026-03-29 18:10:13 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=17
+2026-03-29 18:10:16 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=18
+2026-03-29 18:10:19 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/pc-portables/?page=18
+2026-03-29 18:10:21 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=18
+2026-03-29 18:10:23 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=19
+2026-03-29 18:10:26 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/pc-portables/?page=19
+2026-03-29 18:10:28 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=19
+2026-03-29 18:10:31 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=20
+2026-03-29 18:10:33 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/pc-portables/?page=20
+2026-03-29 18:10:36 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=20
+2026-03-29 18:10:39 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=21
+2026-03-29 18:10:42 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/pc-portables/?page=21
+2026-03-29 18:10:44 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=21
+2026-03-29 18:10:46 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=22
+2026-03-29 18:10:49 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/pc-portables/?page=22
+2026-03-29 18:10:50 [scrapy.extensions.logstats] INFO: Crawled 97 pages (at 25 pages/min), scraped 3736 items (at 975 items/min)
+2026-03-29 18:10:52 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=22
+2026-03-29 18:10:55 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=23
+2026-03-29 18:10:56 [jumia_ma] INFO: [Informatique] 4 produits — https://www.jumia.ma/pc-portables/?page=23
+2026-03-29 18:10:59 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=23
+2026-03-29 18:11:02 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=24
+2026-03-29 18:11:04 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=24
+2026-03-29 18:11:06 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=25
+2026-03-29 18:11:09 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=25
+2026-03-29 18:11:12 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=26
+2026-03-29 18:11:15 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=26
+2026-03-29 18:11:18 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=27
+2026-03-29 18:11:20 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=27
+2026-03-29 18:11:23 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=28
+2026-03-29 18:11:26 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=28
+2026-03-29 18:11:27 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=29
+2026-03-29 18:11:30 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=29
+2026-03-29 18:11:32 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=30
+2026-03-29 18:11:35 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=30
+2026-03-29 18:11:37 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=31
+2026-03-29 18:11:39 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=31
+2026-03-29 18:11:43 [jumia_ma] INFO: [Téléphones & Smartphones] 40 produits — https://www.jumia.ma/telephones-smartphones/?page=32
+2026-03-29 18:11:46 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=32
+2026-03-29 18:11:49 [jumia_ma] INFO: [Téléphones & Smartphones] 38 produits — https://www.jumia.ma/telephones-smartphones/?page=33
+2026-03-29 18:11:50 [scrapy.extensions.logstats] INFO: Crawled 120 pages (at 23 pages/min), scraped 4618 items (at 882 items/min)
+2026-03-29 18:11:51 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=33
+2026-03-29 18:11:54 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=34
+2026-03-29 18:11:56 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=35
+2026-03-29 18:11:58 [jumia_ma] INFO: [Informatique] 40 produits — https://www.jumia.ma/ordinateurs-pc/?page=36
+2026-03-29 18:12:01 [jumia_ma] INFO: [Informatique] 25 produits — https://www.jumia.ma/ordinateurs-pc/?page=37
+2026-03-29 18:12:01 [scrapy.core.engine] INFO: Closing spider (finished)
+2026-03-29 18:12:01 [jumia_ma] INFO: Terminé → data/raw/jumia_ma.json
+2026-03-29 18:12:01 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'downloader/request_bytes': 139174,
+ 'downloader/request_count': 125,
+ 'downloader/request_method_count/GET': 125,
+ 'downloader/response_bytes': 8557343,
+ 'downloader/response_count': 125,
+ 'downloader/response_status_count/200': 125,
+ 'elapsed_time_seconds': 310.929705,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2026, 3, 29, 17, 12, 1, 32446, tzinfo=datetime.timezone.utc),
+ 'httpcompression/response_bytes': 60293498,
+ 'httpcompression/response_count': 125,
+ 'item_scraped_count': 4803,
+ 'log_count/INFO': 141,
+ 'log_count/WARNING': 1,
+ 'request_depth_max': 36,
+ 'response_received_count': 125,
+ 'robotstxt/request_count': 1,
+ 'robotstxt/response_count': 1,
+ 'robotstxt/response_status_count/200': 1,
+ 'scheduler/dequeued': 124,
+ 'scheduler/dequeued/memory': 124,
+ 'scheduler/enqueued': 124,
+ 'scheduler/enqueued/memory': 124,
+ 'start_time': datetime.datetime(2026, 3, 29, 17, 6, 50, 102741, tzinfo=datetime.timezone.utc)}
+2026-03-29 18:12:01 [scrapy.core.engine] INFO: Spider closed (finished)
+2026-03-29 18:13:47 [scrapy.utils.log] INFO: Scrapy 2.11.2 started (bot: price_intelligence)
+2026-03-29 18:13:47 [scrapy.utils.log] INFO: Versions: lxml 6.0.2.0, libxml2 2.11.9, cssselect 1.4.0, parsel 1.11.0, w3lib 2.4.1, Twisted 25.5.0, Python 3.14.0 (tags/v3.14.0:ebf955d, Oct  7 2025, 10:15:03) [MSC v.1944 64 bit (AMD64)], pyOpenSSL 26.0.0 (OpenSSL 3.5.5 27 Jan 2026), cryptography 46.0.6, Platform Windows-11-10.0.26200-SP0
+2026-03-29 18:13:47 [scrapy.addons] INFO: Enabled addons:
+[]
+2026-03-29 18:13:47 [py.warnings] WARNING: C:\Users\Administrateur\Downloads\price_intelligence_jumia (1)\price_intelligence\venv\Lib\site-packages\scrapy\utils\request.py:254: ScrapyDeprecationWarning: '2.6' is a deprecated value for the 'REQUEST_FINGERPRINTER_IMPLEMENTATION' setting.
+
+It is also the default value. In other words, it is normal to get this warning if you have not defined a value for the 'REQUEST_FINGERPRINTER_IMPLEMENTATION' setting. This is so for backward compatibility reasons, but it will change in a future version of Scrapy.
+
+See the documentation of the 'REQUEST_FINGERPRINTER_IMPLEMENTATION' setting for information on how to handle this deprecation.
+  return cls(crawler)
+
+2026-03-29 18:13:47 [scrapy.extensions.telnet] INFO: Telnet Password: 62edd4864fbdf414
+2026-03-29 18:13:47 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole']
+2026-03-29 18:13:47 [scrapy.crawler] INFO: Overridden settings:
+{'BOT_NAME': 'price_intelligence',
+ 'CONCURRENT_REQUESTS': 4,
+ 'CONCURRENT_REQUESTS_PER_DOMAIN': 2,
+ 'DOWNLOAD_DELAY': 2,
+ 'DUPEFILTER_CLASS': 'scrapy.dupefilters.BaseDupeFilter',
+ 'LOGSTATS_INTERVAL': 0,
+ 'LOG_ENABLED': False,
+ 'LOG_FILE': 'logs/scrapy.log',
+ 'LOG_LEVEL': 'INFO',
+ 'NEWSPIDER_MODULE': 'scrapers.spiders',
+ 'RETRY_HTTP_CODES': [429, 500, 502, 503, 504],
+ 'RETRY_TIMES': 3,
+ 'ROBOTSTXT_OBEY': True,
+ 'SPIDER_MODULES': ['scrapers.spiders'],
+ 'TWISTED_REACTOR': 'twisted.internet.asyncioreactor.AsyncioSelectorReactor',
+ 'USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+               '(KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'}
+2026-03-29 18:13:48 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware',
+ 'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2026-03-29 18:13:48 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2026-03-29 18:13:48 [scrapy.middleware] INFO: Enabled item pipelines:
+['scrapers.pipelines.AddMetadataPipeline',
+ 'scrapers.pipelines.JsonExportPipeline']
+2026-03-29 18:13:48 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+2026-03-29 18:13:48 [scrapy.core.engine] INFO: Spider opened
+2026-03-29 18:13:48 [jumia_ma] INFO: Export → data/raw/jumia_ma.json

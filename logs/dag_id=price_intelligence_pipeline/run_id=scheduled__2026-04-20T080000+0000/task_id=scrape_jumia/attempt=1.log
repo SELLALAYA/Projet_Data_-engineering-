@@ -1,0 +1,17 @@
+[2026-04-21T14:16:17.956+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_jumia scheduled__2026-04-20T08:00:00+00:00 [queued]>
+[2026-04-21T14:16:17.978+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_jumia scheduled__2026-04-20T08:00:00+00:00 [queued]>
+[2026-04-21T14:16:17.979+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-04-21T14:16:18.011+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_jumia> on 2026-04-20 08:00:00+00:00
+[2026-04-21T14:16:18.020+0000] {standard_task_runner.py:60} INFO - Started process 486 to run task
+[2026-04-21T14:16:18.027+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_jumia', 'scheduled__2026-04-20T08:00:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmphefu_ho5']
+[2026-04-21T14:16:18.032+0000] {standard_task_runner.py:88} INFO - Job 2: Subtask scrape_jumia
+[2026-04-21T14:16:18.175+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_jumia scheduled__2026-04-20T08:00:00+00:00 [running]> on host 21bc4ddc389a
+[2026-04-21T14:16:18.315+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='price_intelligence' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_jumia' AIRFLOW_CTX_EXECUTION_DATE='2026-04-20T08:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-04-20T08:00:00+00:00'
+[2026-04-21T14:16:18.317+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-04-21T14:16:18.318+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'echo "Scraping Jumia..."']
+[2026-04-21T14:16:18.331+0000] {subprocess.py:86} INFO - Output:
+[2026-04-21T14:16:18.333+0000] {subprocess.py:93} INFO - Scraping Jumia...
+[2026-04-21T14:16:18.334+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-04-21T14:16:18.377+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=scrape_jumia, execution_date=20260420T080000, start_date=20260421T141617, end_date=20260421T141618
+[2026-04-21T14:16:18.400+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-04-21T14:16:18.438+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

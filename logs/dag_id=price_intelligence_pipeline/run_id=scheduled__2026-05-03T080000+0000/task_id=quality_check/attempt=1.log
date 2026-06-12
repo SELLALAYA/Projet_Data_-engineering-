@@ -1,0 +1,25 @@
+[2026-05-04T11:56:24.270+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.quality_check scheduled__2026-05-03T08:00:00+00:00 [queued]>
+[2026-05-04T11:56:24.292+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.quality_check scheduled__2026-05-03T08:00:00+00:00 [queued]>
+[2026-05-04T11:56:24.296+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 3
+[2026-05-04T11:56:24.328+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): quality_check> on 2026-05-03 08:00:00+00:00
+[2026-05-04T11:56:24.338+0000] {standard_task_runner.py:60} INFO - Started process 21458 to run task
+[2026-05-04T11:56:24.345+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'quality_check', 'scheduled__2026-05-03T08:00:00+00:00', '--job-id', '166', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmp5v7p8j0e']
+[2026-05-04T11:56:24.349+0000] {standard_task_runner.py:88} INFO - Job 166: Subtask quality_check
+[2026-05-04T11:56:24.539+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.quality_check scheduled__2026-05-03T08:00:00+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-04T11:56:24.772+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='price_intelligence' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='quality_check' AIRFLOW_CTX_EXECUTION_DATE='2026-05-03T08:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-05-03T08:00:00+00:00'
+[2026-05-04T11:56:24.775+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-04T11:56:24.778+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            python3 -c "\nimport json\n\ndata = json.load(open(\'/opt/***/data/cleaned/products_cleaned.json\'))\ntotal        = len(data)\nwith_price   = sum(1 for p in data if p.get(\'price\',0) > 0)\nwith_rating  = sum(1 for p in data if p.get(\'rating\',\'\'))\nwith_cat     = sum(1 for p in data if p.get(\'category\',\'\'))\ncompleteness = round(100.0 * with_price / total, 1) if total else 0\n\nprint(f\'╔══════════════════════════════════════╗\')\nprint(f\'║        QUALITY REPORT                ║\')\nprint(f\'║  Total produits   : {total:<6}           ║\')\nprint(f\'║  Avec prix        : {with_price:<6}           ║\')\nprint(f\'║  Avec rating      : {with_rating:<6}           ║\')\nprint(f\'║  Avec catégorie   : {with_cat:<6}           ║\')\nprint(f\'║  Price completeness: {completeness}%          ║\')\nprint(f\'╚══════════════════════════════════════╝\')\n\nassert completeness >= 80, f\'❌ Price completeness trop basse: {completeness}%\'\nprint(\'✅ Quality check PASSED!\')\n"\n        ']
+[2026-05-04T11:56:24.801+0000] {subprocess.py:86} INFO - Output:
+[2026-05-04T11:56:25.042+0000] {subprocess.py:93} INFO - ╔══════════════════════════════════════╗
+[2026-05-04T11:56:25.043+0000] {subprocess.py:93} INFO - ║        QUALITY REPORT                ║
+[2026-05-04T11:56:25.044+0000] {subprocess.py:93} INFO - ║  Total produits   : 6936             ║
+[2026-05-04T11:56:25.044+0000] {subprocess.py:93} INFO - ║  Avec prix        : 6936             ║
+[2026-05-04T11:56:25.045+0000] {subprocess.py:93} INFO - ║  Avec rating      : 6936             ║
+[2026-05-04T11:56:25.046+0000] {subprocess.py:93} INFO - ║  Avec catégorie   : 6936             ║
+[2026-05-04T11:56:25.047+0000] {subprocess.py:93} INFO - ║  Price completeness: 100.0%          ║
+[2026-05-04T11:56:25.048+0000] {subprocess.py:93} INFO - ╚══════════════════════════════════════╝
+[2026-05-04T11:56:25.049+0000] {subprocess.py:93} INFO - ✅ Quality check PASSED!
+[2026-05-04T11:56:25.056+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-05-04T11:56:25.125+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=quality_check, execution_date=20260503T080000, start_date=20260504T115624, end_date=20260504T115625
+[2026-05-04T11:56:25.182+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-05-04T11:56:25.226+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

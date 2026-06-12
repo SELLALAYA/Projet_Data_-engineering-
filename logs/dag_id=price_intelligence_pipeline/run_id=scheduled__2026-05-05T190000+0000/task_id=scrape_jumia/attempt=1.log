@@ -1,0 +1,50 @@
+[2026-05-05T20:08:08.924+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_jumia scheduled__2026-05-05T19:00:00+00:00 [queued]>
+[2026-05-05T20:08:08.952+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_jumia scheduled__2026-05-05T19:00:00+00:00 [queued]>
+[2026-05-05T20:08:08.955+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 3
+[2026-05-05T20:08:09.007+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_jumia> on 2026-05-05 19:00:00+00:00
+[2026-05-05T20:08:09.045+0000] {standard_task_runner.py:60} INFO - Started process 2186 to run task
+[2026-05-05T20:08:09.066+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_jumia', 'scheduled__2026-05-05T19:00:00+00:00', '--job-id', '280', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpy993gomr']
+[2026-05-05T20:08:09.084+0000] {standard_task_runner.py:88} INFO - Job 280: Subtask scrape_jumia
+[2026-05-05T20:08:09.410+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_jumia scheduled__2026-05-05T19:00:00+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-05T20:08:09.863+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_jumia' AIRFLOW_CTX_EXECUTION_DATE='2026-05-05T19:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-05-05T19:00:00+00:00'
+[2026-05-05T20:08:09.869+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-05T20:08:09.876+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            set -e\n            cd /opt/***\n            mkdir -p data/raw\n            scrapy crawl jumia_ma -o data/raw/jumia_ma.json --overwrite-output -s LOG_LEVEL=WARNING -s ROBOTSTXT_OBEY=False -s DOWNLOAD_DELAY=1.5 -s CONCURRENT_REQUESTS=4\n            echo Jumia done\n        ']
+[2026-05-05T20:08:09.923+0000] {subprocess.py:86} INFO - Output:
+[2026-05-05T20:08:09.938+0000] {subprocess.py:93} INFO - /usr/bin/bash: line 5: scrapy: command not found
+[2026-05-05T20:08:09.940+0000] {subprocess.py:97} INFO - Command exited with return code 127
+[2026-05-05T20:08:09.986+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 428, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 127.
+[2026-05-05T20:08:10.001+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=price_intelligence_pipeline, task_id=scrape_jumia, execution_date=20260505T190000, start_date=20260505T200808, end_date=20260505T200809
+[2026-05-05T20:08:10.041+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 280 for task scrape_jumia (Bash command failed. The command returned a non-zero exit code 127.; 2186)
+[2026-05-05T20:08:10.086+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-05-05T20:08:10.167+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-05-05T20:29:46.703+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_jumia scheduled__2026-05-05T19:00:00+00:00 [queued]>
+[2026-05-05T20:29:46.722+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_jumia scheduled__2026-05-05T19:00:00+00:00 [queued]>
+[2026-05-05T20:29:46.727+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 3
+[2026-05-05T20:29:46.772+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_jumia> on 2026-05-05 19:00:00+00:00
+[2026-05-05T20:29:46.782+0000] {standard_task_runner.py:60} INFO - Started process 200 to run task
+[2026-05-05T20:29:46.794+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_jumia', 'scheduled__2026-05-05T19:00:00+00:00', '--job-id', '313', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmp_np0ip6v']
+[2026-05-05T20:29:46.799+0000] {standard_task_runner.py:88} INFO - Job 313: Subtask scrape_jumia
+[2026-05-05T20:29:46.966+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_jumia scheduled__2026-05-05T19:00:00+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-05T20:29:47.179+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_jumia' AIRFLOW_CTX_EXECUTION_DATE='2026-05-05T19:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-05-05T19:00:00+00:00'
+[2026-05-05T20:29:47.181+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-05T20:29:47.186+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            set -e\n            cd /opt/***\n            mkdir -p data/raw\n            scrapy crawl jumia_ma -o data/raw/jumia_ma.json --overwrite-output -s LOG_LEVEL=WARNING -s ROBOTSTXT_OBEY=False -s DOWNLOAD_DELAY=1.5 -s CONCURRENT_REQUESTS=4\n            echo Jumia done\n        ']
+[2026-05-05T20:29:47.207+0000] {subprocess.py:86} INFO - Output:
+[2026-05-05T20:29:47.219+0000] {subprocess.py:93} INFO - /usr/bin/bash: line 5: scrapy: command not found
+[2026-05-05T20:29:47.220+0000] {subprocess.py:97} INFO - Command exited with return code 127
+[2026-05-05T20:29:47.254+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 428, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 127.
+[2026-05-05T20:29:47.262+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=price_intelligence_pipeline, task_id=scrape_jumia, execution_date=20260505T190000, start_date=20260505T202946, end_date=20260505T202947
+[2026-05-05T20:29:47.290+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 313 for task scrape_jumia (Bash command failed. The command returned a non-zero exit code 127.; 200)
+[2026-05-05T20:29:47.330+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-05-05T20:29:47.446+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

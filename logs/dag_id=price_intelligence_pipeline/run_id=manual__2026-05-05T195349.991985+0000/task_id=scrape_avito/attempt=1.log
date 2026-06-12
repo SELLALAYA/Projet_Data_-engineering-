@@ -1,0 +1,28 @@
+[2026-05-05T19:53:51.991+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_avito manual__2026-05-05T19:53:49.991985+00:00 [queued]>
+[2026-05-05T19:53:52.022+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_avito manual__2026-05-05T19:53:49.991985+00:00 [queued]>
+[2026-05-05T19:53:52.023+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 3
+[2026-05-05T19:53:52.074+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_avito> on 2026-05-05 19:53:49.991985+00:00
+[2026-05-05T19:53:52.086+0000] {standard_task_runner.py:60} INFO - Started process 988 to run task
+[2026-05-05T19:53:52.103+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_avito', 'manual__2026-05-05T19:53:49.991985+00:00', '--job-id', '191', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpvb3rw6bx']
+[2026-05-05T19:53:52.114+0000] {standard_task_runner.py:88} INFO - Job 191: Subtask scrape_avito
+[2026-05-05T19:53:52.331+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_avito manual__2026-05-05T19:53:49.991985+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-05T19:53:52.619+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_avito' AIRFLOW_CTX_EXECUTION_DATE='2026-05-05T19:53:49.991985+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-05T19:53:49.991985+00:00'
+[2026-05-05T19:53:52.622+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-05T19:53:52.626+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            set -e\n            cd /opt/***\n            mkdir -p data/raw\n            scrapy crawl avito_ma -o data/raw/avito_ma.json --overwrite-output -s LOG_LEVEL=WARNING -s ROBOTSTXT_OBEY=False -s DOWNLOAD_DELAY=2\n            echo Avito done\n        ']
+[2026-05-05T19:53:52.652+0000] {subprocess.py:86} INFO - Output:
+[2026-05-05T19:53:52.674+0000] {subprocess.py:93} INFO - /usr/bin/bash: line 5: scrapy: command not found
+[2026-05-05T19:53:52.676+0000] {subprocess.py:97} INFO - Command exited with return code 127
+[2026-05-05T19:53:52.720+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 428, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 127.
+[2026-05-05T19:53:52.732+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=price_intelligence_pipeline, task_id=scrape_avito, execution_date=20260505T195349, start_date=20260505T195351, end_date=20260505T195352
+[2026-05-05T19:53:52.764+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 191 for task scrape_avito (Bash command failed. The command returned a non-zero exit code 127.; 988)
+[2026-05-05T19:53:52.810+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-05-05T19:53:52.874+0000] {dagrun.py:822} ERROR - Failed to get task for ti <TaskInstance: price_intelligence_pipeline.transform_clean manual__2026-05-05T19:53:49.991985+00:00 [None]>. Marking it as removed.
+[2026-05-05T19:53:52.882+0000] {dagrun.py:822} ERROR - Failed to get task for ti <TaskInstance: price_intelligence_pipeline.transform_aggregate manual__2026-05-05T19:53:49.991985+00:00 [None]>. Marking it as removed.
+[2026-05-05T19:53:52.886+0000] {dagrun.py:822} ERROR - Failed to get task for ti <TaskInstance: price_intelligence_pipeline.quality_check manual__2026-05-05T19:53:49.991985+00:00 [None]>. Marking it as removed.
+[2026-05-05T19:53:52.905+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

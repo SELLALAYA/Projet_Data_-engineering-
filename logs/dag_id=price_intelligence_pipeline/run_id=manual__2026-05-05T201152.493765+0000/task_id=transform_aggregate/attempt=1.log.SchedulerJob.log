@@ -1,0 +1,1 @@
+[2026-05-05T20:13:46.631+0000] {scheduler_job_runner.py:781} ERROR - Executor reports task instance <TaskInstance: price_intelligence_pipeline.transform_aggregate manual__2026-05-05T20:11:52.493765+00:00 [queued]> finished (failed) although the task says it's queued. (Info: None) Was the task killed externally?

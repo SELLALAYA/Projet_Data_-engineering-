@@ -3,7 +3,7 @@ SPIDER_MODULES = ["scrapers.spiders"]
 NEWSPIDER_MODULE = "scrapers.spiders"
 
 # Politesse
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 DOWNLOAD_DELAY = 2
 RANDOMIZE_DOWNLOAD_DELAY = True
 CONCURRENT_REQUESTS = 4
@@ -25,6 +25,7 @@ COOKIES_ENABLED = True
 ITEM_PIPELINES = {
     "scrapers.pipelines.AddMetadataPipeline": 100,
     "scrapers.pipelines.JsonExportPipeline":  200,
+    "scrapers.pipelines.NifiStreamingPipeline": 300,
 }
 
 # Retry
@@ -35,6 +36,3 @@ RETRY_HTTP_CODES = [429, 500, 502, 503, 504]
 # Logs
 LOG_LEVEL = "INFO"
 LOG_FILE = None
-
-# Windows asyncio fix
-TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"

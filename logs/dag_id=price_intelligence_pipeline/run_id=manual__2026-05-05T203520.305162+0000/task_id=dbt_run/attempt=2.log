@@ -1,0 +1,25 @@
+[2026-05-05T21:29:16.708+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.dbt_run manual__2026-05-05T20:35:20.305162+00:00 [queued]>
+[2026-05-05T21:29:16.719+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.dbt_run manual__2026-05-05T20:35:20.305162+00:00 [queued]>
+[2026-05-05T21:29:16.720+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 3
+[2026-05-05T21:29:16.738+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): dbt_run> on 2026-05-05 20:35:20.305162+00:00
+[2026-05-05T21:29:16.745+0000] {standard_task_runner.py:60} INFO - Started process 6422 to run task
+[2026-05-05T21:29:16.749+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'dbt_run', 'manual__2026-05-05T20:35:20.305162+00:00', '--job-id', '369', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmprl7hivz2']
+[2026-05-05T21:29:16.754+0000] {standard_task_runner.py:88} INFO - Job 369: Subtask dbt_run
+[2026-05-05T21:29:16.843+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.dbt_run manual__2026-05-05T20:35:20.305162+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-05T21:29:16.964+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='dbt_run' AIRFLOW_CTX_EXECUTION_DATE='2026-05-05T20:35:20.305162+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-05T20:35:20.305162+00:00'
+[2026-05-05T21:29:16.966+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-05T21:29:16.968+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            set -e\n            cd /opt/***/dbt\n            export GOOGLE_APPLICATION_CREDENTIALS=/opt/***/gcp-credentials-new.json\n            dbt run --select stg_prices --profiles-dir . --project-dir .\n            dbt run --select prices_cleaned --profiles-dir . --project-dir .\n            dbt run --select prices_aggregated --profiles-dir . --project-dir .\n            echo dbt done\n        ']
+[2026-05-05T21:29:16.982+0000] {subprocess.py:86} INFO - Output:
+[2026-05-05T21:29:16.985+0000] {subprocess.py:93} INFO - /usr/bin/bash: line 3: cd: /opt/***/dbt: No such file or directory
+[2026-05-05T21:29:16.986+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2026-05-05T21:29:17.008+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 428, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2026-05-05T21:29:17.015+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=price_intelligence_pipeline, task_id=dbt_run, execution_date=20260505T203520, start_date=20260505T212916, end_date=20260505T212917
+[2026-05-05T21:29:17.033+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 369 for task dbt_run (Bash command failed. The command returned a non-zero exit code 1.; 6422)
+[2026-05-05T21:29:17.083+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-05-05T21:29:17.119+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

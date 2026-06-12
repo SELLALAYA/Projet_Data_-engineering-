@@ -1,0 +1,35 @@
+[2026-05-23T13:00:22.060+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.dbt_run scheduled__2026-05-23T12:00:00+00:00 [queued]>
+[2026-05-23T13:00:22.071+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.dbt_run scheduled__2026-05-23T12:00:00+00:00 [queued]>
+[2026-05-23T13:00:22.072+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-23T13:00:22.087+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): dbt_run> on 2026-05-23 12:00:00+00:00
+[2026-05-23T13:00:22.093+0000] {standard_task_runner.py:60} INFO - Started process 93277 to run task
+[2026-05-23T13:00:22.097+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'dbt_run', 'scheduled__2026-05-23T12:00:00+00:00', '--job-id', '1850', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpzm4w_y3a']
+[2026-05-23T13:00:22.099+0000] {standard_task_runner.py:88} INFO - Job 1850: Subtask dbt_run
+[2026-05-23T13:00:22.172+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.dbt_run scheduled__2026-05-23T12:00:00+00:00 [running]> on host 91e0d3a0a233
+[2026-05-23T13:00:22.276+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='dbt_run' AIRFLOW_CTX_EXECUTION_DATE='2026-05-23T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-05-23T12:00:00+00:00'
+[2026-05-23T13:00:22.278+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-23T13:00:22.279+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            set -e\n            cd /opt/***/dbt\n            export GOOGLE_APPLICATION_CREDENTIALS=/opt/***/gcp-credentials-new.json\n            /home/***/.local/bin/dbt run --full-refresh --profiles-dir . --project-dir .\n            echo dbt done\n        ']
+[2026-05-23T13:00:22.291+0000] {subprocess.py:86} INFO - Output:
+[2026-05-23T13:00:24.188+0000] {subprocess.py:93} INFO - [0m13:00:24  Running with dbt=1.8.7
+[2026-05-23T13:00:25.408+0000] {subprocess.py:93} INFO - [0m13:00:25  Registered adapter: bigquery=1.8.3
+[2026-05-23T13:00:26.580+0000] {subprocess.py:93} INFO - [0m13:00:26  Found 3 models, 1 seed, 7 data tests, 1 source, 479 macros
+[2026-05-23T13:00:26.584+0000] {subprocess.py:93} INFO - [0m13:00:26
+[2026-05-23T13:00:28.848+0000] {subprocess.py:93} INFO - [0m13:00:28  Concurrency: 4 threads (target='dev')
+[2026-05-23T13:00:28.849+0000] {subprocess.py:93} INFO - [0m13:00:28
+[2026-05-23T13:00:28.862+0000] {subprocess.py:93} INFO - [0m13:00:28  1 of 3 START sql view model price_intelligence_dbt.stg_prices .................. [RUN]
+[2026-05-23T13:00:30.515+0000] {subprocess.py:93} INFO - [0m13:00:30  1 of 3 OK created sql view model price_intelligence_dbt.stg_prices ............. [[32mCREATE VIEW (0 processed)[0m in 1.65s]
+[2026-05-23T13:00:30.525+0000] {subprocess.py:93} INFO - [0m13:00:30  2 of 3 START sql table model price_intelligence_dbt.prices_cleaned ............. [RUN]
+[2026-05-23T13:00:34.345+0000] {subprocess.py:93} INFO - [0m13:00:34  2 of 3 OK created sql table model price_intelligence_dbt.prices_cleaned ........ [[32mCREATE TABLE (681.0 rows, 616.6 KiB processed)[0m in 3.82s]
+[2026-05-23T13:00:34.352+0000] {subprocess.py:93} INFO - [0m13:00:34  3 of 3 START sql table model price_intelligence_dbt.prices_aggregated .......... [RUN]
+[2026-05-23T13:00:38.107+0000] {subprocess.py:93} INFO - [0m13:00:38  3 of 3 OK created sql table model price_intelligence_dbt.prices_aggregated ..... [[32mCREATE TABLE (5.0 rows, 30.1 KiB processed)[0m in 3.75s]
+[2026-05-23T13:00:38.115+0000] {subprocess.py:93} INFO - [0m13:00:38
+[2026-05-23T13:00:38.116+0000] {subprocess.py:93} INFO - [0m13:00:38  Finished running 1 view model, 2 table models in 0 hours 0 minutes and 11.53 seconds (11.53s).
+[2026-05-23T13:00:38.200+0000] {subprocess.py:93} INFO - [0m13:00:38
+[2026-05-23T13:00:38.201+0000] {subprocess.py:93} INFO - [0m13:00:38  [32mCompleted successfully[0m
+[2026-05-23T13:00:38.203+0000] {subprocess.py:93} INFO - [0m13:00:38
+[2026-05-23T13:00:38.204+0000] {subprocess.py:93} INFO - [0m13:00:38  Done. PASS=3 WARN=0 ERROR=0 SKIP=0 TOTAL=3
+[2026-05-23T13:00:42.601+0000] {subprocess.py:93} INFO - dbt done
+[2026-05-23T13:00:42.606+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-05-23T13:00:42.643+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=dbt_run, execution_date=20260523T120000, start_date=20260523T130022, end_date=20260523T130042
+[2026-05-23T13:00:42.701+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-05-23T13:00:42.730+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

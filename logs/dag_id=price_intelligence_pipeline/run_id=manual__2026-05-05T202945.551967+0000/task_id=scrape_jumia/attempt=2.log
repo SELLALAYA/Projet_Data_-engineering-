@@ -1,0 +1,43 @@
+[2026-05-05T20:55:59.366+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_jumia manual__2026-05-05T20:29:45.551967+00:00 [queued]>
+[2026-05-05T20:55:59.389+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_jumia manual__2026-05-05T20:29:45.551967+00:00 [queued]>
+[2026-05-05T20:55:59.390+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 3
+[2026-05-05T20:55:59.427+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_jumia> on 2026-05-05 20:29:45.551967+00:00
+[2026-05-05T20:55:59.442+0000] {standard_task_runner.py:60} INFO - Started process 706 to run task
+[2026-05-05T20:55:59.456+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_jumia', 'manual__2026-05-05T20:29:45.551967+00:00', '--job-id', '333', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpgqlwhjmk']
+[2026-05-05T20:55:59.469+0000] {standard_task_runner.py:88} INFO - Job 333: Subtask scrape_jumia
+[2026-05-05T20:55:59.775+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_jumia manual__2026-05-05T20:29:45.551967+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-05T20:56:00.267+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_jumia' AIRFLOW_CTX_EXECUTION_DATE='2026-05-05T20:29:45.551967+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-05T20:29:45.551967+00:00'
+[2026-05-05T20:56:00.276+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-05T20:56:00.283+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            set -e\n            cd /opt/***\n            mkdir -p data/raw\n            scrapy crawl jumia_ma -o data/raw/jumia_ma.json --overwrite-output -s LOG_LEVEL=WARNING -s ROBOTSTXT_OBEY=False -s DOWNLOAD_DELAY=1.5 -s CONCURRENT_REQUESTS=4\n            echo Jumia done\n        ']
+[2026-05-05T20:56:00.326+0000] {subprocess.py:86} INFO - Output:
+[2026-05-05T20:56:02.177+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-05T20:56:02.178+0000] {subprocess.py:93} INFO -   File "/home/***/.local/bin/scrapy", line 8, in <module>
+[2026-05-05T20:56:02.179+0000] {subprocess.py:93} INFO -     sys.exit(execute())
+[2026-05-05T20:56:02.180+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/scrapy/cmdline.py", line 128, in execute
+[2026-05-05T20:56:02.181+0000] {subprocess.py:93} INFO -     settings = get_project_settings()
+[2026-05-05T20:56:02.182+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/scrapy/utils/project.py", line 71, in get_project_settings
+[2026-05-05T20:56:02.183+0000] {subprocess.py:93} INFO -     settings.setmodule(settings_module_path, priority="project")
+[2026-05-05T20:56:02.184+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/scrapy/settings/__init__.py", line 385, in setmodule
+[2026-05-05T20:56:02.186+0000] {subprocess.py:93} INFO -     module = import_module(module)
+[2026-05-05T20:56:02.189+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/importlib/__init__.py", line 127, in import_module
+[2026-05-05T20:56:02.190+0000] {subprocess.py:93} INFO -     return _bootstrap._gcd_import(name[level:], package, level)
+[2026-05-05T20:56:02.194+0000] {subprocess.py:93} INFO -   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+[2026-05-05T20:56:02.201+0000] {subprocess.py:93} INFO -   File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+[2026-05-05T20:56:02.204+0000] {subprocess.py:93} INFO -   File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked
+[2026-05-05T20:56:02.205+0000] {subprocess.py:93} INFO -   File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+[2026-05-05T20:56:02.206+0000] {subprocess.py:93} INFO -   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+[2026-05-05T20:56:02.209+0000] {subprocess.py:93} INFO -   File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+[2026-05-05T20:56:02.210+0000] {subprocess.py:93} INFO -   File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
+[2026-05-05T20:56:02.211+0000] {subprocess.py:93} INFO - ModuleNotFoundError: No module named 'scrapers'
+[2026-05-05T20:56:02.360+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2026-05-05T20:56:02.406+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 428, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2026-05-05T20:56:02.416+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=price_intelligence_pipeline, task_id=scrape_jumia, execution_date=20260505T202945, start_date=20260505T205559, end_date=20260505T205602
+[2026-05-05T20:56:02.456+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 333 for task scrape_jumia (Bash command failed. The command returned a non-zero exit code 1.; 706)
+[2026-05-05T20:56:02.506+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-05-05T20:56:02.680+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

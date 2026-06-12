@@ -1,0 +1,21 @@
+[2026-04-28T12:14:33.222+0000] {processor.py:161} INFO - Started process (PID=107680) to work on /opt/airflow/dags/price_intelligence_dag.py
+[2026-04-28T12:14:33.514+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/price_intelligence_dag.py for tasks to queue
+[2026-04-28T12:14:34.370+0000] {logging_mixin.py:188} INFO - [2026-04-28T12:14:34.370+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/price_intelligence_dag.py
+[2026-04-28T12:15:02.765+0000] {processor.py:840} INFO - DAG(s) 'price_intelligence_pipeline' retrieved from /opt/airflow/dags/price_intelligence_dag.py
+[2026-04-28T12:15:05.025+0000] {logging_mixin.py:188} INFO - [2026-04-28T12:15:05.024+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2026-04-28T12:15:05.899+0000] {logging_mixin.py:188} INFO - [2026-04-28T12:15:05.898+0000] {dag.py:3823} INFO - Setting next_dagrun for price_intelligence_pipeline to 2026-04-28 08:00:00+00:00, run_after=2026-04-29 08:00:00+00:00
+[2026-04-28T12:15:08.452+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/price_intelligence_dag.py took 35.498 seconds
+[2026-04-28T12:15:45.316+0000] {processor.py:161} INFO - Started process (PID=107702) to work on /opt/airflow/dags/price_intelligence_dag.py
+[2026-04-28T12:15:45.338+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/price_intelligence_dag.py for tasks to queue
+[2026-04-28T12:15:45.569+0000] {logging_mixin.py:188} INFO - [2026-04-28T12:15:45.481+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/price_intelligence_dag.py
+[2026-04-28T12:15:50.908+0000] {processor.py:840} INFO - DAG(s) 'price_intelligence_pipeline' retrieved from /opt/airflow/dags/price_intelligence_dag.py
+[2026-04-28T12:15:51.165+0000] {logging_mixin.py:188} INFO - [2026-04-28T12:15:51.164+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2026-04-28T12:15:51.330+0000] {logging_mixin.py:188} INFO - [2026-04-28T12:15:51.328+0000] {dag.py:3823} INFO - Setting next_dagrun for price_intelligence_pipeline to 2026-04-28 08:00:00+00:00, run_after=2026-04-29 08:00:00+00:00
+[2026-04-28T12:16:13.624+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/price_intelligence_dag.py took 28.273 seconds
+[2026-04-28T12:16:44.297+0000] {processor.py:161} INFO - Started process (PID=107730) to work on /opt/airflow/dags/price_intelligence_dag.py
+[2026-04-28T12:16:44.311+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/price_intelligence_dag.py for tasks to queue
+[2026-04-28T12:16:44.317+0000] {logging_mixin.py:188} INFO - [2026-04-28T12:16:44.316+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/price_intelligence_dag.py
+[2026-04-28T12:16:46.418+0000] {processor.py:840} INFO - DAG(s) 'price_intelligence_pipeline' retrieved from /opt/airflow/dags/price_intelligence_dag.py
+[2026-04-28T12:16:46.646+0000] {logging_mixin.py:188} INFO - [2026-04-28T12:16:46.646+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2026-04-28T12:16:46.862+0000] {logging_mixin.py:188} INFO - [2026-04-28T12:16:46.861+0000] {dag.py:3823} INFO - Setting next_dagrun for price_intelligence_pipeline to 2026-04-28 08:00:00+00:00, run_after=2026-04-29 08:00:00+00:00
+[2026-04-28T12:16:47.014+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/price_intelligence_dag.py took 2.741 seconds

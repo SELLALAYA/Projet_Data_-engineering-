@@ -1,0 +1,115 @@
+[2026-05-16T19:00:10.857+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.load_bigquery scheduled__2026-05-16T18:00:00+00:00 [queued]>
+[2026-05-16T19:00:10.900+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.load_bigquery scheduled__2026-05-16T18:00:00+00:00 [queued]>
+[2026-05-16T19:00:10.901+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-16T19:00:10.952+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): load_bigquery> on 2026-05-16 18:00:00+00:00
+[2026-05-16T19:00:10.963+0000] {standard_task_runner.py:60} INFO - Started process 38687 to run task
+[2026-05-16T19:00:10.975+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'load_bigquery', 'scheduled__2026-05-16T18:00:00+00:00', '--job-id', '1299', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpox3am56p']
+[2026-05-16T19:00:10.984+0000] {standard_task_runner.py:88} INFO - Job 1299: Subtask load_bigquery
+[2026-05-16T19:00:11.204+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.load_bigquery scheduled__2026-05-16T18:00:00+00:00 [running]> on host 91e0d3a0a233
+[2026-05-16T19:00:11.665+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='load_bigquery' AIRFLOW_CTX_EXECUTION_DATE='2026-05-16T18:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-05-16T18:00:00+00:00'
+[2026-05-16T19:00:11.672+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-16T19:00:11.675+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            set -e\n            cd /opt/***\n            export GOOGLE_APPLICATION_CREDENTIALS=/opt/***/gcp-credentials-new.json\n            python3 bigquery_load.py\n            echo BigQuery done\n        ']
+[2026-05-16T19:00:11.708+0000] {subprocess.py:86} INFO - Output:
+[2026-05-17T12:42:54.255+0000] {subprocess.py:93} INFO - /home/***/.local/lib/python3.8/site-packages/google/auth/_default.py:76: UserWarning: Your application has authenticated using end user credentials from Google Cloud SDK without a quota project. You might receive a "quota exceeded" or "API not enabled" error. See the following page for troubleshooting: https://cloud.google.com/docs/authentication/adc-troubleshooting/user-creds.
+[2026-05-17T12:42:54.287+0000] {subprocess.py:93} INFO -   warnings.warn(_CLOUD_SDK_CREDENTIALS_WARNING)
+[2026-05-17T12:42:54.321+0000] {subprocess.py:93} INFO - Total rows: 7486
+[2026-05-17T12:42:54.405+0000] {subprocess.py:93} INFO - Sample image_url: https://ma.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/88/273276/1.jpg?7898
+[2026-05-17T12:42:55.065+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-17T12:42:55.225+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 715, in urlopen
+[2026-05-17T12:42:55.318+0000] {subprocess.py:93} INFO -     httplib_response = self._make_request(
+[2026-05-17T12:42:55.342+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+[2026-05-17T12:42:55.390+0000] {subprocess.py:93} INFO -     six.raise_from(e, None)
+[2026-05-17T12:42:55.425+0000] {subprocess.py:93} INFO -   File "<string>", line 3, in raise_from
+[2026-05-17T12:42:55.468+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 462, in _make_request
+[2026-05-17T12:42:55.513+0000] {subprocess.py:93} INFO -     httplib_response = conn.getresponse()
+[2026-05-17T12:42:55.548+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/http/client.py", line 1348, in getresponse
+[2026-05-17T12:42:55.564+0000] {subprocess.py:93} INFO -     response.begin()
+[2026-05-17T12:42:55.598+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/http/client.py", line 316, in begin
+[2026-05-17T12:42:55.615+0000] {subprocess.py:93} INFO -     version, status, reason = self._read_status()
+[2026-05-17T12:42:55.631+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/http/client.py", line 285, in _read_status
+[2026-05-17T12:42:55.647+0000] {subprocess.py:93} INFO -     raise RemoteDisconnected("Remote end closed connection without"
+[2026-05-17T12:42:55.671+0000] {subprocess.py:93} INFO - http.client.RemoteDisconnected: Remote end closed connection without response
+[2026-05-17T12:42:55.682+0000] {subprocess.py:93} INFO - 
+[2026-05-17T12:42:55.697+0000] {subprocess.py:93} INFO - During handling of the above exception, another exception occurred:
+[2026-05-17T12:42:55.736+0000] {subprocess.py:93} INFO - 
+[2026-05-17T12:42:55.773+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-17T12:42:55.789+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/requests/adapters.py", line 486, in send
+[2026-05-17T12:42:55.805+0000] {subprocess.py:93} INFO -     resp = conn.urlopen(
+[2026-05-17T12:42:55.819+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 799, in urlopen
+[2026-05-17T12:42:55.830+0000] {subprocess.py:93} INFO -     retries = retries.increment(
+[2026-05-17T12:42:55.850+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/util/retry.py", line 550, in increment
+[2026-05-17T12:42:55.874+0000] {subprocess.py:93} INFO -     raise six.reraise(type(error), error, _stacktrace)
+[2026-05-17T12:42:55.904+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/packages/six.py", line 769, in reraise
+[2026-05-17T12:42:55.967+0000] {subprocess.py:93} INFO -     raise value.with_traceback(tb)
+[2026-05-17T12:42:55.981+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 715, in urlopen
+[2026-05-17T12:42:56.023+0000] {subprocess.py:93} INFO -     httplib_response = self._make_request(
+[2026-05-17T12:42:56.063+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+[2026-05-17T12:42:56.078+0000] {subprocess.py:93} INFO -     six.raise_from(e, None)
+[2026-05-17T12:42:56.107+0000] {subprocess.py:93} INFO -   File "<string>", line 3, in raise_from
+[2026-05-17T12:42:56.169+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 462, in _make_request
+[2026-05-17T12:42:56.201+0000] {subprocess.py:93} INFO -     httplib_response = conn.getresponse()
+[2026-05-17T12:42:56.223+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/http/client.py", line 1348, in getresponse
+[2026-05-17T12:42:56.236+0000] {subprocess.py:93} INFO -     response.begin()
+[2026-05-17T12:42:56.252+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/http/client.py", line 316, in begin
+[2026-05-17T12:42:58.469+0000] {subprocess.py:93} INFO -     version, status, reason = self._read_status()
+[2026-05-17T12:42:58.558+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/http/client.py", line 285, in _read_status
+[2026-05-17T12:42:58.610+0000] {subprocess.py:93} INFO -     raise RemoteDisconnected("Remote end closed connection without"
+[2026-05-17T12:42:58.670+0000] {subprocess.py:93} INFO - urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+[2026-05-17T12:42:58.733+0000] {subprocess.py:93} INFO - 
+[2026-05-17T12:42:58.826+0000] {subprocess.py:93} INFO - During handling of the above exception, another exception occurred:
+[2026-05-17T12:42:58.880+0000] {subprocess.py:93} INFO - 
+[2026-05-17T12:42:58.917+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-17T12:42:58.941+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/auth/transport/requests.py", line 186, in __call__
+[2026-05-17T12:42:58.958+0000] {subprocess.py:93} INFO -     response = self.session.request(
+[2026-05-17T12:42:58.986+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/requests/sessions.py", line 589, in request
+[2026-05-17T12:42:59.005+0000] {subprocess.py:93} INFO -     resp = self.send(prep, **send_kwargs)
+[2026-05-17T12:42:59.035+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/requests/sessions.py", line 703, in send
+[2026-05-17T12:42:59.065+0000] {subprocess.py:93} INFO -     r = adapter.send(request, **kwargs)
+[2026-05-17T12:42:59.132+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/requests/adapters.py", line 501, in send
+[2026-05-17T12:42:59.149+0000] {subprocess.py:93} INFO -     raise ConnectionError(err, request=request)
+[2026-05-17T12:42:59.180+0000] {subprocess.py:93} INFO - requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+[2026-05-17T12:42:59.213+0000] {subprocess.py:93} INFO - 
+[2026-05-17T12:42:59.252+0000] {subprocess.py:93} INFO - The above exception was the direct cause of the following exception:
+[2026-05-17T12:42:59.273+0000] {subprocess.py:93} INFO - 
+[2026-05-17T12:42:59.296+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-17T12:42:59.319+0000] {subprocess.py:93} INFO -   File "bigquery_load.py", line 90, in <module>
+[2026-05-17T12:42:59.370+0000] {subprocess.py:93} INFO -     job = client.load_table_from_file(f, table_ref, job_config=job_config)
+[2026-05-17T12:42:59.434+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/cloud/bigquery/client.py", line 2487, in load_table_from_file
+[2026-05-17T12:42:59.503+0000] {subprocess.py:93} INFO -     response = self._do_resumable_upload(
+[2026-05-17T12:42:59.534+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/cloud/bigquery/client.py", line 2894, in _do_resumable_upload
+[2026-05-17T12:42:59.566+0000] {subprocess.py:93} INFO -     response = upload.transmit_next_chunk(transport, timeout=timeout)
+[2026-05-17T12:42:59.613+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/resumable_media/requests/upload.py", line 515, in transmit_next_chunk
+[2026-05-17T12:42:59.637+0000] {subprocess.py:93} INFO -     return _request_helpers.wait_and_retry(
+[2026-05-17T12:42:59.649+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/resumable_media/requests/_request_helpers.py", line 155, in wait_and_retry
+[2026-05-17T12:42:59.682+0000] {subprocess.py:93} INFO -     response = func()
+[2026-05-17T12:42:59.697+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/resumable_media/requests/upload.py", line 507, in retriable_request
+[2026-05-17T12:42:59.720+0000] {subprocess.py:93} INFO -     result = transport.request(
+[2026-05-17T12:42:59.724+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/auth/transport/requests.py", line 537, in request
+[2026-05-17T12:42:59.738+0000] {subprocess.py:93} INFO -     self.credentials.before_request(auth_request, method, url, request_headers)
+[2026-05-17T12:42:59.749+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/auth/credentials.py", line 228, in before_request
+[2026-05-17T12:42:59.757+0000] {subprocess.py:93} INFO -     self._blocking_refresh(request)
+[2026-05-17T12:42:59.770+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/auth/credentials.py", line 191, in _blocking_refresh
+[2026-05-17T12:42:59.787+0000] {subprocess.py:93} INFO -     self.refresh(request)
+[2026-05-17T12:42:59.799+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/oauth2/credentials.py", line 390, in refresh
+[2026-05-17T12:42:59.803+0000] {subprocess.py:93} INFO -     ) = reauth.refresh_grant(
+[2026-05-17T12:42:59.806+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/oauth2/reauth.py", line 332, in refresh_grant
+[2026-05-17T12:42:59.816+0000] {subprocess.py:93} INFO -     response_status_ok, response_data, retryable_error = _client._token_endpoint_request_no_throw(
+[2026-05-17T12:42:59.821+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/oauth2/_client.py", line 215, in _token_endpoint_request_no_throw
+[2026-05-17T12:42:59.826+0000] {subprocess.py:93} INFO -     request_succeeded, response_data, retryable_error = _perform_request()
+[2026-05-17T12:42:59.840+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/oauth2/_client.py", line 191, in _perform_request
+[2026-05-17T12:42:59.848+0000] {subprocess.py:93} INFO -     response = request(
+[2026-05-17T12:42:59.857+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/auth/transport/requests.py", line 192, in __call__
+[2026-05-17T12:42:59.895+0000] {subprocess.py:93} INFO -     raise new_exc from caught_exc
+[2026-05-17T12:42:59.921+0000] {subprocess.py:93} INFO - google.auth.exceptions.TransportError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+[2026-05-17T12:42:59.947+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2026-05-17T12:43:00.045+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 428, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2026-05-17T12:43:00.081+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=price_intelligence_pipeline, task_id=load_bigquery, execution_date=20260516T180000, start_date=20260516T190010, end_date=20260517T124300
+[2026-05-17T12:43:00.199+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 1299 for task load_bigquery (Bash command failed. The command returned a non-zero exit code 1.; 38687)
+[2026-05-17T12:43:00.274+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-05-17T12:43:00.477+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
