@@ -1,5 +1,5 @@
-FROM python:3.8-slim 
+FROM python:3.11-slim 
 WORKDIR /app 
-COPY ../requirements.txt . 
+COPY requirements.txt . 
 RUN pip install -r requirements.txt 
-CMD ["python", "../bigquery_load.py"] 
+CMD ["python", "app.py"] 
