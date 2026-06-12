@@ -1,0 +1,11 @@
+.alert-card {
+  border-left-width: 4px;
+  border-left-style: solid;
+  transition: all 0.2s ease;
+}
+
+.alert-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  border-color: var(--accent-orange);
+}
