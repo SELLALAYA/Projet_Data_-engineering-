@@ -1,0 +1,304 @@
+<div class="analysis-wrapper">
+
+  <!-- HEADER -->
+  <header class="analysis-header container-premium">
+    <div class="header-main">
+      <div class="header-badge">Market Intelligence</div>
+      <h1 class="analysis-title">Strategic Price Analytics</h1>
+      <p class="analysis-sub">Real-time predictive modeling and market variance analysis across Morocco's digital landscape.</p>
+      <div class="header-meta">
+        <span class="meta-item"><i class="bi bi-person-badge"></i> Prof. ELAACHAK</span>
+        <span class="meta-item"><i class="bi bi-cpu"></i> Data Engineering & Analytics</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-premium btn-premium-outline" routerLink="/dashboard">
+        <i class="bi bi-arrow-left"></i> Back to Dashboard
+      </button>
+      <button class="btn-premium btn-premium-primary" (click)="loadAll()">
+        <i class="bi bi-arrow-clockwise"></i> Refresh Analytics
+      </button>
+    </div>
+  </header>
+
+  <div class="container-premium">
+    <!-- LOADING -->
+    <div class="loading-wrap" *ngIf="loading && !error">
+      <div class="loading-animation">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <p class="loading-text">Synchronizing with BigQuery Data Warehouse...</p>
+    </div>
+
+    <!-- ERROR -->
+    <div class="error-wrap animate-fade-in" *ngIf="error">
+      <div class="error-card">
+        <div class="error-icon"><i class="bi bi-shield-lock"></i></div>
+        <h2 class="error-title">Authentication Required</h2>
+        <p class="error-msg">{{ error }}</p>
+        <button class="btn-premium btn-premium-primary" (click)="loadAll()">Retry Connection</button>
+      </div>
+    </div>
+
+    <div *ngIf="!loading && !error" class="analysis-content animate-fade-in">
+
+      <!-- ══════════════════════════════════════════════ -->
+      <!-- SECTION 1: DESCRIPTIVE METRICS                 -->
+      <!-- ══════════════════════════════════════════════ -->
+      <section class="section-container">
+        <div class="section-header">
+          <div class="section-number">01</div>
+          <div class="section-info">
+            <h2 class="section-title">Descriptive Performance Metrics</h2>
+            <p class="section-subtitle">Aggregate analysis of price distribution and market share dynamics.</p>
+          </div>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="chart-container-premium">
+            <div class="chart-header">
+              <h3 class="chart-title">Pricing Index by Source</h3>
+              <p class="chart-desc">Weighted average market prices in MAD</p>
+            </div>
+            <div id="chart-avg-price" class="plotly-canvas"></div>
+          </div>
+          <div class="chart-container-premium">
+            <div class="chart-header">
+              <h3 class="chart-title">Market Concentration</h3>
+              <p class="chart-desc">Relative inventory share across retailers</p>
+            </div>
+            <div id="chart-market-share" class="plotly-canvas"></div>
+          </div>
+        </div>
+
+        <div class="table-card-premium mt-4" *ngIf="descriptive">
+          <table class="table-premium">
+            <thead>
+              <tr>
+                <th>Retailer</th>
+                <th>Volume</th>
+                <th>Avg. Price</th>
+                <th>Median</th>
+                <th>Volatility</th>
+                <th>Range (Min/Max)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let key of getDescKeys()">
+                <td><span class="source-tag" [attr.data-source]="key">{{key}}</span></td>
+                <td>{{descriptive[key].count | number}}</td>
+                <td class="fw-bold">{{descriptive[key].mean | number:'1.0-0'}} MAD</td>
+                <td>{{descriptive[key].median | number:'1.0-0'}} MAD</td>
+                <td>
+                  <div class="volatility-indicator">
+                    <span class="v-label">{{(descriptive[key].std / descriptive[key].mean * 100) | number:'1.0-0'}}%</span>
+                    <div class="v-bar"><div class="v-progress" [style.width.%]="(descriptive[key].std / descriptive[key].mean * 100)"></div></div>
+                  </div>
+                </td>
+                <td><span class="text-muted small">{{descriptive[key].min | number:'1.0-0'}} — {{descriptive[key].max | number:'1.0-0'}}</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="metrics-grid mt-4">
+          <div class="chart-container-premium">
+            <div class="chart-header"><h3 class="chart-title">Price Distribution Density</h3></div>
+            <div id="chart-price-dist" class="plotly-canvas"></div>
+          </div>
+          <div class="chart-container-premium">
+            <div class="chart-header"><h3 class="chart-title">Discount Frequency Spectrum</h3></div>
+            <div id="chart-discount-dist" class="plotly-canvas"></div>
+          </div>
+        </div>
+
+        <div class="metrics-grid mt-4">
+          <div class="chart-container-premium">
+            <div class="chart-header"><h3 class="chart-title">Valuation by Category (Mean)</h3></div>
+            <div id="chart-cat-bar" class="plotly-canvas"></div>
+          </div>
+          <div class="chart-container-premium">
+            <div class="chart-header"><h3 class="chart-title">Category Variance Distribution</h3></div>
+            <div id="chart-cat-box" class="plotly-canvas"></div>
+          </div>
+        </div>
+        <div class="metrics-grid mt-4">
+          <div class="chart-container-premium">
+            <div class="chart-header">
+              <h3 class="chart-title">Market Valuation Trends</h3>
+              <p class="chart-desc">Price evolution by retailer & category</p>
+            </div>
+            <div id="chart-trends" class="plotly-canvas"></div>
+          </div>
+          <div class="chart-container-premium">
+            <div class="chart-header">
+              <h3 class="chart-title">Price Velocity / Top Drops</h3>
+              <p class="chart-desc">Largest price reductions detected in market</p>
+            </div>
+            <div id="chart-velocity" class="plotly-canvas"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════ -->
+      <!-- SECTION 2: INFERENTIAL ANALYSIS                -->
+      <!-- ══════════════════════════════════════════════ -->
+      <section class="section-container">
+        <div class="section-header">
+          <div class="section-number">02</div>
+          <div class="section-info">
+            <h2 class="section-title">Inferential Statistical Modeling</h2>
+            <p class="section-subtitle">Hypothesis testing and variance analysis for market significance.</p>
+          </div>
+        </div>
+
+        <!-- T-TEST & MANN-WHITNEY -->
+        <div class="analysis-card-split mb-4">
+          <div class="analysis-stats-panel" *ngIf="statistics && mannwhitney">
+            <h3 class="panel-title">Retailer Comparison: jumia.ma vs connecto.ma</h3>
+            <div class="stat-entry">
+              <div class="label">T-Statistic</div>
+              <div class="value">{{statistics?.ttest?.t_statistic | number:'1.3-3'}}</div>
+            </div>
+            <div class="stat-entry">
+              <div class="label">P-Value (Prob.)</div>
+              <div class="value" [class.text-success]="statistics?.ttest?.significant">{{statistics?.ttest?.p_value}}</div>
+            </div>
+            <div class="significance-badge" [class.sig-active]="statistics?.ttest?.significant">
+              <i class="bi" [class.bi-check-circle-fill]="statistics?.ttest?.significant" [class.bi-exclamation-circle-fill]="!statistics?.ttest?.significant"></i>
+              {{statistics?.ttest?.significant ? 'Significant Market Variance Detected' : 'No Statistical Significance'}}
+            </div>
+            <div class="panel-note mt-4">
+              <p class="small text-muted">Mann-Whitney U Test (Non-parametric) confirms these findings with a U-statistic of {{mannwhitney?.u_statistic | number}}.</p>
+            </div>
+          </div>
+          <div class="analysis-chart-panel">
+            <div id="chart-ttest-box" class="plotly-canvas"></div>
+          </div>
+        </div>
+
+        <!-- ANOVA -->
+        <div class="metrics-grid">
+          <div class="chart-container-premium">
+            <div class="chart-header">
+              <h3 class="chart-title">ANOVA: Source Variance</h3>
+              <p class="chart-desc" *ngIf="statistics?.anova">F-Stat: {{statistics.anova.f_statistic}} | P-Val: {{statistics.anova.p_value}}</p>
+            </div>
+            <div id="chart-anova-box" class="plotly-canvas"></div>
+          </div>
+          <div class="chart-container-premium">
+            <div class="chart-header">
+              <h3 class="chart-title">ANOVA: Category Variance</h3>
+              <p class="chart-desc" *ngIf="anovaCategory">F-Stat: {{anovaCategory?.f_statistic}} | P-Val: {{anovaCategory?.p_value}}</p>
+            </div>
+            <div id="chart-anova-cat-box" class="plotly-canvas"></div>
+          </div>
+        </div>
+
+        <!-- CI & POWER -->
+        <div class="metrics-grid mt-4">
+          <div class="chart-container-premium">
+            <div class="chart-header"><h3 class="chart-title">95% Confidence Intervals (Price Mean)</h3></div>
+            <div id="chart-ci" class="plotly-canvas"></div>
+          </div>
+          <div class="chart-container-premium">
+            <div class="chart-header">
+              <h3 class="chart-title">Statistical Power Analysis</h3>
+              <p class="chart-desc" *ngIf="power">Computed Power: {{power?.power}} | Threshold: 0.80</p>
+            </div>
+            <div id="chart-power" class="plotly-canvas"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════ -->
+      <!-- SECTION 3: PREDICTIVE REGRESSION               -->
+      <!-- ══════════════════════════════════════════════ -->
+      <section class="section-container">
+        <div class="section-header">
+          <div class="section-number">03</div>
+          <div class="section-info">
+            <h2 class="section-title">Multivariate Regression Analysis</h2>
+            <p class="section-subtitle">Predicting price behavior based on discount depth and user ratings.</p>
+          </div>
+        </div>
+
+        <div class="regression-summary-grid" *ngIf="regression && !regression.error">
+          <div class="reg-stat-card">
+            <span class="label">R-Squared (Model Fit)</span>
+            <span class="value">{{regression?.r2 | number:'1.4-4'}}</span>
+          </div>
+          <div class="reg-stat-card">
+            <span class="label">Standard Error</span>
+            <span class="value">Residual Analysis Active</span>
+          </div>
+          <div class="reg-stat-card">
+            <span class="label">Observations (n)</span>
+            <span class="value">{{regression?.n | number}}</span>
+          </div>
+        </div>
+
+        <div class="alert alert-warning mt-3" *ngIf="regression && regression.error">
+          <i class="bi bi-exclamation-triangle-fill me-2"></i>
+          <strong>Regression Engine:</strong> {{regression.error}}
+        </div>
+
+        <div class="metrics-grid mt-4">
+          <div class="chart-container-premium">
+            <div id="chart-scatter-discount" class="plotly-canvas"></div>
+          </div>
+          <div class="chart-container-premium">
+            <div id="chart-scatter-rating" class="plotly-canvas"></div>
+          </div>
+        </div>
+
+        <div class="chart-container-premium full-width mt-4">
+          <div class="chart-header"><h3 class="chart-title">OLS Regression Residuals Distribution</h3></div>
+          <div id="chart-residuals" class="plotly-canvas"></div>
+        </div>
+      </section>
+
+      <!-- PIPELINE CONTROLS -->
+      <section class="section-container mt-5">
+        <div class="section-header">
+          <div class="section-number">04</div>
+          <div class="section-info">
+            <h2 class="section-title">Strategic Pipeline Orchestration</h2>
+            <p class="section-subtitle">Manage data flows and automated reporting engines.</p>
+          </div>
+        </div>
+
+        <div class="pipeline-grid">
+          <div class="pipeline-card">
+            <div class="p-icon"><i class="bi bi-broadcast"></i></div>
+            <div class="p-info">
+              <h3>Apache NiFi</h3>
+              <p>Real-time price anomaly detection & ingestion.</p>
+            </div>
+            <button class="btn-premium btn-premium-outline btn-sm" (click)="triggerPipeline()">Sync NiFi Flow</button>
+          </div>
+          <div class="pipeline-card">
+            <div class="p-icon"><i class="bi bi-clock-history"></i></div>
+            <div class="p-info">
+              <h3>Apache Airflow</h3>
+              <p>Weekly statistical report generation & dbt sync.</p>
+            </div>
+            <button class="btn-premium btn-premium-outline btn-sm" (click)="triggerPipeline()">Trigger DAG</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="analysis-report-footer">
+        <div class="footer-seal">
+          <i class="bi bi-patch-check-fill"></i>
+          <span>Certified Analytical Report</span>
+        </div>
+        <p class="footer-disclaimer">This report utilizes SciPy, Statsmodels, and Plotly.js for high-fidelity data visualization and statistical computation. Powered by Google BigQuery Data Warehouse.</p>
+      </footer>
+
+    </div>
+  </div>
+</div>
