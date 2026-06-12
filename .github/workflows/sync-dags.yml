@@ -1,0 +1,38 @@
+name: Sync DAGs to Cloud Composer
+
+on:
+  push:
+    branches: [ develop, main ]
+    paths:
+      - 'airflow/dags/**'
+
+jobs:
+  sync-dags:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v1
+        with:
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Upload DAGs to Composer
+        run: |
+          gsutil -m cp -r airflow/dags/* gs://europe-west1-price-intellig-2e16956c-bucket/dags/
+
+      - name: Verify DAGs uploaded
+        run: |
+          gsutil ls gs://europe-west1-price-intellig-2e16956c-bucket/dags/
