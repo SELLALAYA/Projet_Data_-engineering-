@@ -1,44 +1,33 @@
 name: Push to Artifact Registry
-
 on:
-  push:
-    branches: [ main, develop ]
-
+  workflow_dispatch:
 jobs:
   push-image:
     runs-on: ubuntu-latest
-
     permissions:
       contents: read
       id-token: write
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Authenticate to GCP
         uses: google-github-actions/auth@v1
         with:
           workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
           service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
-
       - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
-
       - name: Configure Docker for Artifact Registry
         run: |
           gcloud auth configure-docker europe-west1-docker.pkg.dev
-
       - name: Build Docker image
         run: |
           docker build -t europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/price-intelligence-registry/price-intelligence-app:${{ github.sha }} ./app
-
       - name: Push Docker image
         run: |
           docker push europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/price-intelligence-registry/price-intelligence-app:${{ github.sha }}
-
       - name: Tag as latest
         run: |
           docker tag europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/price-intelligence-registry/price-intelligence-app:${{ github.sha }} europe-west1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/price-intelligence-registry/price-intelligence-app:latest
