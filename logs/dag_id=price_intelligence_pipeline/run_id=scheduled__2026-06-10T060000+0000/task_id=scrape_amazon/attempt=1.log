@@ -1,0 +1,18 @@
+[2026-06-10T12:04:24.653+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_amazon scheduled__2026-06-10T06:00:00+00:00 [queued]>
+[2026-06-10T12:04:24.700+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_amazon scheduled__2026-06-10T06:00:00+00:00 [queued]>
+[2026-06-10T12:04:24.703+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-06-10T12:04:24.763+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_amazon> on 2026-06-10 06:00:00+00:00
+[2026-06-10T12:04:24.785+0000] {standard_task_runner.py:60} INFO - Started process 731 to run task
+[2026-06-10T12:04:24.825+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_amazon', 'scheduled__2026-06-10T06:00:00+00:00', '--job-id', '1950', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmp27pvra8t']
+[2026-06-10T12:04:24.837+0000] {standard_task_runner.py:88} INFO - Job 1950: Subtask scrape_amazon
+[2026-06-10T12:04:25.196+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_amazon scheduled__2026-06-10T06:00:00+00:00 [running]> on host 91e0d3a0a233
+[2026-06-10T12:04:25.708+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_amazon' AIRFLOW_CTX_EXECUTION_DATE='2026-06-10T06:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-06-10T06:00:00+00:00'
+[2026-06-10T12:04:25.719+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-06-10T12:04:25.725+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            cd /opt/*** && export PYTHONPATH=/opt/*** && export GOOGLE_APPLICATION_CREDENTIALS=/opt/***/gcp-credentials-new.json\n            mkdir -p data/raw\n            scrapy crawl amazon_ma -s LOG_LEVEL=WARNING -s ROBOTSTXT_OBEY=False || echo "Amazon done"\n        ']
+[2026-06-10T12:04:25.767+0000] {subprocess.py:86} INFO - Output:
+[2026-06-10T12:04:25.794+0000] {subprocess.py:93} INFO - /usr/bin/bash: line 4: scrapy: command not found
+[2026-06-10T12:04:25.804+0000] {subprocess.py:93} INFO - Amazon done
+[2026-06-10T12:04:25.808+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-06-10T12:04:25.985+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=scrape_amazon, execution_date=20260610T060000, start_date=20260610T120424, end_date=20260610T120425
+[2026-06-10T12:04:26.174+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-06-10T12:04:26.334+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

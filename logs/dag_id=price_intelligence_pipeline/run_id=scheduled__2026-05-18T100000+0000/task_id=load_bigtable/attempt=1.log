@@ -1,0 +1,17 @@
+[2026-05-18T11:04:56.604+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.load_bigtable scheduled__2026-05-18T10:00:00+00:00 [queued]>
+[2026-05-18T11:04:56.628+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.load_bigtable scheduled__2026-05-18T10:00:00+00:00 [queued]>
+[2026-05-18T11:04:56.629+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-18T11:04:56.658+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): load_bigtable> on 2026-05-18 10:00:00+00:00
+[2026-05-18T11:04:56.667+0000] {standard_task_runner.py:60} INFO - Started process 46870 to run task
+[2026-05-18T11:04:56.675+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'load_bigtable', 'scheduled__2026-05-18T10:00:00+00:00', '--job-id', '1398', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpji4bsezp']
+[2026-05-18T11:04:56.685+0000] {standard_task_runner.py:88} INFO - Job 1398: Subtask load_bigtable
+[2026-05-18T11:04:56.842+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.load_bigtable scheduled__2026-05-18T10:00:00+00:00 [running]> on host 91e0d3a0a233
+[2026-05-18T11:04:57.041+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='load_bigtable' AIRFLOW_CTX_EXECUTION_DATE='2026-05-18T10:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-05-18T10:00:00+00:00'
+[2026-05-18T11:04:57.044+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-18T11:04:57.046+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            set -e\n            cd /opt/***\n            export GOOGLE_APPLICATION_CREDENTIALS=/opt/***/gcp-credentials-new.json\n            python3 dags/load_bigtable.py\n            echo Bigtable done\n        ']
+[2026-05-18T11:04:57.071+0000] {subprocess.py:86} INFO - Output:
+[2026-05-18T11:04:58.603+0000] {subprocess.py:93} INFO - Bigtable done
+[2026-05-18T11:04:58.604+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-05-18T11:04:58.672+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=load_bigtable, execution_date=20260518T100000, start_date=20260518T110456, end_date=20260518T110458
+[2026-05-18T11:04:58.744+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-05-18T11:04:58.822+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

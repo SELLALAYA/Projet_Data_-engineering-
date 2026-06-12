@@ -1,0 +1,57 @@
+[2026-05-07T22:15:24.524+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_avito manual__2026-05-07T22:15:22.791998+00:00 [queued]>
+[2026-05-07T22:15:24.547+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_avito manual__2026-05-07T22:15:22.791998+00:00 [queued]>
+[2026-05-07T22:15:24.548+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-07T22:15:24.611+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_avito> on 2026-05-07 22:15:22.791998+00:00
+[2026-05-07T22:15:24.625+0000] {standard_task_runner.py:60} INFO - Started process 1936 to run task
+[2026-05-07T22:15:24.648+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_avito', 'manual__2026-05-07T22:15:22.791998+00:00', '--job-id', '729', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpgyezbn3u']
+[2026-05-07T22:15:24.657+0000] {standard_task_runner.py:88} INFO - Job 729: Subtask scrape_avito
+[2026-05-07T22:15:24.914+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_avito manual__2026-05-07T22:15:22.791998+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-07T22:15:25.234+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_avito' AIRFLOW_CTX_EXECUTION_DATE='2026-05-07T22:15:22.791998+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-07T22:15:22.791998+00:00'
+[2026-05-07T22:15:25.238+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-07T22:15:25.247+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            cd /opt/***\n            mkdir -p data/raw\n            export DISPLAY=:99\n            python3 scrapers/spiders/avito_ma.py || echo "Avito done with warnings"\n        ']
+[2026-05-07T22:15:25.273+0000] {subprocess.py:86} INFO - Output:
+[2026-05-07T22:16:09.289+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-07T22:16:09.294+0000] {subprocess.py:93} INFO -   File "scrapers/spiders/avito_ma.py", line 93, in <module>
+[2026-05-07T22:16:09.294+0000] {subprocess.py:93} INFO -     scrape_avito()
+[2026-05-07T22:16:09.295+0000] {subprocess.py:93} INFO -   File "scrapers/spiders/avito_ma.py", line 25, in scrape_avito
+[2026-05-07T22:16:09.296+0000] {subprocess.py:93} INFO -     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+[2026-05-07T22:16:09.296+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/selenium/webdriver/chrome/webdriver.py", line 45, in __init__
+[2026-05-07T22:16:09.297+0000] {subprocess.py:93} INFO -     super().__init__(
+[2026-05-07T22:16:09.298+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/selenium/webdriver/chromium/webdriver.py", line 66, in __init__
+[2026-05-07T22:16:09.298+0000] {subprocess.py:93} INFO -     super().__init__(command_executor=executor, options=options)
+[2026-05-07T22:16:09.299+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/selenium/webdriver/remote/webdriver.py", line 241, in __init__
+[2026-05-07T22:16:09.300+0000] {subprocess.py:93} INFO -     self.start_session(capabilities)
+[2026-05-07T22:16:09.300+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/selenium/webdriver/remote/webdriver.py", line 329, in start_session
+[2026-05-07T22:16:09.301+0000] {subprocess.py:93} INFO -     response = self.execute(Command.NEW_SESSION, caps)["value"]
+[2026-05-07T22:16:09.301+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/selenium/webdriver/remote/webdriver.py", line 384, in execute
+[2026-05-07T22:16:09.302+0000] {subprocess.py:93} INFO -     self.error_handler.check_response(response)
+[2026-05-07T22:16:09.303+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/selenium/webdriver/remote/errorhandler.py", line 232, in check_response
+[2026-05-07T22:16:09.304+0000] {subprocess.py:93} INFO -     raise exception_class(message, screen, stacktrace)
+[2026-05-07T22:16:09.304+0000] {subprocess.py:93} INFO - selenium.common.exceptions.SessionNotCreatedException: Message: session not created: This version of ChromeDriver only supports Chrome version 114
+[2026-05-07T22:16:09.305+0000] {subprocess.py:93} INFO - Current browser version is 147.0.7727.137 with binary path /usr/bin/chromium
+[2026-05-07T22:16:09.305+0000] {subprocess.py:93} INFO - Stacktrace:
+[2026-05-07T22:16:09.306+0000] {subprocess.py:93} INFO - #0 0x5896dfe944e3 <unknown>
+[2026-05-07T22:16:09.307+0000] {subprocess.py:93} INFO - #1 0x5896dfbc3c76 <unknown>
+[2026-05-07T22:16:09.307+0000] {subprocess.py:93} INFO - #2 0x5896dfbf104a <unknown>
+[2026-05-07T22:16:09.308+0000] {subprocess.py:93} INFO - #3 0x5896dfbec4a1 <unknown>
+[2026-05-07T22:16:09.308+0000] {subprocess.py:93} INFO - #4 0x5896dfbe9029 <unknown>
+[2026-05-07T22:16:09.309+0000] {subprocess.py:93} INFO - #5 0x5896dfc27ccc <unknown>
+[2026-05-07T22:16:09.309+0000] {subprocess.py:93} INFO - #6 0x5896dfc2747f <unknown>
+[2026-05-07T22:16:09.310+0000] {subprocess.py:93} INFO - #7 0x5896dfc1ede3 <unknown>
+[2026-05-07T22:16:09.310+0000] {subprocess.py:93} INFO - #8 0x5896dfbf42dd <unknown>
+[2026-05-07T22:16:09.311+0000] {subprocess.py:93} INFO - #9 0x5896dfbf534e <unknown>
+[2026-05-07T22:16:09.311+0000] {subprocess.py:93} INFO - #10 0x5896dfe543e4 <unknown>
+[2026-05-07T22:16:09.312+0000] {subprocess.py:93} INFO - #11 0x5896dfe583d7 <unknown>
+[2026-05-07T22:16:09.312+0000] {subprocess.py:93} INFO - #12 0x5896dfe62b20 <unknown>
+[2026-05-07T22:16:09.313+0000] {subprocess.py:93} INFO - #13 0x5896dfe59023 <unknown>
+[2026-05-07T22:16:09.314+0000] {subprocess.py:93} INFO - #14 0x5896dfe271aa <unknown>
+[2026-05-07T22:16:09.314+0000] {subprocess.py:93} INFO - #15 0x5896dfe7d6b8 <unknown>
+[2026-05-07T22:16:09.315+0000] {subprocess.py:93} INFO - #16 0x5896dfe7d847 <unknown>
+[2026-05-07T22:16:09.316+0000] {subprocess.py:93} INFO - #17 0x5896dfe8d243 <unknown>
+[2026-05-07T22:16:09.317+0000] {subprocess.py:93} INFO - #18 0x7c646d1e7134 <unknown>
+[2026-05-07T22:16:09.317+0000] {subprocess.py:93} INFO - 
+[2026-05-07T22:16:09.341+0000] {subprocess.py:93} INFO - Avito done with warnings
+[2026-05-07T22:16:09.342+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-05-07T22:16:09.393+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=scrape_avito, execution_date=20260507T221522, start_date=20260507T221524, end_date=20260507T221609
+[2026-05-07T22:16:09.456+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-05-07T22:16:09.526+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

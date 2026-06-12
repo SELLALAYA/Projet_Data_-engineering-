@@ -1,0 +1,58 @@
+[2026-05-08T16:55:00.330+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_electroplanet manual__2026-05-08T16:52:01.175369+00:00 [queued]>
+[2026-05-08T16:55:00.370+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_electroplanet manual__2026-05-08T16:52:01.175369+00:00 [queued]>
+[2026-05-08T16:55:00.374+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-08T16:55:00.456+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_electroplanet> on 2026-05-08 16:52:01.175369+00:00
+[2026-05-08T16:55:00.479+0000] {standard_task_runner.py:60} INFO - Started process 4983 to run task
+[2026-05-08T16:55:00.497+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_electroplanet', 'manual__2026-05-08T16:52:01.175369+00:00', '--job-id', '778', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpcxfllr6w']
+[2026-05-08T16:55:00.515+0000] {standard_task_runner.py:88} INFO - Job 778: Subtask scrape_electroplanet
+[2026-05-08T16:55:00.907+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_electroplanet manual__2026-05-08T16:52:01.175369+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-08T16:55:01.353+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_electroplanet' AIRFLOW_CTX_EXECUTION_DATE='2026-05-08T16:52:01.175369+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-08T16:52:01.175369+00:00'
+[2026-05-08T16:55:01.371+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-08T16:55:01.375+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            cd /opt/***\n            mkdir -p data/raw\n            export DISPLAY=:99\n            python3 scrapers/spiders/electroplanet_ma.py || echo "Electroplanet done with warnings"\n        ']
+[2026-05-08T16:55:01.447+0000] {subprocess.py:86} INFO - Output:
+[2026-05-08T16:55:08.949+0000] {subprocess.py:93} INFO - 
+[2026-05-08T16:55:08.951+0000] {subprocess.py:93} INFO - [Electroplanet] Scraping : smartphones
+[2026-05-08T16:55:08.958+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-08T16:55:08.963+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/core/file_manager.py", line 65, in __extract_zip
+[2026-05-08T16:55:08.965+0000] {subprocess.py:93} INFO -     archive.extractall(to_directory)
+[2026-05-08T16:55:08.966+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/zipfile.py", line 1647, in extractall
+[2026-05-08T16:55:08.967+0000] {subprocess.py:93} INFO -     self._extract_member(zipinfo, path, pwd)
+[2026-05-08T16:55:08.969+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/zipfile.py", line 1702, in _extract_member
+[2026-05-08T16:55:08.970+0000] {subprocess.py:93} INFO -     shutil.copyfileobj(source, target)
+[2026-05-08T16:55:08.972+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/shutil.py", line 205, in copyfileobj
+[2026-05-08T16:55:08.974+0000] {subprocess.py:93} INFO -     buf = fsrc_read(length)
+[2026-05-08T16:55:08.975+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/zipfile.py", line 940, in read
+[2026-05-08T16:55:08.977+0000] {subprocess.py:93} INFO -     data = self._read1(n)
+[2026-05-08T16:55:08.980+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/zipfile.py", line 1008, in _read1
+[2026-05-08T16:55:08.984+0000] {subprocess.py:93} INFO -     data += self._read2(n - len(data))
+[2026-05-08T16:55:08.986+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/zipfile.py", line 1043, in _read2
+[2026-05-08T16:55:08.987+0000] {subprocess.py:93} INFO -     raise EOFError
+[2026-05-08T16:55:08.988+0000] {subprocess.py:93} INFO - EOFError
+[2026-05-08T16:55:08.990+0000] {subprocess.py:93} INFO - 
+[2026-05-08T16:55:08.991+0000] {subprocess.py:93} INFO - During handling of the above exception, another exception occurred:
+[2026-05-08T16:55:08.992+0000] {subprocess.py:93} INFO - 
+[2026-05-08T16:55:08.993+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-08T16:55:08.995+0000] {subprocess.py:93} INFO -   File "scrapers/spiders/electroplanet_ma.py", line 162, in <module>
+[2026-05-08T16:55:08.998+0000] {subprocess.py:93} INFO -     scrape_electroplanet()
+[2026-05-08T16:55:09.002+0000] {subprocess.py:93} INFO -   File "scrapers/spiders/electroplanet_ma.py", line 73, in scrape_electroplanet
+[2026-05-08T16:55:09.003+0000] {subprocess.py:93} INFO -     driver = get_driver()
+[2026-05-08T16:55:09.004+0000] {subprocess.py:93} INFO -   File "scrapers/spiders/electroplanet_ma.py", line 63, in get_driver
+[2026-05-08T16:55:09.005+0000] {subprocess.py:93} INFO -     return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=opts)
+[2026-05-08T16:55:09.006+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/chrome.py", line 40, in install
+[2026-05-08T16:55:09.008+0000] {subprocess.py:93} INFO -     driver_path = self._get_driver_binary_path(self.driver)
+[2026-05-08T16:55:09.010+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/core/manager.py", line 41, in _get_driver_binary_path
+[2026-05-08T16:55:09.012+0000] {subprocess.py:93} INFO -     binary_path = self._cache_manager.save_file_to_cache(driver, file)
+[2026-05-08T16:55:09.013+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/core/driver_cache.py", line 54, in save_file_to_cache
+[2026-05-08T16:55:09.015+0000] {subprocess.py:93} INFO -     files = self.unpack_archive(archive, path)
+[2026-05-08T16:55:09.032+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/core/driver_cache.py", line 49, in unpack_archive
+[2026-05-08T16:55:09.035+0000] {subprocess.py:93} INFO -     return self._file_manager.unpack_archive(archive, path)
+[2026-05-08T16:55:09.039+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/core/file_manager.py", line 57, in unpack_archive
+[2026-05-08T16:55:09.048+0000] {subprocess.py:93} INFO -     return self.__extract_zip(archive_file, target_dir)
+[2026-05-08T16:55:09.053+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/core/file_manager.py", line 67, in __extract_zip
+[2026-05-08T16:55:09.068+0000] {subprocess.py:93} INFO -     if e.args[0] not in [26, 13] and e.args[1] not in [
+[2026-05-08T16:55:09.085+0000] {subprocess.py:93} INFO - IndexError: tuple index out of range
+[2026-05-08T16:55:09.150+0000] {subprocess.py:93} INFO - Electroplanet done with warnings
+[2026-05-08T16:55:09.152+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-05-08T16:55:09.400+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=scrape_electroplanet, execution_date=20260508T165201, start_date=20260508T165500, end_date=20260508T165509
+[2026-05-08T16:55:09.662+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-05-08T16:55:09.837+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

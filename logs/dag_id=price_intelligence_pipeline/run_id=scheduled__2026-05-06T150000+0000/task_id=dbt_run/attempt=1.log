@@ -1,0 +1,47 @@
+[2026-05-06T16:00:59.768+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.dbt_run scheduled__2026-05-06T15:00:00+00:00 [queued]>
+[2026-05-06T16:00:59.810+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.dbt_run scheduled__2026-05-06T15:00:00+00:00 [queued]>
+[2026-05-06T16:00:59.812+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-06T16:00:59.861+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): dbt_run> on 2026-05-06 15:00:00+00:00
+[2026-05-06T16:00:59.879+0000] {standard_task_runner.py:60} INFO - Started process 20785 to run task
+[2026-05-06T16:00:59.895+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'dbt_run', 'scheduled__2026-05-06T15:00:00+00:00', '--job-id', '599', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpj1_ep1bj']
+[2026-05-06T16:00:59.901+0000] {standard_task_runner.py:88} INFO - Job 599: Subtask dbt_run
+[2026-05-06T16:01:00.224+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.dbt_run scheduled__2026-05-06T15:00:00+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-06T16:01:00.711+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='dbt_run' AIRFLOW_CTX_EXECUTION_DATE='2026-05-06T15:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-05-06T15:00:00+00:00'
+[2026-05-06T16:01:00.722+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-06T16:01:00.727+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            set -e\n            cd /opt/***/dbt\n            export GOOGLE_APPLICATION_CREDENTIALS=/opt/***/gcp-credentials-new.json\n            /home/***/.local/bin/dbt run --select stg_prices --profiles-dir . --project-dir .\n            /home/***/.local/bin/dbt run --select prices_cleaned --profiles-dir . --project-dir .\n            /home/***/.local/bin/dbt run --select prices_aggregated --profiles-dir . --project-dir .\n            echo dbt done\n        ']
+[2026-05-06T16:01:00.786+0000] {subprocess.py:86} INFO - Output:
+[2026-05-06T16:01:06.471+0000] {subprocess.py:93} INFO - [0m16:01:06  Running with dbt=1.8.7
+[2026-05-06T16:01:09.321+0000] {subprocess.py:93} INFO - [0m16:01:09  Registered adapter: bigquery=1.8.3
+[2026-05-06T16:01:12.046+0000] {subprocess.py:93} INFO - [0m16:01:12  [[33mWARNING[0m]: Deprecated functionality
+[2026-05-06T16:01:12.063+0000] {subprocess.py:93} INFO - The `tests` config has been renamed to `data_tests`. Please see
+[2026-05-06T16:01:12.065+0000] {subprocess.py:93} INFO - https://docs.getdbt.com/docs/build/data-tests#new-data_tests-syntax for more
+[2026-05-06T16:01:12.067+0000] {subprocess.py:93} INFO - information.
+[2026-05-06T16:01:14.589+0000] {subprocess.py:93} INFO - [0m16:01:14  Found 3 models, 1 seed, 7 data tests, 1 source, 479 macros
+[2026-05-06T16:01:14.594+0000] {subprocess.py:93} INFO - [0m16:01:14
+[2026-05-06T16:01:16.981+0000] {subprocess.py:93} INFO - [0m16:01:16  Concurrency: 4 threads (target='dev')
+[2026-05-06T16:01:16.982+0000] {subprocess.py:93} INFO - [0m16:01:16
+[2026-05-06T16:01:17.012+0000] {subprocess.py:93} INFO - [0m16:01:17  1 of 1 START sql view model price_intelligence_dbt.stg_prices .................. [RUN]
+[2026-05-06T16:01:20.787+0000] {subprocess.py:93} INFO - [0m16:01:20  BigQuery adapter: https://console.cloud.google.com/bigquery?project=project-32a82952-90fa-4dd7-b9c&j=bq:US:6bf3d4f0-374d-4715-a133-74e7dfd27e3e&page=queryresults
+[2026-05-06T16:01:20.821+0000] {subprocess.py:93} INFO - [0m16:01:20  1 of 1 ERROR creating sql view model price_intelligence_dbt.stg_prices ......... [[31mERROR[0m in 3.80s]
+[2026-05-06T16:01:20.849+0000] {subprocess.py:93} INFO - [0m16:01:20
+[2026-05-06T16:01:20.863+0000] {subprocess.py:93} INFO - [0m16:01:20  Finished running 1 view model in 0 hours 0 minutes and 6.25 seconds (6.25s).
+[2026-05-06T16:01:21.101+0000] {subprocess.py:93} INFO - [0m16:01:21
+[2026-05-06T16:01:21.102+0000] {subprocess.py:93} INFO - [0m16:01:21  [31mCompleted with 1 error and 0 warnings:[0m
+[2026-05-06T16:01:21.105+0000] {subprocess.py:93} INFO - [0m16:01:21
+[2026-05-06T16:01:21.106+0000] {subprocess.py:93} INFO - [0m16:01:21    Database Error in model stg_prices (models/staging/stg_prices.sql)
+[2026-05-06T16:01:21.106+0000] {subprocess.py:93} INFO -   Unrecognized name: old_price at [11:10]
+[2026-05-06T16:01:21.107+0000] {subprocess.py:93} INFO -   compiled code at target/run/price_intelligence/models/staging/stg_prices.sql
+[2026-05-06T16:01:21.108+0000] {subprocess.py:93} INFO - [0m16:01:21
+[2026-05-06T16:01:21.108+0000] {subprocess.py:93} INFO - [0m16:01:21  Done. PASS=0 WARN=0 ERROR=1 SKIP=0 TOTAL=1
+[2026-05-06T16:01:25.657+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2026-05-06T16:01:25.686+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 428, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2026-05-06T16:01:25.693+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=price_intelligence_pipeline, task_id=dbt_run, execution_date=20260506T150000, start_date=20260506T160059, end_date=20260506T160125
+[2026-05-06T16:01:25.724+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 599 for task dbt_run (Bash command failed. The command returned a non-zero exit code 1.; 20785)
+[2026-05-06T16:01:25.773+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-05-06T16:01:25.815+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

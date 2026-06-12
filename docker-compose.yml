@@ -1,0 +1,173 @@
+x-airflow-common: &airflow-common
+  image: apache/airflow:2.8.1
+  environment: &airflow-common-env
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+    AIRFLOW__CORE__FERNET_KEY: 'ZmDfcTF7_60GrrY167zsiPd67pEvs0aGOv2oasOM1Pg='
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+    AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+    AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth'
+    AIRFLOW__WEBSERVER__EXPOSE_CONFIG: 'true'
+    AIRFLOW__WEBSERVER__WEB_SERVER_HOST: '0.0.0.0'
+    PYTHONPATH: /opt/airflow/dags:/opt/airflow/plugins
+    GOOGLE_APPLICATION_CREDENTIALS: /opt/airflow/gcp-credentials.json
+  volumes:
+    - ./dags:/opt/airflow/dags
+    - ./logs:/opt/airflow/logs
+    - ./plugins:/opt/airflow/plugins
+    - ./data:/opt/airflow/data
+    - ./scripts:/opt/airflow/scripts
+    - ./gcp-credentials.json:/opt/airflow/gcp-credentials.json
+    - ./dbt:/opt/airflow/dbt
+    - ./bigquery_load.py:/opt/airflow/bigquery_load.py
+    - ./gcp-credentials-new.json:/opt/airflow/gcp-credentials-new.json
+  user: "${AIRFLOW_UID:-50000}:0"
+  depends_on:
+    postgres:
+      condition: service_healthy
+
+services:
+
+  postgres:
+    image: postgres:15
+    container_name: price_postgres
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+    restart: always
+    networks:
+      - price_net
+
+  nifi:
+    image: apache/nifi:1.23.2
+    container_name: price_nifi
+    environment:
+      - NIFI_WEB_HTTP_PORT=8080
+      - NIFI_WEB_HTTPS_PORT=
+      - SINGLE_USER_CREDENTIALS_USERNAME=admin
+      - SINGLE_USER_CREDENTIALS_PASSWORD=admin12345678
+      - NIFI_SENSITIVE_PROPS_KEY=price_intelligence_2026
+    ports:
+      - "9090:8080"
+    volumes:
+      - nifi_data:/opt/nifi/nifi-current/data
+      - nifi_logs:/opt/nifi/nifi-current/logs
+      - ./nifi_templates:/opt/nifi/nifi-current/conf/templates
+      - ./data:/opt/nifi/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/nifi-api/system-diagnostics"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+    restart: always
+    networks:
+      - price_net
+
+  airflow-init:
+    <<: *airflow-common
+    container_name: price_airflow_init
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        airflow db init &&
+        airflow users create \
+          --username admin \
+          --password admin \
+          --firstname Admin \
+          --lastname Price \
+          --role Admin \
+          --email admin@price-intelligence.ma
+    environment:
+      <<: *airflow-common-env
+    restart: on-failure
+    networks:
+      - price_net
+
+  airflow-webserver:
+    <<: *airflow-common
+    container_name: price_airflow_webserver
+    command: webserver
+    ports:
+      - "8082:8080"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: always
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+    networks:
+      - price_net
+
+  airflow-scheduler:
+    <<: *airflow-common
+    container_name: price_airflow_scheduler
+    command: scheduler
+    healthcheck:
+      test: ["CMD-SHELL", 'airflow jobs check --job-type SchedulerJob --hostname "$${HOSTNAME}"']
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: always
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+    networks:
+      - price_net
+
+  streamlit:
+    image: python:3.11-slim
+    container_name: price_streamlit
+    working_dir: /app
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/gcp-credentials.json
+    volumes:
+      - ./dashboard:/app/dashboard
+      - ./data:/app/data
+      - ./gcp-credentials-new.json:/app/gcp-credentials.json
+    command: >
+      bash -c "pip install streamlit plotly pandas google-cloud-bigquery db-dtypes --quiet &&
+               streamlit run dashboard/dashboard.py --server.port=8502 --server.address=0.0.0.0"
+    ports:
+      - "8502:8502"
+    restart: always
+    networks:
+      - price_net
+
+  dbt:
+    image: ghcr.io/dbt-labs/dbt-bigquery:1.7.0
+    container_name: price_dbt
+    working_dir: /usr/app/dbt
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/usr/app/gcp-credentials.json
+    volumes:
+      - ./dbt:/usr/app/dbt
+      - ./gcp-credentials-new.json:/usr/app/gcp-credentials.json
+    command: run
+    networks:
+      - price_net
+
+volumes:
+  postgres_data:
+  nifi_data:
+  nifi_logs:
+
+networks:
+  price_net:
+    driver: bridge

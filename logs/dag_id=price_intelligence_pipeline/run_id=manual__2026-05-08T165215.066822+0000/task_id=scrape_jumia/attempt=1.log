@@ -1,0 +1,21 @@
+[2026-05-08T16:58:21.664+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_jumia manual__2026-05-08T16:52:15.066822+00:00 [queued]>
+[2026-05-08T16:58:21.692+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_jumia manual__2026-05-08T16:52:15.066822+00:00 [queued]>
+[2026-05-08T16:58:21.695+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-08T16:58:21.748+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_jumia> on 2026-05-08 16:52:15.066822+00:00
+[2026-05-08T16:58:21.773+0000] {standard_task_runner.py:60} INFO - Started process 5363 to run task
+[2026-05-08T16:58:21.802+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_jumia', 'manual__2026-05-08T16:52:15.066822+00:00', '--job-id', '787', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpk4odi3z7']
+[2026-05-08T16:58:21.823+0000] {standard_task_runner.py:88} INFO - Job 787: Subtask scrape_jumia
+[2026-05-08T16:58:22.369+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_jumia manual__2026-05-08T16:52:15.066822+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-08T16:58:22.883+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_jumia' AIRFLOW_CTX_EXECUTION_DATE='2026-05-08T16:52:15.066822+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-08T16:52:15.066822+00:00'
+[2026-05-08T16:58:22.887+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-08T16:58:22.891+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            cd /opt/***\n            mkdir -p data/raw\n            scrapy crawl jumia_ma -o data/raw/jumia_ma.json --overwrite-output -s LOG_LEVEL=WARNING -s ROBOTSTXT_OBEY=False -s DOWNLOAD_DELAY=1.5 -s CONCURRENT_REQUESTS=4 || echo "Jumia done with warnings"\n        ']
+[2026-05-08T16:58:22.924+0000] {subprocess.py:86} INFO - Output:
+[2026-05-08T16:58:26.306+0000] {subprocess.py:93} INFO - Usage
+[2026-05-08T16:58:26.308+0000] {subprocess.py:93} INFO - =====
+[2026-05-08T16:58:26.311+0000] {subprocess.py:93} INFO -   scrapy crawl [options] <spider>
+[2026-05-08T16:58:26.312+0000] {subprocess.py:93} INFO - crawl: error: argument -O/--overwrite-output: expected one argument
+[2026-05-08T16:58:26.587+0000] {subprocess.py:93} INFO - Jumia done with warnings
+[2026-05-08T16:58:26.589+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-05-08T16:58:26.772+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=scrape_jumia, execution_date=20260508T165215, start_date=20260508T165821, end_date=20260508T165826
+[2026-05-08T16:58:27.347+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-05-08T16:58:27.613+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

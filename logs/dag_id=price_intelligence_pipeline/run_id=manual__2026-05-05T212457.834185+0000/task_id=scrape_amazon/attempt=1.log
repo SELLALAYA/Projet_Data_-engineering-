@@ -1,0 +1,56 @@
+[2026-05-05T21:57:01.691+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_amazon manual__2026-05-05T21:24:57.834185+00:00 [queued]>
+[2026-05-05T21:57:01.759+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_amazon manual__2026-05-05T21:24:57.834185+00:00 [queued]>
+[2026-05-05T21:57:01.765+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-05T21:57:01.907+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_amazon> on 2026-05-05 21:24:57.834185+00:00
+[2026-05-05T21:57:01.944+0000] {standard_task_runner.py:60} INFO - Started process 7949 to run task
+[2026-05-05T21:57:01.969+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_amazon', 'manual__2026-05-05T21:24:57.834185+00:00', '--job-id', '424', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmp6pz1o8xy']
+[2026-05-05T21:57:01.985+0000] {standard_task_runner.py:88} INFO - Job 424: Subtask scrape_amazon
+[2026-05-05T21:57:02.312+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_amazon manual__2026-05-05T21:24:57.834185+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-05T21:57:02.690+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_amazon' AIRFLOW_CTX_EXECUTION_DATE='2026-05-05T21:24:57.834185+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-05T21:24:57.834185+00:00'
+[2026-05-05T21:57:02.698+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-05T21:57:02.703+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            cd /opt/***\n            mkdir -p data/raw\n            export DISPLAY=:99\n            python3 scrapers/spiders/amazon_ma.py || echo "Amazon done with warnings"\n        ']
+[2026-05-05T21:57:02.795+0000] {subprocess.py:86} INFO - Output:
+[2026-05-05T21:57:22.383+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-05T21:57:22.399+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/core/file_manager.py", line 65, in __extract_zip
+[2026-05-05T21:57:22.413+0000] {subprocess.py:93} INFO -     archive.extractall(to_directory)
+[2026-05-05T21:57:22.414+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/zipfile.py", line 1647, in extractall
+[2026-05-05T21:57:22.439+0000] {subprocess.py:93} INFO -     self._extract_member(zipinfo, path, pwd)
+[2026-05-05T21:57:22.467+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/zipfile.py", line 1702, in _extract_member
+[2026-05-05T21:57:22.485+0000] {subprocess.py:93} INFO -     shutil.copyfileobj(source, target)
+[2026-05-05T21:57:22.497+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/shutil.py", line 205, in copyfileobj
+[2026-05-05T21:57:22.513+0000] {subprocess.py:93} INFO -     buf = fsrc_read(length)
+[2026-05-05T21:57:22.514+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/zipfile.py", line 940, in read
+[2026-05-05T21:57:22.518+0000] {subprocess.py:93} INFO -     data = self._read1(n)
+[2026-05-05T21:57:22.523+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/zipfile.py", line 1008, in _read1
+[2026-05-05T21:57:22.525+0000] {subprocess.py:93} INFO -     data += self._read2(n - len(data))
+[2026-05-05T21:57:22.526+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/zipfile.py", line 1043, in _read2
+[2026-05-05T21:57:22.527+0000] {subprocess.py:93} INFO -     raise EOFError
+[2026-05-05T21:57:22.528+0000] {subprocess.py:93} INFO - EOFError
+[2026-05-05T21:57:22.534+0000] {subprocess.py:93} INFO - 
+[2026-05-05T21:57:22.541+0000] {subprocess.py:93} INFO - During handling of the above exception, another exception occurred:
+[2026-05-05T21:57:22.542+0000] {subprocess.py:93} INFO - 
+[2026-05-05T21:57:22.544+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-05T21:57:22.546+0000] {subprocess.py:93} INFO -   File "scrapers/spiders/amazon_ma.py", line 147, in <module>
+[2026-05-05T21:57:22.547+0000] {subprocess.py:93} INFO -     scrape_amazon()
+[2026-05-05T21:57:22.549+0000] {subprocess.py:93} INFO -   File "scrapers/spiders/amazon_ma.py", line 55, in scrape_amazon
+[2026-05-05T21:57:22.553+0000] {subprocess.py:93} INFO -     driver = get_driver()
+[2026-05-05T21:57:22.555+0000] {subprocess.py:93} INFO -   File "scrapers/spiders/amazon_ma.py", line 47, in get_driver
+[2026-05-05T21:57:22.561+0000] {subprocess.py:93} INFO -     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=opts)
+[2026-05-05T21:57:22.562+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/chrome.py", line 40, in install
+[2026-05-05T21:57:22.564+0000] {subprocess.py:93} INFO -     driver_path = self._get_driver_binary_path(self.driver)
+[2026-05-05T21:57:22.565+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/core/manager.py", line 41, in _get_driver_binary_path
+[2026-05-05T21:57:22.567+0000] {subprocess.py:93} INFO -     binary_path = self._cache_manager.save_file_to_cache(driver, file)
+[2026-05-05T21:57:22.573+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/core/driver_cache.py", line 54, in save_file_to_cache
+[2026-05-05T21:57:22.575+0000] {subprocess.py:93} INFO -     files = self.unpack_archive(archive, path)
+[2026-05-05T21:57:22.576+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/core/driver_cache.py", line 49, in unpack_archive
+[2026-05-05T21:57:22.581+0000] {subprocess.py:93} INFO -     return self._file_manager.unpack_archive(archive, path)
+[2026-05-05T21:57:22.583+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/core/file_manager.py", line 57, in unpack_archive
+[2026-05-05T21:57:22.585+0000] {subprocess.py:93} INFO -     return self.__extract_zip(archive_file, target_dir)
+[2026-05-05T21:57:22.589+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/core/file_manager.py", line 67, in __extract_zip
+[2026-05-05T21:57:22.591+0000] {subprocess.py:93} INFO -     if e.args[0] not in [26, 13] and e.args[1] not in [
+[2026-05-05T21:57:22.592+0000] {subprocess.py:93} INFO - IndexError: tuple index out of range
+[2026-05-05T21:57:22.601+0000] {subprocess.py:93} INFO - Amazon done with warnings
+[2026-05-05T21:57:22.603+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-05-05T21:57:22.722+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=scrape_amazon, execution_date=20260505T212457, start_date=20260505T215701, end_date=20260505T215722
+[2026-05-05T21:57:22.828+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-05-05T21:57:22.950+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,18 @@
+[2026-05-18T12:00:01.816+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_amazon scheduled__2026-05-18T11:00:00+00:00 [queued]>
+[2026-05-18T12:00:01.852+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_amazon scheduled__2026-05-18T11:00:00+00:00 [queued]>
+[2026-05-18T12:00:01.853+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-18T12:00:01.912+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_amazon> on 2026-05-18 11:00:00+00:00
+[2026-05-18T12:00:01.926+0000] {standard_task_runner.py:60} INFO - Started process 48179 to run task
+[2026-05-18T12:00:01.934+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_amazon', 'scheduled__2026-05-18T11:00:00+00:00', '--job-id', '1404', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmppe7knhao']
+[2026-05-18T12:00:01.946+0000] {standard_task_runner.py:88} INFO - Job 1404: Subtask scrape_amazon
+[2026-05-18T12:00:02.138+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_amazon scheduled__2026-05-18T11:00:00+00:00 [running]> on host 91e0d3a0a233
+[2026-05-18T12:00:02.584+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_amazon' AIRFLOW_CTX_EXECUTION_DATE='2026-05-18T11:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-05-18T11:00:00+00:00'
+[2026-05-18T12:00:02.592+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-18T12:00:02.599+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            cd /opt/***\n            mkdir -p data/raw\n            export DISPLAY=:99\n            python3 scrapers/spiders/amazon_ma.py || echo "Amazon done with warnings"\n        ']
+[2026-05-18T12:00:02.637+0000] {subprocess.py:86} INFO - Output:
+[2026-05-18T12:00:02.819+0000] {subprocess.py:93} INFO - python3: can't open file 'scrapers/spiders/amazon_ma.py': [Errno 2] No such file or directory
+[2026-05-18T12:00:02.827+0000] {subprocess.py:93} INFO - Amazon done with warnings
+[2026-05-18T12:00:02.828+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-05-18T12:00:02.945+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=scrape_amazon, execution_date=20260518T110000, start_date=20260518T120001, end_date=20260518T120002
+[2026-05-18T12:00:03.026+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-05-18T12:00:03.154+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

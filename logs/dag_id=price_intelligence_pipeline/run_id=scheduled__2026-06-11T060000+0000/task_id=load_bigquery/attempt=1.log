@@ -1,0 +1,34 @@
+[2026-06-11T12:01:14.752+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.load_bigquery scheduled__2026-06-11T06:00:00+00:00 [queued]>
+[2026-06-11T12:01:14.778+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.load_bigquery scheduled__2026-06-11T06:00:00+00:00 [queued]>
+[2026-06-11T12:01:14.780+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-06-11T12:01:14.826+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): load_bigquery> on 2026-06-11 06:00:00+00:00
+[2026-06-11T12:01:14.842+0000] {standard_task_runner.py:60} INFO - Started process 7546 to run task
+[2026-06-11T12:01:14.857+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'load_bigquery', 'scheduled__2026-06-11T06:00:00+00:00', '--job-id', '1992', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpcak02fti']
+[2026-06-11T12:01:14.865+0000] {standard_task_runner.py:88} INFO - Job 1992: Subtask load_bigquery
+[2026-06-11T12:01:15.137+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.load_bigquery scheduled__2026-06-11T06:00:00+00:00 [running]> on host 91e0d3a0a233
+[2026-06-11T12:01:15.408+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='load_bigquery' AIRFLOW_CTX_EXECUTION_DATE='2026-06-11T06:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-06-11T06:00:00+00:00'
+[2026-06-11T12:01:15.411+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-06-11T12:01:15.413+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            set -e\n            cd /opt/***\n            export GOOGLE_APPLICATION_CREDENTIALS=/opt/***/gcp-credentials-new.json\n            python3 bigquery_load.py\n            echo BigQuery done\n        ']
+[2026-06-11T12:01:15.432+0000] {subprocess.py:86} INFO - Output:
+[2026-06-11T12:04:32.719+0000] {subprocess.py:93} INFO - /home/***/.local/lib/python3.8/site-packages/google/auth/_default.py:76: UserWarning: Your application has authenticated using end user credentials from Google Cloud SDK without a quota project. You might receive a "quota exceeded" or "API not enabled" error. See the following page for troubleshooting: https://cloud.google.com/docs/authentication/adc-troubleshooting/user-creds.
+[2026-06-11T12:04:32.741+0000] {subprocess.py:93} INFO -   warnings.warn(_CLOUD_SDK_CREDENTIALS_WARNING)
+[2026-06-11T12:04:32.743+0000] {subprocess.py:93} INFO - [OK] jumia.ma: 7004 rows
+[2026-06-11T12:04:32.746+0000] {subprocess.py:93} INFO - [OK] avito.ma: 1692 rows
+[2026-06-11T12:04:32.757+0000] {subprocess.py:93} INFO - [OK] amazon.com: 897 rows
+[2026-06-11T12:04:32.773+0000] {subprocess.py:93} INFO - [OK] connecto.ma: 3061 rows
+[2026-06-11T12:04:32.775+0000] {subprocess.py:93} INFO - 
+[2026-06-11T12:04:32.776+0000] {subprocess.py:93} INFO - TOTAL: 12654 rows
+[2026-06-11T12:04:32.778+0000] {subprocess.py:93} INFO - 
+[2026-06-11T12:04:32.785+0000] {subprocess.py:93} INFO - ✅ 12654 lignes chargees dans BigQuery
+[2026-06-11T12:04:32.797+0000] {subprocess.py:93} INFO - 
+[2026-06-11T12:04:32.801+0000] {subprocess.py:93} INFO - === BigQuery par source ===
+[2026-06-11T12:04:32.806+0000] {subprocess.py:93} INFO -   jumia.ma: 7004 produits | moy: 2944.0 MAD
+[2026-06-11T12:04:32.808+0000] {subprocess.py:93} INFO -   connecto.ma: 3061 produits | moy: 5640.0 MAD
+[2026-06-11T12:04:32.810+0000] {subprocess.py:93} INFO -   avito.ma: 1692 produits | moy: 1179383.0 MAD
+[2026-06-11T12:04:32.814+0000] {subprocess.py:93} INFO -   amazon.com: 897 produits | moy: 4478.0 MAD
+[2026-06-11T12:04:32.816+0000] {subprocess.py:93} INFO -   TOTAL: 12654
+[2026-06-11T12:04:33.719+0000] {subprocess.py:93} INFO - BigQuery done
+[2026-06-11T12:04:33.722+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-06-11T12:04:34.476+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=load_bigquery, execution_date=20260611T060000, start_date=20260611T120114, end_date=20260611T120434
+[2026-06-11T12:04:34.596+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-06-11T12:04:34.713+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

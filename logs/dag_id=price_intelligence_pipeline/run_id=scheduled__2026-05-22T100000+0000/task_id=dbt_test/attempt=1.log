@@ -1,0 +1,43 @@
+[2026-05-22T11:43:47.993+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.dbt_test scheduled__2026-05-22T10:00:00+00:00 [queued]>
+[2026-05-22T11:43:48.016+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.dbt_test scheduled__2026-05-22T10:00:00+00:00 [queued]>
+[2026-05-22T11:43:48.017+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-22T11:43:48.060+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): dbt_test> on 2026-05-22 10:00:00+00:00
+[2026-05-22T11:43:48.070+0000] {standard_task_runner.py:60} INFO - Started process 75122 to run task
+[2026-05-22T11:43:48.080+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'dbt_test', 'scheduled__2026-05-22T10:00:00+00:00', '--job-id', '1707', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpb645vg0q']
+[2026-05-22T11:43:48.086+0000] {standard_task_runner.py:88} INFO - Job 1707: Subtask dbt_test
+[2026-05-22T11:43:48.234+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.dbt_test scheduled__2026-05-22T10:00:00+00:00 [running]> on host 91e0d3a0a233
+[2026-05-22T11:43:48.475+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='dbt_test' AIRFLOW_CTX_EXECUTION_DATE='2026-05-22T10:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-05-22T10:00:00+00:00'
+[2026-05-22T11:43:48.478+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-22T11:43:48.482+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            cd /opt/***/dbt\n            export GOOGLE_APPLICATION_CREDENTIALS=/opt/***/gcp-credentials-new.json\n            /home/***/.local/bin/dbt test --profiles-dir . --project-dir . || echo warnings only\n            echo dbt test done\n        ']
+[2026-05-22T11:43:48.508+0000] {subprocess.py:86} INFO - Output:
+[2026-05-22T11:43:53.332+0000] {subprocess.py:93} INFO - [0m11:43:53  Running with dbt=1.8.7
+[2026-05-22T11:43:57.020+0000] {subprocess.py:93} INFO - [0m11:43:57  Registered adapter: bigquery=1.8.3
+[2026-05-22T11:43:59.397+0000] {subprocess.py:93} INFO - [0m11:43:59  Found 3 models, 1 seed, 7 data tests, 1 source, 479 macros
+[2026-05-22T11:43:59.412+0000] {subprocess.py:93} INFO - [0m11:43:59
+[2026-05-22T11:44:08.120+0000] {subprocess.py:93} INFO - [0m11:44:08  Concurrency: 4 threads (target='dev')
+[2026-05-22T11:44:08.121+0000] {subprocess.py:93} INFO - [0m11:44:08
+[2026-05-22T11:44:08.144+0000] {subprocess.py:93} INFO - [0m11:44:08  1 of 7 START test not_null_prices_aggregated_source ............................ [RUN]
+[2026-05-22T11:44:08.148+0000] {subprocess.py:93} INFO - [0m11:44:08  2 of 7 START test not_null_prices_aggregated_total_products .................... [RUN]
+[2026-05-22T11:44:08.150+0000] {subprocess.py:93} INFO - [0m11:44:08  3 of 7 START test not_null_prices_cleaned_price ................................ [RUN]
+[2026-05-22T11:44:08.154+0000] {subprocess.py:93} INFO - [0m11:44:08  4 of 7 START test not_null_prices_cleaned_product_id ........................... [RUN]
+[2026-05-22T11:44:10.910+0000] {subprocess.py:93} INFO - [0m11:44:10  3 of 7 PASS not_null_prices_cleaned_price ...................................... [[32mPASS[0m in 2.75s]
+[2026-05-22T11:44:10.914+0000] {subprocess.py:93} INFO - [0m11:44:10  5 of 7 START test not_null_stg_prices_price .................................... [RUN]
+[2026-05-22T11:44:10.932+0000] {subprocess.py:93} INFO - [0m11:44:10  2 of 7 PASS not_null_prices_aggregated_total_products .......................... [[32mPASS[0m in 2.78s]
+[2026-05-22T11:44:10.937+0000] {subprocess.py:93} INFO - [0m11:44:10  6 of 7 START test not_null_stg_prices_product_id ............................... [RUN]
+[2026-05-22T11:44:10.944+0000] {subprocess.py:93} INFO - [0m11:44:10  1 of 7 PASS not_null_prices_aggregated_source .................................. [[32mPASS[0m in 2.79s]
+[2026-05-22T11:44:10.965+0000] {subprocess.py:93} INFO - [0m11:44:10  7 of 7 START test unique_prices_cleaned_product_id ............................. [RUN]
+[2026-05-22T11:44:10.993+0000] {subprocess.py:93} INFO - [0m11:44:10  4 of 7 PASS not_null_prices_cleaned_product_id ................................. [[32mPASS[0m in 2.83s]
+[2026-05-22T11:44:12.888+0000] {subprocess.py:93} INFO - [0m11:44:12  7 of 7 PASS unique_prices_cleaned_product_id ................................... [[32mPASS[0m in 1.92s]
+[2026-05-22T11:44:13.038+0000] {subprocess.py:93} INFO - [0m11:44:13  6 of 7 PASS not_null_stg_prices_product_id ..................................... [[32mPASS[0m in 2.10s]
+[2026-05-22T11:44:13.083+0000] {subprocess.py:93} INFO - [0m11:44:13  5 of 7 PASS not_null_stg_prices_price .......................................... [[32mPASS[0m in 2.17s]
+[2026-05-22T11:44:13.093+0000] {subprocess.py:93} INFO - [0m11:44:13
+[2026-05-22T11:44:13.094+0000] {subprocess.py:93} INFO - [0m11:44:13  Finished running 7 data tests in 0 hours 0 minutes and 13.68 seconds (13.68s).
+[2026-05-22T11:44:13.215+0000] {subprocess.py:93} INFO - [0m11:44:13
+[2026-05-22T11:44:13.216+0000] {subprocess.py:93} INFO - [0m11:44:13  [32mCompleted successfully[0m
+[2026-05-22T11:44:13.217+0000] {subprocess.py:93} INFO - [0m11:44:13
+[2026-05-22T11:44:13.219+0000] {subprocess.py:93} INFO - [0m11:44:13  Done. PASS=7 WARN=0 ERROR=0 SKIP=0 TOTAL=7
+[2026-05-22T11:44:15.045+0000] {subprocess.py:93} INFO - dbt test done
+[2026-05-22T11:44:15.055+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-05-22T11:44:15.127+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=dbt_test, execution_date=20260522T100000, start_date=20260522T114347, end_date=20260522T114415
+[2026-05-22T11:44:15.191+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-05-22T11:44:15.242+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check
