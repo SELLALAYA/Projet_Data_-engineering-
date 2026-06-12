@@ -1,0 +1,18 @@
+[2026-05-22T18:00:01.330+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_electroplanet scheduled__2026-05-22T17:00:00+00:00 [queued]>
+[2026-05-22T18:00:01.362+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_electroplanet scheduled__2026-05-22T17:00:00+00:00 [queued]>
+[2026-05-22T18:00:01.364+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-22T18:00:01.412+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_electroplanet> on 2026-05-22 17:00:00+00:00
+[2026-05-22T18:00:01.429+0000] {standard_task_runner.py:60} INFO - Started process 84543 to run task
+[2026-05-22T18:00:01.438+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_electroplanet', 'scheduled__2026-05-22T17:00:00+00:00', '--job-id', '1763', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpc4x6g3nx']
+[2026-05-22T18:00:01.451+0000] {standard_task_runner.py:88} INFO - Job 1763: Subtask scrape_electroplanet
+[2026-05-22T18:00:01.671+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_electroplanet scheduled__2026-05-22T17:00:00+00:00 [running]> on host 91e0d3a0a233
+[2026-05-22T18:00:01.988+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_electroplanet' AIRFLOW_CTX_EXECUTION_DATE='2026-05-22T17:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-05-22T17:00:00+00:00'
+[2026-05-22T18:00:01.997+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-22T18:00:02.014+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            cd /opt/***\n            mkdir -p data/raw\n            export DISPLAY=:99\n            python3 scrapers/spiders/electroplanet_ma.py || echo "Electroplanet done with warnings"\n        ']
+[2026-05-22T18:00:02.052+0000] {subprocess.py:86} INFO - Output:
+[2026-05-22T18:00:02.209+0000] {subprocess.py:93} INFO - python3: can't open file 'scrapers/spiders/electroplanet_ma.py': [Errno 2] No such file or directory
+[2026-05-22T18:00:02.215+0000] {subprocess.py:93} INFO - Electroplanet done with warnings
+[2026-05-22T18:00:02.217+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-05-22T18:00:02.322+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=scrape_electroplanet, execution_date=20260522T170000, start_date=20260522T180001, end_date=20260522T180002
+[2026-05-22T18:00:02.458+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-05-22T18:00:02.550+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

@@ -1,162 +1,150 @@
-import json
 import time
-import os
+import requests
+import scrapy
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
 from datetime import datetime, timezone
 
+NIFI_URL = "http://price_nifi:8888/contentListener"
+
 URLS = [
-    ("https://www.electroplanet.ma/telephones-et-accessoires/smartphones", "Téléphones & Smartphones"),
-    ("https://www.electroplanet.ma/telephones-et-accessoires/tablettes", "Informatique"),
+    ("https://www.electroplanet.ma/telephones-et-accessoires/smartphones", "Telephones & Smartphones"),
     ("https://www.electroplanet.ma/informatique/ordinateurs-portables", "Informatique"),
-    ("https://www.electroplanet.ma/informatique/ordinateurs-de-bureau", "Informatique"),
-    ("https://www.electroplanet.ma/electromenager/refrigerateurs", "Électroménager"),
-    ("https://www.electroplanet.ma/electromenager/lave-linge", "Électroménager"),
-    ("https://www.electroplanet.ma/electromenager/climatiseurs", "Électroménager"),
-    ("https://www.electroplanet.ma/petit-electromenager/cafetières", "Électroménager"),
+    ("https://www.electroplanet.ma/electromenager/refrigerateurs", "Electromenager"),
+    ("https://www.electroplanet.ma/electromenager/lave-linge", "Electromenager"),
+    ("https://www.electroplanet.ma/electromenager/climatiseurs", "Electromenager"),
 ]
 
-def detect_category(name):
-    name_lower = name.lower()
-    if any(k in name_lower for k in [
-        'iphone', 'samsung', 'xiaomi', 'oppo', 'huawei', 'smartphone',
-        'telephone', 'mobile', 'realme', 'oneplus', 'redmi', 'galaxy',
-        'infinix', 'tecno', 'itel', 'vivo', 'nokia', 'motorola']):
-        return "Téléphones & Smartphones"
-    if any(k in name_lower for k in [
-        'tablette', 'tablet', 'ipad', 'laptop', 'ordinateur', ' pc ',
-        'bureau', 'portable', 'ecran', 'clavier', 'souris', 'imprimante',
-        'disque', 'memoire', 'ram', 'processeur', 'carte graphique']):
-        return "Informatique"
-    if any(k in name_lower for k in [
-        'refriger', 'frigo', 'congel', 'lave-linge', 'lavsech', 'mal ',
-        'machine a laver', 'climatiseur', 'clim', 'four', 'micro-onde',
-        'aspirateur', 'aspira', 'cafetiere', 'electromenager', 'lave vais',
-        'seche', 'hotte', 'fer a repasser', 'fer vapeur', 'defroisseur',
-        'friteuse', 'purificateur', 'antimoustique', 'mixeur', 'blender',
-        'grille-pain', 'bouilloire', 'robot', 'cuiseur', 'plaque',
-        'beko', 'arthur martin', 'aeg', 'hisense', 'rowenta', 'tefal',
-        'taurus', 'severin', 'kenwood', 'laurastar', 'dyson', 'solac']):
-        return "Électroménager"
-    return "Électroménager"
+class ElectroplanetMaSpider(scrapy.Spider):
+    name = "electroplanet_ma"
 
-def clean_price(price_text):
-    try:
-        cleaned = price_text.replace('DH', '').replace('\xa0', '').replace(' ', '').replace(',', '.').strip()
-        return float(cleaned)
-    except:
-        return None
+    def start_requests(self):
+        yield scrapy.Request(
+            url="https://www.electroplanet.ma/telephones-et-accessoires/smartphones",
+            callback=self.parse,
+            dont_filter=True,
+            errback=self.handle_error,
+        )
 
-def get_driver():
-    opts = Options()
-    opts.add_argument('--headless')
-    opts.add_argument('--no-sandbox')
-    opts.add_argument('--disable-dev-shm-usage')
-    opts.add_argument('--window-size=1920,1080')
-    opts.add_argument('--disable-blink-features=AutomationControlled')
-    opts.add_experimental_option('excludeSwitches', ['enable-automation'])
-    opts.add_experimental_option('useAutomationExtension', False)
-    opts.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36')
-    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=opts)
+    def handle_error(self, failure):
+        self.logger.error(f"Request failed: {failure}")
+        yield from self.run_selenium()
 
-def scrape_electroplanet():
-    all_products = []
-    seen_names = set()
+    def parse(self, response):
+        yield from self.run_selenium()
 
-    for url, forced_category in URLS:
-        cat_name = url.split('/')[-1]
-        print(f"\n[Electroplanet] Scraping : {cat_name}")
+    def get_driver(self):
+        opts = Options()
+        opts.add_argument("--headless")
+        opts.add_argument("--no-sandbox")
+        opts.add_argument("--disable-dev-shm-usage")
+        opts.add_argument("--window-size=1920,1080")
+        opts.add_argument("--disable-blink-features=AutomationControlled")
+        opts.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+        opts.binary_location = "/usr/bin/chromium"
+        service = Service("/usr/bin/chromedriver")
+        return webdriver.Chrome(service=service, options=opts)
 
-        driver = get_driver()
+    def clean_price(self, price_text):
         try:
-            driver.get(url)
-            time.sleep(6)
+            cleaned = price_text.replace("DH", "").replace("\xa0", "").replace("\u202f", "").replace(" ", "").replace(",", ".").strip()
+            return float(cleaned)
+        except:
+            return None
 
-            # Scroll pour charger tous les produits
-            for _ in range(5):
-                driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-                time.sleep(2)
+    def run_selenium(self):
+        total = 0
+        seen_names = set()
+        driver = self.get_driver()
 
-            items = driver.find_elements(By.CSS_SELECTOR, '.product-item')
-            print(f"  {len(items)} produits détectés...", end=" ", flush=True)
+        for url, category in URLS:
+            self.logger.info(f"Scraping: {url}")
+            try:
+                driver.get(url)
+                time.sleep(8)
+                for _ in range(5):
+                    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                    time.sleep(2)
 
-            count = 0
-            for item in items:
-                try:
+                items = driver.find_elements(By.CSS_SELECTOR, ".product-item")
+                self.logger.info(f"Found {len(items)} items in {category}")
+
+                for item in items:
                     try:
-                        name = item.find_element(By.CSS_SELECTOR, '.product-item-link').text.strip()
-                    except:
-                        name = item.find_element(By.CSS_SELECTOR, 'a').text.strip()
-
-                    if not name or name in seen_names:
-                        continue
-                    seen_names.add(name)
-
-                    # Utiliser la catégorie forcée par l'URL ou détecter automatiquement
-                    category = detect_category(name) if detect_category(name) != "Électroménager" else forced_category
-
-                    try:
-                        price_text = item.find_element(By.CSS_SELECTOR, '.price').text
-                        price = clean_price(price_text)
-                    except:
-                        price = None
-
-                    try:
-                        old_price_text = item.find_element(By.CSS_SELECTOR, '.old-price .price').text
-                        old_price = clean_price(old_price_text)
-                    except:
-                        old_price = None
-
-                    try:
-                        image_url = item.find_element(By.CSS_SELECTOR, 'img').get_attribute('src')
-                    except:
-                        image_url = None
-
-                    try:
-                        product_url = item.find_element(By.CSS_SELECTOR, 'a.product-item-link').get_attribute('href')
-                    except:
+                        # Nom
                         try:
-                            product_url = item.find_element(By.CSS_SELECTOR, 'a').get_attribute('href')
+                            name = item.find_element(By.CSS_SELECTOR, ".product-item-link").text.strip()
+                        except:
+                            name = item.find_element(By.CSS_SELECTOR, "a").text.strip()
+
+                        if not name or name in seen_names:
+                            continue
+                        seen_names.add(name)
+
+                        # Prix special (prix actuel)
+                        try:
+                            price = self.clean_price(item.find_element(By.CSS_SELECTOR, ".special-price .price").text)
+                        except:
+                            try:
+                                price = self.clean_price(item.find_element(By.CSS_SELECTOR, ".price-wrapper .price").text)
+                            except:
+                                price = None
+
+                        # Ancien prix
+                        try:
+                            old_price = self.clean_price(item.find_element(By.CSS_SELECTOR, ".old-price .price").text)
+                        except:
+                            old_price = None
+
+                        # Discount %
+                        try:
+                            discount_text = item.find_element(By.CSS_SELECTOR, ".price-discount-percent").text
+                            discount = float(discount_text.replace("%", "").replace("-", "").strip())
+                        except:
+                            discount = None
+
+                        # Image
+                        try:
+                            image_url = item.find_element(By.CSS_SELECTOR, "img.product-image-photo").get_attribute("src")
+                        except:
+                            image_url = None
+
+                        # URL produit
+                        try:
+                            product_url = item.find_element(By.CSS_SELECTOR, "a.product-item-link").get_attribute("href")
                         except:
                             product_url = None
 
-                    all_products.append({
-                        "name": name,
-                        "price": price,
-                        "old_price": old_price,
-                        "discount": None,
-                        "rating": None,
-                        "currency": "MAD",
-                        "category": category,
-                        "image_url": image_url,
-                        "url": product_url,
-                        "source": "electroplanet.ma",
-                        "scraped_at": datetime.now(timezone.utc).isoformat(),
-                    })
-                    count += 1
-                except:
-                    continue
+                        product = {
+                            "product_name": name,
+                            "price": price,
+                            "old_price": old_price,
+                            "discount_pct": discount,
+                            "rating": None,
+                            "currency": "MAD",
+                            "category": category,
+                            "image_url": image_url,
+                            "url": product_url,
+                            "source": "electroplanet.ma",
+                            "scraped_at": datetime.now(timezone.utc).isoformat(),
+                        }
 
-            print(f"✅ {count} produits uniques")
-        except Exception as e:
-            print(f"❌ Erreur: {e}")
-        finally:
-            driver.quit()
+                        try:
+                            requests.post(NIFI_URL, json=product, timeout=5)
+                            total += 1
+                            self.logger.info(f"Sent to NiFi: {name} — {price} MAD")
+                        except Exception as e:
+                            self.logger.error(f"NiFi error: {e}")
 
-    os.makedirs("data/raw", exist_ok=True)
-    with open("data/raw/electroplanet_ma.json", "w", encoding="utf-8") as f:
-        json.dump(all_products, f, ensure_ascii=False, indent=2)
+                        yield product
 
-    from collections import Counter
-    cats = Counter(p['category'] for p in all_products)
-    print(f"\n📊 Répartition par catégorie:")
-    for cat, nb in cats.items():
-        print(f"  {cat}: {nb} produits")
+                    except Exception:
+                        continue
 
-    print(f"\n🎉 TOTAL : {len(all_products)} produits → data/raw/electroplanet_ma.json")
+            except Exception as e:
+                self.logger.error(f"Error scraping {url}: {e}")
 
-if __name__ == "__main__":
-    scrape_electroplanet()
+        driver.quit()
+        self.logger.info(f"TOTAL sent to NiFi: {total}")

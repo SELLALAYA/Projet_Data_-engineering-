@@ -1,0 +1,17 @@
+[2026-05-05T19:58:54.846+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_avito manual__2026-05-05T19:53:49.991985+00:00 [queued]>
+[2026-05-05T19:58:54.880+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_avito manual__2026-05-05T19:53:49.991985+00:00 [queued]>
+[2026-05-05T19:58:54.882+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 3
+[2026-05-05T19:58:54.929+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_avito> on 2026-05-05 19:53:49.991985+00:00
+[2026-05-05T19:58:54.945+0000] {standard_task_runner.py:60} INFO - Started process 1464 to run task
+[2026-05-05T19:58:54.954+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_avito', 'manual__2026-05-05T19:53:49.991985+00:00', '--job-id', '229', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag_BACKUP.py', '--cfg-path', '/tmp/tmpd7ndtjx3']
+[2026-05-05T19:58:54.961+0000] {standard_task_runner.py:88} INFO - Job 229: Subtask scrape_avito
+[2026-05-05T19:58:55.187+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_avito manual__2026-05-05T19:53:49.991985+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-05T19:58:55.733+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='price_intelligence' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_avito' AIRFLOW_CTX_EXECUTION_DATE='2026-05-05T19:53:49.991985+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-05T19:53:49.991985+00:00'
+[2026-05-05T19:58:55.741+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-05T19:58:55.743+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            python3 -c "\nimport json\ndata = json.load(open(\'/opt/***/data/raw/avito_ma.json\'))\nprint(f\'✅ Avito: {len(data)} produits disponibles\')\n"\n        ']
+[2026-05-05T19:58:55.796+0000] {subprocess.py:86} INFO - Output:
+[2026-05-05T19:58:56.190+0000] {subprocess.py:93} INFO - ✅ Avito: 1710 produits disponibles
+[2026-05-05T19:58:56.215+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-05-05T19:58:56.372+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=scrape_avito, execution_date=20260505T195349, start_date=20260505T195854, end_date=20260505T195856
+[2026-05-05T19:58:56.467+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-05-05T19:58:56.617+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

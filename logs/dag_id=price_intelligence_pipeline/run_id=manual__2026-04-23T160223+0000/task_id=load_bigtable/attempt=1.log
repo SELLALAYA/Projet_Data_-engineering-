@@ -1,0 +1,62 @@
+[2026-04-23T16:02:29.471+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.load_bigtable manual__2026-04-23T16:02:23+00:00 [queued]>
+[2026-04-23T16:02:29.525+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.load_bigtable manual__2026-04-23T16:02:23+00:00 [queued]>
+[2026-04-23T16:02:29.527+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 3
+[2026-04-23T16:02:29.601+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): load_bigtable> on 2026-04-23 16:02:23+00:00
+[2026-04-23T16:02:29.617+0000] {standard_task_runner.py:60} INFO - Started process 16432 to run task
+[2026-04-23T16:02:29.627+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'load_bigtable', 'manual__2026-04-23T16:02:23+00:00', '--job-id', '27', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmp07d47peo']
+[2026-04-23T16:02:29.635+0000] {standard_task_runner.py:88} INFO - Job 27: Subtask load_bigtable
+[2026-04-23T16:02:29.802+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.load_bigtable manual__2026-04-23T16:02:23+00:00 [running]> on host f3ebc944c42b
+[2026-04-23T16:02:30.030+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='price_intelligence' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='load_bigtable' AIRFLOW_CTX_EXECUTION_DATE='2026-04-23T16:02:23+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-04-23T16:02:23+00:00'
+[2026-04-23T16:02:30.039+0000] {_default.py:683} WARNING - No project ID could be determined. Consider running `gcloud config set project` or setting the GOOGLE_CLOUD_PROJECT environment variable
+[2026-04-24T10:15:03.092+0000] {local_task_job_runner.py:211} ERROR - Heartbeat time limit exceeded!
+[2026-04-24T10:15:03.693+0000] {process_utils.py:131} INFO - Sending 15 to group 16432. PIDs of all processes in the group: [16432]
+[2026-04-24T10:15:03.726+0000] {process_utils.py:86} INFO - Sending the signal 15 to group 16432
+[2026-04-24T10:15:03.751+0000] {taskinstance.py:2450} ERROR - Received SIGTERM. Terminating subprocesses.
+[2026-04-24T10:15:03.811+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/load_bigtable.py", line 86, in load_to_bigtable
+    bt_row.commit()
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/cloud/bigtable/row.py", line 473, in commit
+    response = self._table.mutate_rows([self])
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/cloud/bigtable/table.py", line 729, in mutate_rows
+    return retryable_mutate_rows(retry=retry)
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/cloud/bigtable/table.py", line 1089, in __call__
+    mutate_rows()
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/api_core/retry.py", line 372, in retry_wrapped_func
+    return retry_target(
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/api_core/retry.py", line 207, in retry_target
+    result = target()
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/cloud/bigtable/table.py", line 1138, in _do_mutate_retryable_rows
+    responses = data_client.mutate_rows(
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/cloud/bigtable_v2/services/bigtable/client.py", line 907, in mutate_rows
+    response = rpc(
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/api_core/gapic_v1/method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/api_core/timeout.py", line 120, in func_with_timeout
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/api_core/grpc_helpers.py", line 173, in error_remapped_callable
+    return _StreamingResponseIterator(
+  File "/home/airflow/.local/lib/python3.8/site-packages/google/api_core/grpc_helpers.py", line 95, in __init__
+    self._stored_first_result = next(self._wrapped)
+  File "/home/airflow/.local/lib/python3.8/site-packages/grpc/_channel.py", line 540, in __next__
+    return self._next()
+  File "/home/airflow/.local/lib/python3.8/site-packages/grpc/_channel.py", line 957, in _next
+    _common.wait(self._state.condition.wait, _response_ready)
+  File "/home/airflow/.local/lib/python3.8/site-packages/grpc/_common.py", line 156, in wait
+    _wait_once(wait_fn, MAXIMUM_WAIT_TIMEOUT, spin_cb)
+  File "/home/airflow/.local/lib/python3.8/site-packages/grpc/_common.py", line 116, in _wait_once
+    wait_fn(timeout=timeout)
+  File "/usr/local/lib/python3.8/threading.py", line 306, in wait
+    gotit = waiter.acquire(True, timeout)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2452, in signal_handler
+    raise AirflowException("Task received SIGTERM signal")
+airflow.exceptions.AirflowException: Task received SIGTERM signal
+[2026-04-24T10:15:04.927+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=price_intelligence_pipeline, task_id=load_bigtable, execution_date=20260423T160223, start_date=20260423T160229, end_date=20260424T101504
+[2026-04-24T10:15:05.216+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 27 for task load_bigtable (Task received SIGTERM signal; 16432)
+[2026-04-24T10:15:05.339+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=16432, status='terminated', exitcode=1, started='16:02:29') (16432) terminated with exit code 1

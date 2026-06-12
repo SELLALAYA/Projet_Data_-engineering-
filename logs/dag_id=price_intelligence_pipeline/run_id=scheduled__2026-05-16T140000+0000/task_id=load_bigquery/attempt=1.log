@@ -1,0 +1,123 @@
+[2026-05-16T15:00:10.841+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.load_bigquery scheduled__2026-05-16T14:00:00+00:00 [queued]>
+[2026-05-16T15:00:10.864+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.load_bigquery scheduled__2026-05-16T14:00:00+00:00 [queued]>
+[2026-05-16T15:00:10.866+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-16T15:00:10.905+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): load_bigquery> on 2026-05-16 14:00:00+00:00
+[2026-05-16T15:00:10.917+0000] {standard_task_runner.py:60} INFO - Started process 32961 to run task
+[2026-05-16T15:00:10.927+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'load_bigquery', 'scheduled__2026-05-16T14:00:00+00:00', '--job-id', '1262', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpmthn6lhc']
+[2026-05-16T15:00:10.936+0000] {standard_task_runner.py:88} INFO - Job 1262: Subtask load_bigquery
+[2026-05-16T15:00:11.219+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.load_bigquery scheduled__2026-05-16T14:00:00+00:00 [running]> on host 91e0d3a0a233
+[2026-05-16T15:00:11.799+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='load_bigquery' AIRFLOW_CTX_EXECUTION_DATE='2026-05-16T14:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-05-16T14:00:00+00:00'
+[2026-05-16T15:00:11.803+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-16T15:00:11.806+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            set -e\n            cd /opt/***\n            export GOOGLE_APPLICATION_CREDENTIALS=/opt/***/gcp-credentials-new.json\n            python3 bigquery_load.py\n            echo BigQuery done\n        ']
+[2026-05-16T15:00:11.835+0000] {subprocess.py:86} INFO - Output:
+[2026-05-16T15:10:09.605+0000] {subprocess.py:93} INFO - /home/***/.local/lib/python3.8/site-packages/google/auth/_default.py:76: UserWarning: Your application has authenticated using end user credentials from Google Cloud SDK without a quota project. You might receive a "quota exceeded" or "API not enabled" error. See the following page for troubleshooting: https://cloud.google.com/docs/authentication/adc-troubleshooting/user-creds.
+[2026-05-16T15:10:09.686+0000] {subprocess.py:93} INFO -   warnings.warn(_CLOUD_SDK_CREDENTIALS_WARNING)
+[2026-05-16T15:10:11.356+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-16T15:10:11.420+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connection.py", line 174, in _new_conn
+[2026-05-16T15:10:11.462+0000] {subprocess.py:93} INFO -     conn = connection.create_connection(
+[2026-05-16T15:10:11.464+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/util/connection.py", line 72, in create_connection
+[2026-05-16T15:10:11.486+0000] {subprocess.py:93} INFO -     for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+[2026-05-16T15:10:11.519+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/socket.py", line 918, in getaddrinfo
+[2026-05-16T15:10:11.527+0000] {subprocess.py:93} INFO -     for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+[2026-05-16T15:10:11.585+0000] {subprocess.py:93} INFO - socket.gaierror: [Errno -2] Name or service not known
+[2026-05-16T15:10:11.678+0000] {subprocess.py:93} INFO - 
+[2026-05-16T15:10:11.744+0000] {subprocess.py:93} INFO - During handling of the above exception, another exception occurred:
+[2026-05-16T15:10:11.807+0000] {subprocess.py:93} INFO - 
+[2026-05-16T15:10:11.883+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-16T15:10:11.898+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 715, in urlopen
+[2026-05-16T15:10:11.920+0000] {subprocess.py:93} INFO -     httplib_response = self._make_request(
+[2026-05-16T15:10:11.953+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 404, in _make_request
+[2026-05-16T15:10:11.972+0000] {subprocess.py:93} INFO -     self._validate_conn(conn)
+[2026-05-16T15:10:12.007+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 1058, in _validate_conn
+[2026-05-16T15:10:12.023+0000] {subprocess.py:93} INFO -     conn.connect()
+[2026-05-16T15:10:12.050+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connection.py", line 363, in connect
+[2026-05-16T15:10:12.083+0000] {subprocess.py:93} INFO -     self.sock = conn = self._new_conn()
+[2026-05-16T15:10:12.124+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connection.py", line 186, in _new_conn
+[2026-05-16T15:10:12.156+0000] {subprocess.py:93} INFO -     raise NewConnectionError(
+[2026-05-16T15:10:12.173+0000] {subprocess.py:93} INFO - urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x7834ead2beb0>: Failed to establish a new connection: [Errno -2] Name or service not known
+[2026-05-16T15:10:12.189+0000] {subprocess.py:93} INFO - 
+[2026-05-16T15:10:12.192+0000] {subprocess.py:93} INFO - During handling of the above exception, another exception occurred:
+[2026-05-16T15:10:12.204+0000] {subprocess.py:93} INFO - 
+[2026-05-16T15:10:12.344+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-16T15:10:12.453+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/requests/adapters.py", line 486, in send
+[2026-05-16T15:10:12.478+0000] {subprocess.py:93} INFO -     resp = conn.urlopen(
+[2026-05-16T15:10:12.512+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 827, in urlopen
+[2026-05-16T15:10:12.528+0000] {subprocess.py:93} INFO -     return self.urlopen(
+[2026-05-16T15:10:12.561+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 827, in urlopen
+[2026-05-16T15:10:12.576+0000] {subprocess.py:93} INFO -     return self.urlopen(
+[2026-05-16T15:10:12.583+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 827, in urlopen
+[2026-05-16T15:10:12.617+0000] {subprocess.py:93} INFO -     return self.urlopen(
+[2026-05-16T15:10:12.719+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 799, in urlopen
+[2026-05-16T15:10:12.821+0000] {subprocess.py:93} INFO -     retries = retries.increment(
+[2026-05-16T15:10:12.894+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/util/retry.py", line 592, in increment
+[2026-05-16T15:10:12.918+0000] {subprocess.py:93} INFO -     raise MaxRetryError(_pool, url, error or ResponseError(cause))
+[2026-05-16T15:10:12.924+0000] {subprocess.py:93} INFO - urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='oauth2.googleapis.com', port=443): Max retries exceeded with url: /token (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7834ead2beb0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+[2026-05-16T15:10:12.941+0000] {subprocess.py:93} INFO - 
+[2026-05-16T15:10:12.949+0000] {subprocess.py:93} INFO - During handling of the above exception, another exception occurred:
+[2026-05-16T15:10:12.963+0000] {subprocess.py:93} INFO - 
+[2026-05-16T15:10:12.963+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-16T15:10:12.971+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/auth/transport/requests.py", line 186, in __call__
+[2026-05-16T15:10:12.985+0000] {subprocess.py:93} INFO -     response = self.session.request(
+[2026-05-16T15:10:12.996+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/requests/sessions.py", line 589, in request
+[2026-05-16T15:10:13.005+0000] {subprocess.py:93} INFO -     resp = self.send(prep, **send_kwargs)
+[2026-05-16T15:10:13.014+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/requests/sessions.py", line 703, in send
+[2026-05-16T15:10:13.045+0000] {subprocess.py:93} INFO -     r = adapter.send(request, **kwargs)
+[2026-05-16T15:10:13.064+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/requests/adapters.py", line 519, in send
+[2026-05-16T15:10:13.092+0000] {subprocess.py:93} INFO -     raise ConnectionError(e, request=request)
+[2026-05-16T15:10:13.113+0000] {subprocess.py:93} INFO - requests.exceptions.ConnectionError: HTTPSConnectionPool(host='oauth2.googleapis.com', port=443): Max retries exceeded with url: /token (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7834ead2beb0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+[2026-05-16T15:10:13.126+0000] {subprocess.py:93} INFO - 
+[2026-05-16T15:10:13.143+0000] {subprocess.py:93} INFO - The above exception was the direct cause of the following exception:
+[2026-05-16T15:10:13.158+0000] {subprocess.py:93} INFO - 
+[2026-05-16T15:10:13.159+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-16T15:10:13.176+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/api_core/retry.py", line 207, in retry_target
+[2026-05-16T15:10:13.180+0000] {subprocess.py:93} INFO -     result = target()
+[2026-05-16T15:10:13.390+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/cloud/_http/__init__.py", line 482, in api_request
+[2026-05-16T15:10:13.702+0000] {subprocess.py:93} INFO -     response = self._make_request(
+[2026-05-16T15:10:14.093+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/cloud/_http/__init__.py", line 341, in _make_request
+[2026-05-16T15:10:14.111+0000] {subprocess.py:93} INFO -     return self._do_request(
+[2026-05-16T15:10:14.118+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/cloud/_http/__init__.py", line 379, in _do_request
+[2026-05-16T15:10:14.135+0000] {subprocess.py:93} INFO -     return self.http.request(
+[2026-05-16T15:10:14.137+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/auth/transport/requests.py", line 537, in request
+[2026-05-16T15:10:14.167+0000] {subprocess.py:93} INFO -     self.credentials.before_request(auth_request, method, url, request_headers)
+[2026-05-16T15:10:14.175+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/auth/credentials.py", line 228, in before_request
+[2026-05-16T15:10:14.180+0000] {subprocess.py:93} INFO -     self._blocking_refresh(request)
+[2026-05-16T15:10:14.191+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/auth/credentials.py", line 191, in _blocking_refresh
+[2026-05-16T15:10:14.222+0000] {subprocess.py:93} INFO -     self.refresh(request)
+[2026-05-16T15:10:14.234+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/oauth2/credentials.py", line 390, in refresh
+[2026-05-16T15:10:14.245+0000] {subprocess.py:93} INFO -     ) = reauth.refresh_grant(
+[2026-05-16T15:10:14.257+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/oauth2/reauth.py", line 332, in refresh_grant
+[2026-05-16T15:10:14.269+0000] {subprocess.py:93} INFO -     response_status_ok, response_data, retryable_error = _client._token_endpoint_request_no_throw(
+[2026-05-16T15:10:14.278+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/oauth2/_client.py", line 215, in _token_endpoint_request_no_throw
+[2026-05-16T15:10:14.289+0000] {subprocess.py:93} INFO -     request_succeeded, response_data, retryable_error = _perform_request()
+[2026-05-16T15:10:14.291+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/oauth2/_client.py", line 191, in _perform_request
+[2026-05-16T15:10:14.300+0000] {subprocess.py:93} INFO -     response = request(
+[2026-05-16T15:10:14.306+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/auth/transport/requests.py", line 192, in __call__
+[2026-05-16T15:10:14.321+0000] {subprocess.py:93} INFO -     raise new_exc from caught_exc
+[2026-05-16T15:10:14.327+0000] {subprocess.py:93} INFO - google.auth.exceptions.TransportError: HTTPSConnectionPool(host='oauth2.googleapis.com', port=443): Max retries exceeded with url: /token (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7834ead2beb0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+[2026-05-16T15:10:14.333+0000] {subprocess.py:93} INFO - 
+[2026-05-16T15:10:14.340+0000] {subprocess.py:93} INFO - The above exception was the direct cause of the following exception:
+[2026-05-16T15:10:14.343+0000] {subprocess.py:93} INFO - 
+[2026-05-16T15:10:14.354+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-16T15:10:14.355+0000] {subprocess.py:93} INFO -   File "bigquery_load.py", line 36, in <module>
+[2026-05-16T15:10:14.371+0000] {subprocess.py:93} INFO -     client.delete_table(table_ref, not_found_ok=True)
+[2026-05-16T15:10:14.376+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/cloud/bigquery/client.py", line 1853, in delete_table
+[2026-05-16T15:10:14.397+0000] {subprocess.py:93} INFO -     self._call_api(
+[2026-05-16T15:10:14.408+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/cloud/bigquery/client.py", line 818, in _call_api
+[2026-05-16T15:10:14.417+0000] {subprocess.py:93} INFO -     return call()
+[2026-05-16T15:10:14.430+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/api_core/retry.py", line 372, in retry_wrapped_func
+[2026-05-16T15:10:14.441+0000] {subprocess.py:93} INFO -     return retry_target(
+[2026-05-16T15:10:14.441+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/api_core/retry.py", line 226, in retry_target
+[2026-05-16T15:10:14.450+0000] {subprocess.py:93} INFO -     raise exceptions.RetryError(
+[2026-05-16T15:10:14.452+0000] {subprocess.py:93} INFO - google.api_core.exceptions.RetryError: Deadline of 600.0s exceeded while calling target function, last exception: HTTPSConnectionPool(host='oauth2.googleapis.com', port=443): Max retries exceeded with url: /token (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7834ead2beb0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+[2026-05-16T15:10:17.495+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2026-05-16T15:10:20.403+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 428, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2026-05-16T15:10:20.463+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=price_intelligence_pipeline, task_id=load_bigquery, execution_date=20260516T140000, start_date=20260516T150010, end_date=20260516T151020
+[2026-05-16T15:10:21.002+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 1262 for task load_bigquery (Bash command failed. The command returned a non-zero exit code 1.; 32961)
+[2026-05-16T15:10:21.104+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-05-16T15:10:21.916+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,91 @@
+[2026-05-05T21:31:22.590+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_amazon manual__2026-05-05T20:39:16.558602+00:00 [queued]>
+[2026-05-05T21:31:22.614+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_amazon manual__2026-05-05T20:39:16.558602+00:00 [queued]>
+[2026-05-05T21:31:22.617+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 3
+[2026-05-05T21:31:22.668+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_amazon> on 2026-05-05 20:39:16.558602+00:00
+[2026-05-05T21:31:22.686+0000] {standard_task_runner.py:60} INFO - Started process 6474 to run task
+[2026-05-05T21:31:22.696+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_amazon', 'manual__2026-05-05T20:39:16.558602+00:00', '--job-id', '371', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpz0m4fc2m']
+[2026-05-05T21:31:22.709+0000] {standard_task_runner.py:88} INFO - Job 371: Subtask scrape_amazon
+[2026-05-05T21:31:22.921+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_amazon manual__2026-05-05T20:39:16.558602+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-05T21:31:23.182+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_amazon' AIRFLOW_CTX_EXECUTION_DATE='2026-05-05T20:39:16.558602+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-05T20:39:16.558602+00:00'
+[2026-05-05T21:31:23.186+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-05T21:31:23.193+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            cd /opt/***\n            mkdir -p data/raw\n            export DISPLAY=:99\n            python3 scrapers/spiders/amazon_ma.py || echo "Amazon done with warnings"\n        ']
+[2026-05-05T21:31:23.221+0000] {subprocess.py:86} INFO - Output:
+[2026-05-05T21:31:28.669+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-05T21:31:28.670+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connection.py", line 174, in _new_conn
+[2026-05-05T21:31:28.681+0000] {subprocess.py:93} INFO -     conn = connection.create_connection(
+[2026-05-05T21:31:28.688+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/util/connection.py", line 72, in create_connection
+[2026-05-05T21:31:28.690+0000] {subprocess.py:93} INFO -     for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+[2026-05-05T21:31:28.692+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.8/socket.py", line 918, in getaddrinfo
+[2026-05-05T21:31:28.693+0000] {subprocess.py:93} INFO -     for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+[2026-05-05T21:31:28.696+0000] {subprocess.py:93} INFO - socket.gaierror: [Errno -5] No address associated with hostname
+[2026-05-05T21:31:28.699+0000] {subprocess.py:93} INFO - 
+[2026-05-05T21:31:28.705+0000] {subprocess.py:93} INFO - During handling of the above exception, another exception occurred:
+[2026-05-05T21:31:28.707+0000] {subprocess.py:93} INFO - 
+[2026-05-05T21:31:28.708+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-05T21:31:28.712+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 715, in urlopen
+[2026-05-05T21:31:28.713+0000] {subprocess.py:93} INFO -     httplib_response = self._make_request(
+[2026-05-05T21:31:28.714+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 404, in _make_request
+[2026-05-05T21:31:28.718+0000] {subprocess.py:93} INFO -     self._validate_conn(conn)
+[2026-05-05T21:31:28.719+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 1058, in _validate_conn
+[2026-05-05T21:31:28.720+0000] {subprocess.py:93} INFO -     conn.connect()
+[2026-05-05T21:31:28.721+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connection.py", line 363, in connect
+[2026-05-05T21:31:28.722+0000] {subprocess.py:93} INFO -     self.sock = conn = self._new_conn()
+[2026-05-05T21:31:28.724+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connection.py", line 186, in _new_conn
+[2026-05-05T21:31:28.725+0000] {subprocess.py:93} INFO -     raise NewConnectionError(
+[2026-05-05T21:31:28.729+0000] {subprocess.py:93} INFO - urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x7605461463d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname
+[2026-05-05T21:31:28.731+0000] {subprocess.py:93} INFO - 
+[2026-05-05T21:31:28.733+0000] {subprocess.py:93} INFO - During handling of the above exception, another exception occurred:
+[2026-05-05T21:31:28.735+0000] {subprocess.py:93} INFO - 
+[2026-05-05T21:31:28.736+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-05T21:31:28.740+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/requests/adapters.py", line 486, in send
+[2026-05-05T21:31:28.743+0000] {subprocess.py:93} INFO -     resp = conn.urlopen(
+[2026-05-05T21:31:28.745+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 799, in urlopen
+[2026-05-05T21:31:28.747+0000] {subprocess.py:93} INFO -     retries = retries.increment(
+[2026-05-05T21:31:28.749+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/urllib3/util/retry.py", line 592, in increment
+[2026-05-05T21:31:28.750+0000] {subprocess.py:93} INFO -     raise MaxRetryError(_pool, url, error or ResponseError(cause))
+[2026-05-05T21:31:28.751+0000] {subprocess.py:93} INFO - urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='chromedriver.storage.googleapis.com', port=443): Max retries exceeded with url: /LATEST_RELEASE (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7605461463d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname'))
+[2026-05-05T21:31:28.752+0000] {subprocess.py:93} INFO - 
+[2026-05-05T21:31:28.753+0000] {subprocess.py:93} INFO - During handling of the above exception, another exception occurred:
+[2026-05-05T21:31:28.754+0000] {subprocess.py:93} INFO - 
+[2026-05-05T21:31:28.755+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-05T21:31:28.756+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/core/http.py", line 32, in get
+[2026-05-05T21:31:28.757+0000] {subprocess.py:93} INFO -     resp = requests.get(
+[2026-05-05T21:31:28.758+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/requests/api.py", line 73, in get
+[2026-05-05T21:31:28.760+0000] {subprocess.py:93} INFO -     return request("get", url, params=params, **kwargs)
+[2026-05-05T21:31:28.761+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/requests/api.py", line 59, in request
+[2026-05-05T21:31:28.762+0000] {subprocess.py:93} INFO -     return session.request(method=method, url=url, **kwargs)
+[2026-05-05T21:31:28.763+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/requests/sessions.py", line 589, in request
+[2026-05-05T21:31:28.763+0000] {subprocess.py:93} INFO -     resp = self.send(prep, **send_kwargs)
+[2026-05-05T21:31:28.764+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/requests/sessions.py", line 703, in send
+[2026-05-05T21:31:28.765+0000] {subprocess.py:93} INFO -     r = adapter.send(request, **kwargs)
+[2026-05-05T21:31:28.766+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/requests/adapters.py", line 519, in send
+[2026-05-05T21:31:28.767+0000] {subprocess.py:93} INFO -     raise ConnectionError(e, request=request)
+[2026-05-05T21:31:28.768+0000] {subprocess.py:93} INFO - requests.exceptions.ConnectionError: HTTPSConnectionPool(host='chromedriver.storage.googleapis.com', port=443): Max retries exceeded with url: /LATEST_RELEASE (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7605461463d0>: Failed to establish a new connection: [Errno -5] No address associated with hostname'))
+[2026-05-05T21:31:28.770+0000] {subprocess.py:93} INFO - 
+[2026-05-05T21:31:28.771+0000] {subprocess.py:93} INFO - During handling of the above exception, another exception occurred:
+[2026-05-05T21:31:28.772+0000] {subprocess.py:93} INFO - 
+[2026-05-05T21:31:28.773+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-05T21:31:28.774+0000] {subprocess.py:93} INFO -   File "scrapers/spiders/amazon_ma.py", line 147, in <module>
+[2026-05-05T21:31:28.775+0000] {subprocess.py:93} INFO -     scrape_amazon()
+[2026-05-05T21:31:28.776+0000] {subprocess.py:93} INFO -   File "scrapers/spiders/amazon_ma.py", line 55, in scrape_amazon
+[2026-05-05T21:31:28.777+0000] {subprocess.py:93} INFO -     driver = get_driver()
+[2026-05-05T21:31:28.778+0000] {subprocess.py:93} INFO -   File "scrapers/spiders/amazon_ma.py", line 47, in get_driver
+[2026-05-05T21:31:28.779+0000] {subprocess.py:93} INFO -     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=opts)
+[2026-05-05T21:31:28.780+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/chrome.py", line 40, in install
+[2026-05-05T21:31:28.780+0000] {subprocess.py:93} INFO -     driver_path = self._get_driver_binary_path(self.driver)
+[2026-05-05T21:31:28.781+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/core/manager.py", line 40, in _get_driver_binary_path
+[2026-05-05T21:31:28.782+0000] {subprocess.py:93} INFO -     file = self._download_manager.download_file(driver.get_driver_download_url(os_type))
+[2026-05-05T21:31:28.783+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/drivers/chrome.py", line 32, in get_driver_download_url
+[2026-05-05T21:31:28.784+0000] {subprocess.py:93} INFO -     driver_version_to_download = self.get_driver_version_to_download()
+[2026-05-05T21:31:28.786+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/core/driver.py", line 48, in get_driver_version_to_download
+[2026-05-05T21:31:28.787+0000] {subprocess.py:93} INFO -     return self.get_latest_release_version()
+[2026-05-05T21:31:28.788+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/drivers/chrome.py", line 70, in get_latest_release_version
+[2026-05-05T21:31:28.789+0000] {subprocess.py:93} INFO -     resp = self._http_client.get(url=latest_release_url)
+[2026-05-05T21:31:28.799+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/webdriver_manager/core/http.py", line 35, in get
+[2026-05-05T21:31:28.800+0000] {subprocess.py:93} INFO -     raise exceptions.ConnectionError(f"Could not reach host. Are you offline?")
+[2026-05-05T21:31:28.801+0000] {subprocess.py:93} INFO - requests.exceptions.ConnectionError: Could not reach host. Are you offline?
+[2026-05-05T21:31:28.802+0000] {subprocess.py:93} INFO - Amazon done with warnings
+[2026-05-05T21:31:28.803+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-05-05T21:31:28.878+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=scrape_amazon, execution_date=20260505T203916, start_date=20260505T213122, end_date=20260505T213128
+[2026-05-05T21:31:28.934+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-05-05T21:31:29.054+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

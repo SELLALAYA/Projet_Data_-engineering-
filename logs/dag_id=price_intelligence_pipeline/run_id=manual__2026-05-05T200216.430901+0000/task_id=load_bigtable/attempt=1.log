@@ -1,0 +1,37 @@
+[2026-05-05T20:02:58.169+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.load_bigtable manual__2026-05-05T20:02:16.430901+00:00 [queued]>
+[2026-05-05T20:02:58.194+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.load_bigtable manual__2026-05-05T20:02:16.430901+00:00 [queued]>
+[2026-05-05T20:02:58.196+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 3
+[2026-05-05T20:02:58.229+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): load_bigtable> on 2026-05-05 20:02:16.430901+00:00
+[2026-05-05T20:02:58.238+0000] {standard_task_runner.py:60} INFO - Started process 1821 to run task
+[2026-05-05T20:02:58.247+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'load_bigtable', 'manual__2026-05-05T20:02:16.430901+00:00', '--job-id', '260', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag_BACKUP.py', '--cfg-path', '/tmp/tmpzs0n0vc6']
+[2026-05-05T20:02:58.253+0000] {standard_task_runner.py:88} INFO - Job 260: Subtask load_bigtable
+[2026-05-05T20:02:58.455+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.load_bigtable manual__2026-05-05T20:02:16.430901+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-05T20:02:58.714+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='price_intelligence' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='load_bigtable' AIRFLOW_CTX_EXECUTION_DATE='2026-05-05T20:02:16.430901+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-05T20:02:16.430901+00:00'
+[2026-05-05T20:02:58.740+0000] {_default.py:683} WARNING - No project ID could be determined. Consider running `gcloud config set project` or setting the GOOGLE_CLOUD_PROJECT environment variable
+[2026-05-05T20:02:58.931+0000] {logging_mixin.py:188} INFO - 📦 Traitement jumia_ma: 4803 produits...
+[2026-05-05T20:03:28.100+0000] {logging_mixin.py:188} INFO -   ✅ Batch de 500 produits envoyé!
+[2026-05-05T20:03:48.937+0000] {logging_mixin.py:188} INFO -   ✅ Batch de 500 produits envoyé!
+[2026-05-05T20:04:05.326+0000] {logging_mixin.py:188} INFO -   ✅ Batch de 500 produits envoyé!
+[2026-05-05T20:04:23.688+0000] {logging_mixin.py:188} INFO -   ✅ Batch de 500 produits envoyé!
+[2026-05-05T20:04:44.849+0000] {logging_mixin.py:188} INFO -   ✅ Batch de 500 produits envoyé!
+[2026-05-05T20:05:10.156+0000] {logging_mixin.py:188} INFO -   ✅ Batch de 500 produits envoyé!
+[2026-05-05T20:05:33.493+0000] {logging_mixin.py:188} INFO -   ✅ Batch de 500 produits envoyé!
+[2026-05-05T20:05:59.171+0000] {logging_mixin.py:188} INFO -   ✅ Batch de 500 produits envoyé!
+[2026-05-05T20:06:16.018+0000] {logging_mixin.py:188} INFO -   ✅ Batch de 500 produits envoyé!
+[2026-05-05T20:06:16.307+0000] {logging_mixin.py:188} INFO - 📦 Traitement avito_ma: 1710 produits...
+[2026-05-05T20:06:28.053+0000] {logging_mixin.py:188} INFO -   ✅ Batch de 500 produits envoyé!
+[2026-05-05T20:06:38.088+0000] {logging_mixin.py:188} INFO -   ✅ Batch de 500 produits envoyé!
+[2026-05-05T20:06:52.277+0000] {logging_mixin.py:188} INFO -   ✅ Batch de 500 produits envoyé!
+[2026-05-05T20:07:02.282+0000] {logging_mixin.py:188} INFO -   ✅ Batch de 500 produits envoyé!
+[2026-05-05T20:07:02.314+0000] {logging_mixin.py:188} INFO - 📦 Traitement amazon_ma: 794 produits...
+[2026-05-05T20:07:14.846+0000] {logging_mixin.py:188} INFO -   ✅ Batch de 500 produits envoyé!
+[2026-05-05T20:07:15.091+0000] {logging_mixin.py:188} INFO - 📦 Traitement electroplanet_ma: 179 produits...
+[2026-05-05T20:07:26.940+0000] {logging_mixin.py:188} INFO -   ✅ Batch de 486 produits envoyé!
+[2026-05-05T20:07:26.941+0000] {logging_mixin.py:188} INFO - 
+✅ TOTAL: 7486 produits chargés dans Bigtable!
+[2026-05-05T20:07:26.943+0000] {logging_mixin.py:188} INFO -    Column families: price_cf ✅ metadata_cf ✅ agg_cf ✅
+[2026-05-05T20:07:26.945+0000] {logging_mixin.py:188} INFO -    Row key format: product_id#timestamp ✅
+[2026-05-05T20:07:26.966+0000] {python.py:201} INFO - Done. Returned value was: 7486
+[2026-05-05T20:07:27.040+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=load_bigtable, execution_date=20260505T200216, start_date=20260505T200258, end_date=20260505T200727
+[2026-05-05T20:07:27.110+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-05-05T20:07:27.155+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,3 +1,7 @@
+gcp-credentials.json
+gcp-credentials-new.json
+dbt/profiles.yml
+
 # ─── SECRETS & CREDENTIALS ───────────────────────
 .env
 .env.local
@@ -50,6 +54,7 @@ infra/terraform/*.json
 *terraform-sa-key.json
 UsersHpterraform-sa-key.json
 infra/terraform/terraform.tfstate*
+
 # ─── DOCKER ──────────────────────────────────────
 *.tar
 
@@ -70,7 +75,4 @@ desktop.ini
 # ─── LOGS ────────────────────────────────────────
 *.log
 logs/
-
-# ─── NODE ────────────────────────────────────────
-node_modules/
-app/frontend/dist/
+data/raw/

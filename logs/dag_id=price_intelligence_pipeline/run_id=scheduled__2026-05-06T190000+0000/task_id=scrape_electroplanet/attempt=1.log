@@ -1,0 +1,61 @@
+[2026-05-06T20:46:07.528+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_electroplanet scheduled__2026-05-06T19:00:00+00:00 [queued]>
+[2026-05-06T20:46:07.561+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_electroplanet scheduled__2026-05-06T19:00:00+00:00 [queued]>
+[2026-05-06T20:46:07.563+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-06T20:46:07.637+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_electroplanet> on 2026-05-06 19:00:00+00:00
+[2026-05-06T20:46:07.663+0000] {standard_task_runner.py:60} INFO - Started process 22452 to run task
+[2026-05-06T20:46:07.695+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_electroplanet', 'scheduled__2026-05-06T19:00:00+00:00', '--job-id', '619', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmp8sn86fi8']
+[2026-05-06T20:46:07.716+0000] {standard_task_runner.py:88} INFO - Job 619: Subtask scrape_electroplanet
+[2026-05-06T20:46:08.040+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_electroplanet scheduled__2026-05-06T19:00:00+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-06T20:46:08.447+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_electroplanet' AIRFLOW_CTX_EXECUTION_DATE='2026-05-06T19:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-05-06T19:00:00+00:00'
+[2026-05-06T20:46:08.452+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-06T20:46:08.457+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            cd /opt/***\n            mkdir -p data/raw\n            export DISPLAY=:99\n            python3 scrapers/spiders/electroplanet_ma.py || echo "Electroplanet done with warnings"\n        ']
+[2026-05-06T20:46:08.487+0000] {subprocess.py:86} INFO - Output:
+[2026-05-06T20:46:25.486+0000] {subprocess.py:93} INFO - 
+[2026-05-06T20:46:25.487+0000] {subprocess.py:93} INFO - [Electroplanet] Scraping : smartphones
+[2026-05-06T20:46:25.489+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-06T20:46:25.490+0000] {subprocess.py:93} INFO -   File "scrapers/spiders/electroplanet_ma.py", line 162, in <module>
+[2026-05-06T20:46:25.491+0000] {subprocess.py:93} INFO -     scrape_electroplanet()
+[2026-05-06T20:46:25.492+0000] {subprocess.py:93} INFO -   File "scrapers/spiders/electroplanet_ma.py", line 73, in scrape_electroplanet
+[2026-05-06T20:46:25.493+0000] {subprocess.py:93} INFO -     driver = get_driver()
+[2026-05-06T20:46:25.494+0000] {subprocess.py:93} INFO -   File "scrapers/spiders/electroplanet_ma.py", line 63, in get_driver
+[2026-05-06T20:46:25.495+0000] {subprocess.py:93} INFO -     return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=opts)
+[2026-05-06T20:46:25.496+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/selenium/webdriver/chrome/webdriver.py", line 45, in __init__
+[2026-05-06T20:46:25.497+0000] {subprocess.py:93} INFO -     super().__init__(
+[2026-05-06T20:46:25.498+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/selenium/webdriver/chromium/webdriver.py", line 66, in __init__
+[2026-05-06T20:46:25.499+0000] {subprocess.py:93} INFO -     super().__init__(command_executor=executor, options=options)
+[2026-05-06T20:46:25.501+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/selenium/webdriver/remote/webdriver.py", line 241, in __init__
+[2026-05-06T20:46:25.502+0000] {subprocess.py:93} INFO -     self.start_session(capabilities)
+[2026-05-06T20:46:25.503+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/selenium/webdriver/remote/webdriver.py", line 329, in start_session
+[2026-05-06T20:46:25.504+0000] {subprocess.py:93} INFO -     response = self.execute(Command.NEW_SESSION, caps)["value"]
+[2026-05-06T20:46:25.504+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/selenium/webdriver/remote/webdriver.py", line 384, in execute
+[2026-05-06T20:46:25.505+0000] {subprocess.py:93} INFO -     self.error_handler.check_response(response)
+[2026-05-06T20:46:25.506+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/selenium/webdriver/remote/errorhandler.py", line 232, in check_response
+[2026-05-06T20:46:25.507+0000] {subprocess.py:93} INFO -     raise exception_class(message, screen, stacktrace)
+[2026-05-06T20:46:25.508+0000] {subprocess.py:93} INFO - selenium.common.exceptions.SessionNotCreatedException: Message: session not created: This version of ChromeDriver only supports Chrome version 114
+[2026-05-06T20:46:25.509+0000] {subprocess.py:93} INFO - Current browser version is 147.0.7727.137 with binary path /usr/bin/chromium
+[2026-05-06T20:46:25.510+0000] {subprocess.py:93} INFO - Stacktrace:
+[2026-05-06T20:46:25.511+0000] {subprocess.py:93} INFO - #0 0x5f9644ccf4e3 <unknown>
+[2026-05-06T20:46:25.512+0000] {subprocess.py:93} INFO - #1 0x5f96449fec76 <unknown>
+[2026-05-06T20:46:25.513+0000] {subprocess.py:93} INFO - #2 0x5f9644a2c04a <unknown>
+[2026-05-06T20:46:25.514+0000] {subprocess.py:93} INFO - #3 0x5f9644a274a1 <unknown>
+[2026-05-06T20:46:25.516+0000] {subprocess.py:93} INFO - #4 0x5f9644a24029 <unknown>
+[2026-05-06T20:46:25.517+0000] {subprocess.py:93} INFO - #5 0x5f9644a62ccc <unknown>
+[2026-05-06T20:46:25.521+0000] {subprocess.py:93} INFO - #6 0x5f9644a6247f <unknown>
+[2026-05-06T20:46:25.523+0000] {subprocess.py:93} INFO - #7 0x5f9644a59de3 <unknown>
+[2026-05-06T20:46:25.524+0000] {subprocess.py:93} INFO - #8 0x5f9644a2f2dd <unknown>
+[2026-05-06T20:46:25.525+0000] {subprocess.py:93} INFO - #9 0x5f9644a3034e <unknown>
+[2026-05-06T20:46:25.527+0000] {subprocess.py:93} INFO - #10 0x5f9644c8f3e4 <unknown>
+[2026-05-06T20:46:25.528+0000] {subprocess.py:93} INFO - #11 0x5f9644c933d7 <unknown>
+[2026-05-06T20:46:25.529+0000] {subprocess.py:93} INFO - #12 0x5f9644c9db20 <unknown>
+[2026-05-06T20:46:25.530+0000] {subprocess.py:93} INFO - #13 0x5f9644c94023 <unknown>
+[2026-05-06T20:46:25.531+0000] {subprocess.py:93} INFO - #14 0x5f9644c621aa <unknown>
+[2026-05-06T20:46:25.532+0000] {subprocess.py:93} INFO - #15 0x5f9644cb86b8 <unknown>
+[2026-05-06T20:46:25.534+0000] {subprocess.py:93} INFO - #16 0x5f9644cb8847 <unknown>
+[2026-05-06T20:46:25.535+0000] {subprocess.py:93} INFO - #17 0x5f9644cc8243 <unknown>
+[2026-05-06T20:46:25.536+0000] {subprocess.py:93} INFO - #18 0x7d54fdbba134 <unknown>
+[2026-05-06T20:46:25.538+0000] {subprocess.py:93} INFO - 
+[2026-05-06T20:46:25.577+0000] {subprocess.py:93} INFO - Electroplanet done with warnings
+[2026-05-06T20:46:25.578+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-05-06T20:46:25.675+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=scrape_electroplanet, execution_date=20260506T190000, start_date=20260506T204607, end_date=20260506T204625
+[2026-05-06T20:46:25.745+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-05-06T20:46:25.809+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

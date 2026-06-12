@@ -1,0 +1,62 @@
+[0m15:28:32.570057 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6c27001550>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6c26c9a520>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6c266c7670>]}
+
+
+============================== 15:28:32.601595 | 56db381f-3244-45da-866c-b68f7e2faa54 ==============================
+[0m15:28:32.601595 [info ] [MainThread]: Running with dbt=1.9.0-b2
+[0m15:28:32.602570 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'fail_fast': 'False', 'version_check': 'True', 'log_path': 'logs', 'profiles_dir': '/home/airflow/.dbt', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'None', 'log_format': 'default', 'static_parser': 'True', 'introspect': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'target_path': 'None', 'invocation_command': 'dbt init price_intelligence', 'send_anonymous_usage_stats': 'True'}
+[0m15:28:32.613423 [warn ] [MainThread]: [ConfigFolderDirectory]: Unable to parse logging event dictionary. Failed to parse dir field: expected string or bytes-like object.. Dictionary: {'dir': PosixPath('/home/airflow/.dbt')}
+[0m15:28:32.614323 [info ] [MainThread]: Creating dbt configuration folder at 
+[0m15:28:32.617518 [debug] [MainThread]: Starter project path: /home/airflow/.local/lib/python3.8/site-packages/dbt/include/starter_project
+[0m15:28:32.627295 [info ] [MainThread]: 
+Your new dbt project "price_intelligence" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m15:28:32.628174 [info ] [MainThread]: Setting up your profile.
+[0m15:30:48.992854 [info ] [MainThread]: Profile price_intelligence written to /home/airflow/.dbt/profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m15:30:48.997591 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 137.02997, "process_user_time": 1.621548, "process_kernel_time": 0.218056, "process_mem_max_rss": "94340", "process_out_blocks": "1944", "process_in_blocks": "0"}
+[0m15:30:48.998903 [debug] [MainThread]: Command `dbt init` succeeded at 15:30:48.998722 after 137.03 seconds
+[0m15:30:48.999865 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6c27001550>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6c2586f310>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f6c27f0c8b0>]}
+[0m15:30:49.000898 [debug] [MainThread]: Flushing usage events
+[0m15:30:53.008961 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m12:21:39.235163 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7498031c15b0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x749802e65520>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74980288adf0>]}
+
+
+============================== 12:21:39.243327 | 623f38c7-d260-439c-8fbd-c3af9a174318 ==============================
+[0m12:21:39.243327 [info ] [MainThread]: Running with dbt=1.9.0-b2
+[0m12:21:39.244263 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'debug': 'False', 'version_check': 'True', 'log_path': 'logs', 'fail_fast': 'False', 'profiles_dir': '/home/airflow/.dbt', 'use_colors': 'True', 'use_experimental_parser': 'False', 'empty': 'None', 'quiet': 'False', 'no_print': 'None', 'log_format': 'default', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'introspect': 'True', 'target_path': 'None', 'invocation_command': 'dbt init price_intelligence --skip-profile-setup', 'send_anonymous_usage_stats': 'True'}
+[0m12:21:39.254285 [warn ] [MainThread]: [ConfigFolderDirectory]: Unable to parse logging event dictionary. Failed to parse dir field: expected string or bytes-like object.. Dictionary: {'dir': PosixPath('/home/airflow/.dbt')}
+[0m12:21:39.255341 [info ] [MainThread]: Creating dbt configuration folder at 
+[0m12:21:39.259173 [debug] [MainThread]: Starter project path: /home/airflow/.local/lib/python3.8/site-packages/dbt/include/starter_project
+[0m12:21:39.265489 [info ] [MainThread]: 
+Your new dbt project "price_intelligence" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m12:21:39.268785 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 0.088891216, "process_user_time": 1.306349, "process_kernel_time": 0.209015, "process_mem_max_rss": "85952", "process_out_blocks": "976", "process_in_blocks": "0"}
+[0m12:21:39.269895 [debug] [MainThread]: Command `dbt init` succeeded at 12:21:39.269728 after 0.09 seconds
+[0m12:21:39.270879 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7498031c15b0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7498029ee850>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x749802885700>]}
+[0m12:21:39.271834 [debug] [MainThread]: Flushing usage events
+[0m12:21:40.139538 [debug] [MainThread]: An error was encountered while trying to flush usage events

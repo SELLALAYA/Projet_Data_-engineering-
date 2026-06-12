@@ -1,0 +1,59 @@
+[2026-05-06T15:04:36.365+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_amazon manual__2026-05-06T15:02:51.600644+00:00 [queued]>
+[2026-05-06T15:04:36.382+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_amazon manual__2026-05-06T15:02:51.600644+00:00 [queued]>
+[2026-05-06T15:04:36.383+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-06T15:04:36.433+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_amazon> on 2026-05-06 15:02:51.600644+00:00
+[2026-05-06T15:04:36.449+0000] {standard_task_runner.py:60} INFO - Started process 19069 to run task
+[2026-05-06T15:04:36.458+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_amazon', 'manual__2026-05-06T15:02:51.600644+00:00', '--job-id', '584', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpakau11ey']
+[2026-05-06T15:04:36.463+0000] {standard_task_runner.py:88} INFO - Job 584: Subtask scrape_amazon
+[2026-05-06T15:04:36.684+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_amazon manual__2026-05-06T15:02:51.600644+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-06T15:04:37.010+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_amazon' AIRFLOW_CTX_EXECUTION_DATE='2026-05-06T15:02:51.600644+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-06T15:02:51.600644+00:00'
+[2026-05-06T15:04:37.023+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-06T15:04:37.028+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            cd /opt/***\n            mkdir -p data/raw\n            export DISPLAY=:99\n            python3 scrapers/spiders/amazon_ma.py || echo "Amazon done with warnings"\n        ']
+[2026-05-06T15:04:37.090+0000] {subprocess.py:86} INFO - Output:
+[2026-05-06T15:04:56.191+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-06T15:04:56.192+0000] {subprocess.py:93} INFO -   File "scrapers/spiders/amazon_ma.py", line 147, in <module>
+[2026-05-06T15:04:56.193+0000] {subprocess.py:93} INFO -     scrape_amazon()
+[2026-05-06T15:04:56.195+0000] {subprocess.py:93} INFO -   File "scrapers/spiders/amazon_ma.py", line 55, in scrape_amazon
+[2026-05-06T15:04:56.197+0000] {subprocess.py:93} INFO -     driver = get_driver()
+[2026-05-06T15:04:56.198+0000] {subprocess.py:93} INFO -   File "scrapers/spiders/amazon_ma.py", line 47, in get_driver
+[2026-05-06T15:04:56.199+0000] {subprocess.py:93} INFO -     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=opts)
+[2026-05-06T15:04:56.201+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/selenium/webdriver/chrome/webdriver.py", line 45, in __init__
+[2026-05-06T15:04:56.202+0000] {subprocess.py:93} INFO -     super().__init__(
+[2026-05-06T15:04:56.203+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/selenium/webdriver/chromium/webdriver.py", line 66, in __init__
+[2026-05-06T15:04:56.204+0000] {subprocess.py:93} INFO -     super().__init__(command_executor=executor, options=options)
+[2026-05-06T15:04:56.205+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/selenium/webdriver/remote/webdriver.py", line 241, in __init__
+[2026-05-06T15:04:56.205+0000] {subprocess.py:93} INFO -     self.start_session(capabilities)
+[2026-05-06T15:04:56.206+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/selenium/webdriver/remote/webdriver.py", line 329, in start_session
+[2026-05-06T15:04:56.207+0000] {subprocess.py:93} INFO -     response = self.execute(Command.NEW_SESSION, caps)["value"]
+[2026-05-06T15:04:56.207+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/selenium/webdriver/remote/webdriver.py", line 384, in execute
+[2026-05-06T15:04:56.208+0000] {subprocess.py:93} INFO -     self.error_handler.check_response(response)
+[2026-05-06T15:04:56.209+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/selenium/webdriver/remote/errorhandler.py", line 232, in check_response
+[2026-05-06T15:04:56.209+0000] {subprocess.py:93} INFO -     raise exception_class(message, screen, stacktrace)
+[2026-05-06T15:04:56.210+0000] {subprocess.py:93} INFO - selenium.common.exceptions.WebDriverException: Message: unknown error: Chrome failed to start: exited abnormally.
+[2026-05-06T15:04:56.211+0000] {subprocess.py:93} INFO -   (unknown error: DevToolsActivePort file doesn't exist)
+[2026-05-06T15:04:56.211+0000] {subprocess.py:93} INFO -   (The process started from chrome location /usr/bin/chromium is no longer running, so ChromeDriver is assuming that Chrome has crashed.)
+[2026-05-06T15:04:56.212+0000] {subprocess.py:93} INFO - Stacktrace:
+[2026-05-06T15:04:56.213+0000] {subprocess.py:93} INFO - #0 0x62ac2e7b14e3 <unknown>
+[2026-05-06T15:04:56.214+0000] {subprocess.py:93} INFO - #1 0x62ac2e4e0c76 <unknown>
+[2026-05-06T15:04:56.215+0000] {subprocess.py:93} INFO - #2 0x62ac2e509d78 <unknown>
+[2026-05-06T15:04:56.216+0000] {subprocess.py:93} INFO - #3 0x62ac2e506029 <unknown>
+[2026-05-06T15:04:56.217+0000] {subprocess.py:93} INFO - #4 0x62ac2e544ccc <unknown>
+[2026-05-06T15:04:56.218+0000] {subprocess.py:93} INFO - #5 0x62ac2e54447f <unknown>
+[2026-05-06T15:04:56.218+0000] {subprocess.py:93} INFO - #6 0x62ac2e53bde3 <unknown>
+[2026-05-06T15:04:56.219+0000] {subprocess.py:93} INFO - #7 0x62ac2e5112dd <unknown>
+[2026-05-06T15:04:56.220+0000] {subprocess.py:93} INFO - #8 0x62ac2e51234e <unknown>
+[2026-05-06T15:04:56.220+0000] {subprocess.py:93} INFO - #9 0x62ac2e7713e4 <unknown>
+[2026-05-06T15:04:56.221+0000] {subprocess.py:93} INFO - #10 0x62ac2e7753d7 <unknown>
+[2026-05-06T15:04:56.221+0000] {subprocess.py:93} INFO - #11 0x62ac2e77fb20 <unknown>
+[2026-05-06T15:04:56.222+0000] {subprocess.py:93} INFO - #12 0x62ac2e776023 <unknown>
+[2026-05-06T15:04:56.223+0000] {subprocess.py:93} INFO - #13 0x62ac2e7441aa <unknown>
+[2026-05-06T15:04:56.223+0000] {subprocess.py:93} INFO - #14 0x62ac2e79a6b8 <unknown>
+[2026-05-06T15:04:56.224+0000] {subprocess.py:93} INFO - #15 0x62ac2e79a847 <unknown>
+[2026-05-06T15:04:56.225+0000] {subprocess.py:93} INFO - #16 0x62ac2e7aa243 <unknown>
+[2026-05-06T15:04:56.225+0000] {subprocess.py:93} INFO - #17 0x7ffa11c26134 <unknown>
+[2026-05-06T15:04:56.226+0000] {subprocess.py:93} INFO - 
+[2026-05-06T15:04:56.253+0000] {subprocess.py:93} INFO - Amazon done with warnings
+[2026-05-06T15:04:56.255+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-05-06T15:04:56.322+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=scrape_amazon, execution_date=20260506T150251, start_date=20260506T150436, end_date=20260506T150456
+[2026-05-06T15:04:56.366+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-05-06T15:04:56.416+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

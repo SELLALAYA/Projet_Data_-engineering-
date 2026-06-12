@@ -1,0 +1,23 @@
+[2026-05-23T15:00:04.204+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.load_bigquery scheduled__2026-05-23T14:00:00+00:00 [queued]>
+[2026-05-23T15:00:04.214+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.load_bigquery scheduled__2026-05-23T14:00:00+00:00 [queued]>
+[2026-05-23T15:00:04.215+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-23T15:00:04.229+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): load_bigquery> on 2026-05-23 14:00:00+00:00
+[2026-05-23T15:00:04.235+0000] {standard_task_runner.py:60} INFO - Started process 96395 to run task
+[2026-05-23T15:00:04.238+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'load_bigquery', 'scheduled__2026-05-23T14:00:00+00:00', '--job-id', '1867', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmp4ykprarw']
+[2026-05-23T15:00:04.241+0000] {standard_task_runner.py:88} INFO - Job 1867: Subtask load_bigquery
+[2026-05-23T15:00:04.311+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.load_bigquery scheduled__2026-05-23T14:00:00+00:00 [running]> on host 91e0d3a0a233
+[2026-05-23T15:00:04.413+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='load_bigquery' AIRFLOW_CTX_EXECUTION_DATE='2026-05-23T14:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-05-23T14:00:00+00:00'
+[2026-05-23T15:00:04.414+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-23T15:00:04.416+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            set -e\n            cd /opt/***\n            export GOOGLE_APPLICATION_CREDENTIALS=/opt/***/gcp-credentials-new.json\n            python3 bigquery_load.py\n            echo BigQuery done\n        ']
+[2026-05-23T15:00:04.427+0000] {subprocess.py:86} INFO - Output:
+[2026-05-23T15:00:29.853+0000] {subprocess.py:93} INFO - /home/***/.local/lib/python3.8/site-packages/google/auth/_default.py:76: UserWarning: Your application has authenticated using end user credentials from Google Cloud SDK without a quota project. You might receive a "quota exceeded" or "API not enabled" error. See the following page for troubleshooting: https://cloud.google.com/docs/authentication/adc-troubleshooting/user-creds.
+[2026-05-23T15:00:29.854+0000] {subprocess.py:93} INFO -   warnings.warn(_CLOUD_SDK_CREDENTIALS_WARNING)
+[2026-05-23T15:00:29.854+0000] {subprocess.py:93} INFO - Erreur /opt/***/data/raw/avito_ma.json: Extra data: line 1263 column 2 (char 46861)
+[2026-05-23T15:00:29.855+0000] {subprocess.py:93} INFO - Total rows: 1192
+[2026-05-23T15:00:29.855+0000] {subprocess.py:93} INFO - Sample image_url: https://ma.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/23/716276/1.jpg?6986
+[2026-05-23T15:00:29.856+0000] {subprocess.py:93} INFO - OK 1192 lignes chargees dans project-32a82952-90fa-4dd7-b9c.price_intelligence_dbt.prices_raw
+[2026-05-23T15:00:29.986+0000] {subprocess.py:93} INFO - BigQuery done
+[2026-05-23T15:00:29.989+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-05-23T15:00:30.026+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=load_bigquery, execution_date=20260523T140000, start_date=20260523T150004, end_date=20260523T150030
+[2026-05-23T15:00:30.095+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-05-23T15:00:30.128+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

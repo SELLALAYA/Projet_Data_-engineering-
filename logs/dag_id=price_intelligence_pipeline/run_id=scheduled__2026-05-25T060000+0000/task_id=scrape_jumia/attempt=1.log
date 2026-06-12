@@ -1,0 +1,18 @@
+[2026-05-25T12:11:25.020+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_jumia scheduled__2026-05-25T06:00:00+00:00 [queued]>
+[2026-05-25T12:11:25.033+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_jumia scheduled__2026-05-25T06:00:00+00:00 [queued]>
+[2026-05-25T12:11:25.034+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-25T12:11:25.054+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_jumia> on 2026-05-25 06:00:00+00:00
+[2026-05-25T12:11:25.062+0000] {standard_task_runner.py:60} INFO - Started process 22801 to run task
+[2026-05-25T12:11:25.068+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_jumia', 'scheduled__2026-05-25T06:00:00+00:00', '--job-id', '1919', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpytwmodhs']
+[2026-05-25T12:11:25.073+0000] {standard_task_runner.py:88} INFO - Job 1919: Subtask scrape_jumia
+[2026-05-25T12:11:25.190+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_jumia scheduled__2026-05-25T06:00:00+00:00 [running]> on host 91e0d3a0a233
+[2026-05-25T12:11:25.324+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_jumia' AIRFLOW_CTX_EXECUTION_DATE='2026-05-25T06:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-05-25T06:00:00+00:00'
+[2026-05-25T12:11:25.326+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-25T12:11:25.330+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            cd /opt/*** && export PYTHONPATH=/opt/*** && export GOOGLE_APPLICATION_CREDENTIALS=/opt/***/gcp-credentials-new.json\n            mkdir -p data/raw\n            scrapy crawl jumia_ma -s LOG_LEVEL=WARNING -s ROBOTSTXT_OBEY=False || echo "Jumia done"\n        ']
+[2026-05-25T12:11:25.349+0000] {subprocess.py:86} INFO - Output:
+[2026-05-25T12:11:25.358+0000] {subprocess.py:93} INFO - /usr/bin/bash: line 4: scrapy: command not found
+[2026-05-25T12:11:25.359+0000] {subprocess.py:93} INFO - Jumia done
+[2026-05-25T12:11:25.359+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-05-25T12:11:25.404+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=scrape_jumia, execution_date=20260525T060000, start_date=20260525T121125, end_date=20260525T121125
+[2026-05-25T12:11:25.444+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-05-25T12:11:25.477+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

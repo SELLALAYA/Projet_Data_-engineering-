@@ -1,0 +1,20 @@
+[2026-05-05T19:58:58.851+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.load_bigquery manual__2026-05-05T19:53:58.722532+00:00 [queued]>
+[2026-05-05T19:58:58.903+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.load_bigquery manual__2026-05-05T19:53:58.722532+00:00 [queued]>
+[2026-05-05T19:58:58.904+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 3
+[2026-05-05T19:58:58.979+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): load_bigquery> on 2026-05-05 19:53:58.722532+00:00
+[2026-05-05T19:58:59.016+0000] {standard_task_runner.py:60} INFO - Started process 1494 to run task
+[2026-05-05T19:58:59.023+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'load_bigquery', 'manual__2026-05-05T19:53:58.722532+00:00', '--job-id', '235', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmp5_6auoyq']
+[2026-05-05T19:58:59.034+0000] {standard_task_runner.py:88} INFO - Job 235: Subtask load_bigquery
+[2026-05-05T19:58:59.506+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.load_bigquery manual__2026-05-05T19:53:58.722532+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-05T19:59:00.486+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='load_bigquery' AIRFLOW_CTX_EXECUTION_DATE='2026-05-05T19:53:58.722532+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-05T19:53:58.722532+00:00'
+[2026-05-05T19:59:00.503+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-05T19:59:00.506+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            set -e\n            cd /opt/***\n            export GOOGLE_APPLICATION_CREDENTIALS=/opt/***/gcp-credentials-new.json\n            python3 bigquery_load.py\n            echo BigQuery done\n        ']
+[2026-05-05T19:59:00.588+0000] {subprocess.py:86} INFO - Output:
+[2026-05-05T19:59:51.889+0000] {local_task_job_runner.py:302} WARNING - State of this instance has been externally set to removed. Terminating instance.
+[2026-05-05T19:59:51.951+0000] {process_utils.py:131} INFO - Sending 15 to group 1494. PIDs of all processes in the group: [1503, 1504, 1494]
+[2026-05-05T19:59:51.957+0000] {process_utils.py:86} INFO - Sending the signal 15 to group 1494
+[2026-05-05T19:59:51.969+0000] {taskinstance.py:2450} ERROR - Received SIGTERM. Terminating subprocesses.
+[2026-05-05T19:59:51.982+0000] {subprocess.py:104} INFO - Sending SIGTERM signal to process group
+[2026-05-05T19:59:52.327+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=1504, status='terminated', started='19:59:00') (1504) terminated with exit code None
+[2026-05-05T19:59:52.358+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=1503, status='terminated', started='19:59:00') (1503) terminated with exit code None
+[2026-05-05T19:59:52.359+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=1494, status='terminated', exitcode=0, started='19:58:58') (1494) terminated with exit code 0

@@ -1,0 +1,30 @@
+[2026-05-06T14:55:01.776+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.dbt_run manual__2026-05-06T14:54:03.703696+00:00 [queued]>
+[2026-05-06T14:55:01.790+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.dbt_run manual__2026-05-06T14:54:03.703696+00:00 [queued]>
+[2026-05-06T14:55:01.791+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-06T14:55:01.813+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): dbt_run> on 2026-05-06 14:54:03.703696+00:00
+[2026-05-06T14:55:01.822+0000] {standard_task_runner.py:60} INFO - Started process 18096 to run task
+[2026-05-06T14:55:01.827+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'dbt_run', 'manual__2026-05-06T14:54:03.703696+00:00', '--job-id', '564', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpx730osz0']
+[2026-05-06T14:55:01.830+0000] {standard_task_runner.py:88} INFO - Job 564: Subtask dbt_run
+[2026-05-06T14:55:01.937+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.dbt_run manual__2026-05-06T14:54:03.703696+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-06T14:55:02.065+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='dbt_run' AIRFLOW_CTX_EXECUTION_DATE='2026-05-06T14:54:03.703696+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-06T14:54:03.703696+00:00'
+[2026-05-06T14:55:02.068+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-06T14:55:02.070+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            set -e\n            cd /opt/***/dbt\n            export GOOGLE_APPLICATION_CREDENTIALS=/opt/***/gcp-credentials-new.json\n            /home/***/.local/bin/dbt run --select stg_prices --profiles-dir . --project-dir .\n            /home/***/.local/bin/dbt run --select prices_cleaned --profiles-dir . --project-dir .\n            /home/***/.local/bin/dbt run --select prices_aggregated --profiles-dir . --project-dir .\n            echo dbt done\n        ']
+[2026-05-06T14:55:02.086+0000] {subprocess.py:86} INFO - Output:
+[2026-05-06T14:55:04.690+0000] {subprocess.py:93} INFO - [0m14:55:04  Running with dbt=1.8.7
+[2026-05-06T14:55:04.693+0000] {subprocess.py:93} INFO - [0m14:55:04  Encountered an error:
+[2026-05-06T14:55:04.694+0000] {subprocess.py:93} INFO - Runtime Error
+[2026-05-06T14:55:04.695+0000] {subprocess.py:93} INFO -   No dbt_project.yml found at expected path ./dbt_project.yml
+[2026-05-06T14:55:04.696+0000] {subprocess.py:93} INFO -   Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+[2026-05-06T14:55:04.696+0000] {subprocess.py:93} INFO - 
+[2026-05-06T14:55:09.016+0000] {subprocess.py:97} INFO - Command exited with return code 2
+[2026-05-06T14:55:09.044+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 428, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 2.
+[2026-05-06T14:55:09.049+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=price_intelligence_pipeline, task_id=dbt_run, execution_date=20260506T145403, start_date=20260506T145501, end_date=20260506T145509
+[2026-05-06T14:55:09.074+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 564 for task dbt_run (Bash command failed. The command returned a non-zero exit code 2.; 18096)
+[2026-05-06T14:55:09.135+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-05-06T14:55:09.185+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

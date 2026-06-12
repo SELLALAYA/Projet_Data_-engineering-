@@ -1,0 +1,45 @@
+[2026-05-07T22:56:17.247+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.dbt_run manual__2026-05-07T22:55:21.001274+00:00 [queued]>
+[2026-05-07T22:56:17.270+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.dbt_run manual__2026-05-07T22:55:21.001274+00:00 [queued]>
+[2026-05-07T22:56:17.271+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-07T22:56:17.304+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): dbt_run> on 2026-05-07 22:55:21.001274+00:00
+[2026-05-07T22:56:17.317+0000] {standard_task_runner.py:60} INFO - Started process 3354 to run task
+[2026-05-07T22:56:17.323+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'dbt_run', 'manual__2026-05-07T22:55:21.001274+00:00', '--job-id', '750', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmp4cehfdns']
+[2026-05-07T22:56:17.336+0000] {standard_task_runner.py:88} INFO - Job 750: Subtask dbt_run
+[2026-05-07T22:56:17.538+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.dbt_run manual__2026-05-07T22:55:21.001274+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-07T22:56:17.774+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='dbt_run' AIRFLOW_CTX_EXECUTION_DATE='2026-05-07T22:55:21.001274+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-07T22:55:21.001274+00:00'
+[2026-05-07T22:56:17.777+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-07T22:56:17.780+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            set -e\n            cd /opt/***/dbt\n            export GOOGLE_APPLICATION_CREDENTIALS=/opt/***/gcp-credentials-new.json\n            /home/***/.local/bin/dbt run --full-refresh --profiles-dir . --project-dir .\n            echo dbt done\n        ']
+[2026-05-07T22:56:17.802+0000] {subprocess.py:86} INFO - Output:
+[2026-05-07T22:56:24.742+0000] {subprocess.py:93} INFO - [0m22:56:24  Running with dbt=1.8.7
+[2026-05-07T22:56:27.317+0000] {subprocess.py:93} INFO - [0m22:56:27  Registered adapter: bigquery=1.8.3
+[2026-05-07T22:56:29.175+0000] {subprocess.py:93} INFO - [0m22:56:29  Found 3 models, 1 seed, 7 data tests, 1 source, 479 macros
+[2026-05-07T22:56:29.180+0000] {subprocess.py:93} INFO - [0m22:56:29
+[2026-05-07T22:56:31.005+0000] {subprocess.py:93} INFO - [0m22:56:31  Concurrency: 4 threads (target='dev')
+[2026-05-07T22:56:31.007+0000] {subprocess.py:93} INFO - [0m22:56:31
+[2026-05-07T22:56:31.027+0000] {subprocess.py:93} INFO - [0m22:56:31  1 of 3 START sql view model price_intelligence_dbt.stg_prices .................. [RUN]
+[2026-05-07T22:56:33.868+0000] {subprocess.py:93} INFO - [0m22:56:33  BigQuery adapter: https://console.cloud.google.com/bigquery?project=project-32a82952-90fa-4dd7-b9c&j=bq:US:5319c01b-bdde-4b2c-833c-9fbdab975186&page=queryresults
+[2026-05-07T22:56:33.877+0000] {subprocess.py:93} INFO - [0m22:56:33  1 of 3 ERROR creating sql view model price_intelligence_dbt.stg_prices ......... [[31mERROR[0m in 2.85s]
+[2026-05-07T22:56:33.882+0000] {subprocess.py:93} INFO - [0m22:56:33  2 of 3 SKIP relation price_intelligence_dbt.prices_cleaned ..................... [[33mSKIP[0m]
+[2026-05-07T22:56:33.886+0000] {subprocess.py:93} INFO - [0m22:56:33  3 of 3 SKIP relation price_intelligence_dbt.prices_aggregated .................. [[33mSKIP[0m]
+[2026-05-07T22:56:33.892+0000] {subprocess.py:93} INFO - [0m22:56:33
+[2026-05-07T22:56:33.893+0000] {subprocess.py:93} INFO - [0m22:56:33  Finished running 1 view model, 2 table models in 0 hours 0 minutes and 4.71 seconds (4.71s).
+[2026-05-07T22:56:33.957+0000] {subprocess.py:93} INFO - [0m22:56:33
+[2026-05-07T22:56:33.960+0000] {subprocess.py:93} INFO - [0m22:56:33  [31mCompleted with 1 error and 0 warnings:[0m
+[2026-05-07T22:56:33.961+0000] {subprocess.py:93} INFO - [0m22:56:33
+[2026-05-07T22:56:33.963+0000] {subprocess.py:93} INFO - [0m22:56:33    Database Error in model stg_prices (models/staging/stg_prices.sql)
+[2026-05-07T22:56:33.963+0000] {subprocess.py:93} INFO -   Unrecognized name: old_price at [11:10]
+[2026-05-07T22:56:33.964+0000] {subprocess.py:93} INFO -   compiled code at target/run/price_intelligence/models/staging/stg_prices.sql
+[2026-05-07T22:56:33.965+0000] {subprocess.py:93} INFO - [0m22:56:33
+[2026-05-07T22:56:33.965+0000] {subprocess.py:93} INFO - [0m22:56:33  Done. PASS=0 WARN=0 ERROR=1 SKIP=2 TOTAL=3
+[2026-05-07T22:56:38.623+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2026-05-07T22:56:38.664+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 428, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2026-05-07T22:56:38.670+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=price_intelligence_pipeline, task_id=dbt_run, execution_date=20260507T225521, start_date=20260507T225617, end_date=20260507T225638
+[2026-05-07T22:56:38.699+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 750 for task dbt_run (Bash command failed. The command returned a non-zero exit code 1.; 3354)
+[2026-05-07T22:56:38.740+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-05-07T22:56:38.788+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

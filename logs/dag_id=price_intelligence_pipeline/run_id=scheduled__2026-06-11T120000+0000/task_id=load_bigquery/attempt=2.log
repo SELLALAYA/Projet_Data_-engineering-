@@ -1,0 +1,62 @@
+[2026-06-11T18:03:35.559+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.load_bigquery scheduled__2026-06-11T12:00:00+00:00 [queued]>
+[2026-06-11T18:03:35.575+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.load_bigquery scheduled__2026-06-11T12:00:00+00:00 [queued]>
+[2026-06-11T18:03:35.576+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 2
+[2026-06-11T18:03:35.606+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): load_bigquery> on 2026-06-11 12:00:00+00:00
+[2026-06-11T18:03:35.616+0000] {standard_task_runner.py:60} INFO - Started process 909 to run task
+[2026-06-11T18:03:35.624+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'load_bigquery', 'scheduled__2026-06-11T12:00:00+00:00', '--job-id', '2003', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpgjk8m8wz']
+[2026-06-11T18:03:35.628+0000] {standard_task_runner.py:88} INFO - Job 2003: Subtask load_bigquery
+[2026-06-11T18:03:35.745+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.load_bigquery scheduled__2026-06-11T12:00:00+00:00 [running]> on host 91e0d3a0a233
+[2026-06-11T18:03:35.904+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='load_bigquery' AIRFLOW_CTX_EXECUTION_DATE='2026-06-11T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-06-11T12:00:00+00:00'
+[2026-06-11T18:03:35.907+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-06-11T18:03:35.910+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            set -e\n            cd /opt/***\n            export GOOGLE_APPLICATION_CREDENTIALS=/opt/***/gcp-credentials-new.json\n            python3 bigquery_load.py\n            echo BigQuery done\n        ']
+[2026-06-11T18:03:35.926+0000] {subprocess.py:86} INFO - Output:
+[2026-06-11T18:03:39.052+0000] {subprocess.py:93} INFO - /home/***/.local/lib/python3.8/site-packages/google/auth/_default.py:76: UserWarning: Your application has authenticated using end user credentials from Google Cloud SDK without a quota project. You might receive a "quota exceeded" or "API not enabled" error. See the following page for troubleshooting: https://cloud.google.com/docs/authentication/adc-troubleshooting/user-creds.
+[2026-06-11T18:03:39.054+0000] {subprocess.py:93} INFO -   warnings.warn(_CLOUD_SDK_CREDENTIALS_WARNING)
+[2026-06-11T18:03:39.055+0000] {subprocess.py:93} INFO - [OK] jumia.ma: 7004 rows
+[2026-06-11T18:03:39.057+0000] {subprocess.py:93} INFO - [OK] avito.ma: 1692 rows
+[2026-06-11T18:03:39.059+0000] {subprocess.py:93} INFO - [OK] amazon.com: 897 rows
+[2026-06-11T18:03:39.060+0000] {subprocess.py:93} INFO - [OK] connecto.ma: 3061 rows
+[2026-06-11T18:03:39.062+0000] {subprocess.py:93} INFO - 
+[2026-06-11T18:03:39.064+0000] {subprocess.py:93} INFO - TOTAL: 12654 rows
+[2026-06-11T18:03:39.068+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-06-11T18:03:39.071+0000] {subprocess.py:93} INFO -   File "bigquery_load.py", line 106, in <module>
+[2026-06-11T18:03:39.073+0000] {subprocess.py:93} INFO -     client.delete_table(TABLE_REF, not_found_ok=True)
+[2026-06-11T18:03:39.075+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/cloud/bigquery/client.py", line 1853, in delete_table
+[2026-06-11T18:03:39.076+0000] {subprocess.py:93} INFO -     self._call_api(
+[2026-06-11T18:03:39.078+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/cloud/bigquery/client.py", line 818, in _call_api
+[2026-06-11T18:03:39.080+0000] {subprocess.py:93} INFO -     return call()
+[2026-06-11T18:03:39.082+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/api_core/retry.py", line 372, in retry_wrapped_func
+[2026-06-11T18:03:39.085+0000] {subprocess.py:93} INFO -     return retry_target(
+[2026-06-11T18:03:39.090+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/api_core/retry.py", line 207, in retry_target
+[2026-06-11T18:03:39.091+0000] {subprocess.py:93} INFO -     result = target()
+[2026-06-11T18:03:39.094+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/cloud/_http/__init__.py", line 482, in api_request
+[2026-06-11T18:03:39.098+0000] {subprocess.py:93} INFO -     response = self._make_request(
+[2026-06-11T18:03:39.102+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/cloud/_http/__init__.py", line 341, in _make_request
+[2026-06-11T18:03:39.104+0000] {subprocess.py:93} INFO -     return self._do_request(
+[2026-06-11T18:03:39.105+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/cloud/_http/__init__.py", line 379, in _do_request
+[2026-06-11T18:03:39.108+0000] {subprocess.py:93} INFO -     return self.http.request(
+[2026-06-11T18:03:39.112+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/auth/transport/requests.py", line 537, in request
+[2026-06-11T18:03:39.117+0000] {subprocess.py:93} INFO -     self.credentials.before_request(auth_request, method, url, request_headers)
+[2026-06-11T18:03:39.119+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/auth/credentials.py", line 228, in before_request
+[2026-06-11T18:03:39.121+0000] {subprocess.py:93} INFO -     self._blocking_refresh(request)
+[2026-06-11T18:03:39.123+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/auth/credentials.py", line 191, in _blocking_refresh
+[2026-06-11T18:03:39.125+0000] {subprocess.py:93} INFO -     self.refresh(request)
+[2026-06-11T18:03:39.126+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/oauth2/credentials.py", line 390, in refresh
+[2026-06-11T18:03:39.128+0000] {subprocess.py:93} INFO -     ) = reauth.refresh_grant(
+[2026-06-11T18:03:39.134+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/oauth2/reauth.py", line 365, in refresh_grant
+[2026-06-11T18:03:39.136+0000] {subprocess.py:93} INFO -     _client._handle_error_response(response_data, retryable_error)
+[2026-06-11T18:03:39.137+0000] {subprocess.py:93} INFO -   File "/home/***/.local/lib/python3.8/site-packages/google/oauth2/_client.py", line 72, in _handle_error_response
+[2026-06-11T18:03:39.139+0000] {subprocess.py:93} INFO -     raise exceptions.RefreshError(
+[2026-06-11T18:03:39.141+0000] {subprocess.py:93} INFO - google.auth.exceptions.RefreshError: ('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})
+[2026-06-11T18:03:39.327+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2026-06-11T18:03:39.357+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 428, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2026-06-11T18:03:39.366+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=price_intelligence_pipeline, task_id=load_bigquery, execution_date=20260611T120000, start_date=20260611T180335, end_date=20260611T180339
+[2026-06-11T18:03:39.407+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 2003 for task load_bigquery (Bash command failed. The command returned a non-zero exit code 1.; 909)
+[2026-06-11T18:03:39.459+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-06-11T18:03:39.515+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

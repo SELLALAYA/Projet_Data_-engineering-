@@ -1,0 +1,19 @@
+[2026-06-11T22:18:28.165+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.validate_pipeline manual__2026-06-11T22:03:45+00:00 [queued]>
+[2026-06-11T22:18:28.208+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.validate_pipeline manual__2026-06-11T22:03:45+00:00 [queued]>
+[2026-06-11T22:18:28.212+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 3
+[2026-06-11T22:18:28.251+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): validate_pipeline> on 2026-06-11 22:03:45+00:00
+[2026-06-11T22:18:28.264+0000] {standard_task_runner.py:60} INFO - Started process 69822 to run task
+[2026-06-11T22:18:28.274+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'validate_pipeline', 'manual__2026-06-11T22:03:45+00:00', '--job-id', '2040', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpkbzpmz2k']
+[2026-06-11T22:18:28.281+0000] {standard_task_runner.py:88} INFO - Job 2040: Subtask validate_pipeline
+[2026-06-11T22:18:28.449+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.validate_pipeline manual__2026-06-11T22:03:45+00:00 [running]> on host 91e0d3a0a233
+[2026-06-11T22:18:28.717+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='validate_pipeline' AIRFLOW_CTX_EXECUTION_DATE='2026-06-11T22:03:45+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-06-11T22:03:45+00:00'
+[2026-06-11T22:18:31.298+0000] {_default.py:683} WARNING - No project ID could be determined. Consider running `gcloud config set project` or setting the GOOGLE_CLOUD_PROJECT environment variable
+[2026-06-11T22:18:33.308+0000] {price_intelligence_dag.py:285} INFO -   jumia.ma: 7004
+[2026-06-11T22:18:33.312+0000] {price_intelligence_dag.py:285} INFO -   connecto.ma: 3061
+[2026-06-11T22:18:33.315+0000] {price_intelligence_dag.py:285} INFO -   avito.ma: 1692
+[2026-06-11T22:18:33.316+0000] {price_intelligence_dag.py:285} INFO -   amazon.com: 897
+[2026-06-11T22:18:33.318+0000] {price_intelligence_dag.py:286} INFO - TOTAL: 12654 produits
+[2026-06-11T22:18:33.321+0000] {python.py:201} INFO - Done. Returned value was: None
+[2026-06-11T22:18:33.368+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=validate_pipeline, execution_date=20260611T220345, start_date=20260611T221828, end_date=20260611T221833
+[2026-06-11T22:18:33.455+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-06-11T22:18:33.506+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

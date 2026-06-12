@@ -1,0 +1,17 @@
+[2026-05-24T00:00:04.117+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.wait_nifi_flush scheduled__2026-05-23T18:00:00+00:00 [queued]>
+[2026-05-24T00:00:04.143+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.wait_nifi_flush scheduled__2026-05-23T18:00:00+00:00 [queued]>
+[2026-05-24T00:00:04.144+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-24T00:00:04.181+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): wait_nifi_flush> on 2026-05-23 18:00:00+00:00
+[2026-05-24T00:00:04.192+0000] {standard_task_runner.py:60} INFO - Started process 9618 to run task
+[2026-05-24T00:00:04.199+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'wait_nifi_flush', 'scheduled__2026-05-23T18:00:00+00:00', '--job-id', '1875', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmp6xv41q6w']
+[2026-05-24T00:00:04.204+0000] {standard_task_runner.py:88} INFO - Job 1875: Subtask wait_nifi_flush
+[2026-05-24T00:00:04.313+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.wait_nifi_flush scheduled__2026-05-23T18:00:00+00:00 [running]> on host 91e0d3a0a233
+[2026-05-24T00:00:04.459+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='wait_nifi_flush' AIRFLOW_CTX_EXECUTION_DATE='2026-05-23T18:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-05-23T18:00:00+00:00'
+[2026-05-24T00:00:04.461+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-24T00:00:04.464+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'sleep 60 && echo NiFi flush done']
+[2026-05-24T00:00:04.481+0000] {subprocess.py:86} INFO - Output:
+[2026-05-24T00:01:04.436+0000] {subprocess.py:93} INFO - NiFi flush done
+[2026-05-24T00:01:04.437+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-05-24T00:01:04.484+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=wait_nifi_flush, execution_date=20260523T180000, start_date=20260524T000004, end_date=20260524T000104
+[2026-05-24T00:01:04.542+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-05-24T00:01:04.580+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

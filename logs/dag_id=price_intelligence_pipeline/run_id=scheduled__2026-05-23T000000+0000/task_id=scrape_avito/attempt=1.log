@@ -1,0 +1,18 @@
+[2026-05-23T11:40:32.269+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_avito scheduled__2026-05-23T00:00:00+00:00 [queued]>
+[2026-05-23T11:40:32.342+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_avito scheduled__2026-05-23T00:00:00+00:00 [queued]>
+[2026-05-23T11:40:32.345+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-05-23T11:40:32.423+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_avito> on 2026-05-23 00:00:00+00:00
+[2026-05-23T11:40:32.448+0000] {standard_task_runner.py:60} INFO - Started process 91048 to run task
+[2026-05-23T11:40:32.498+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_avito', 'scheduled__2026-05-23T00:00:00+00:00', '--job-id', '1817', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmp8mh1oalf']
+[2026-05-23T11:40:32.514+0000] {standard_task_runner.py:88} INFO - Job 1817: Subtask scrape_avito
+[2026-05-23T11:40:32.932+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_avito scheduled__2026-05-23T00:00:00+00:00 [running]> on host 91e0d3a0a233
+[2026-05-23T11:40:33.521+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_avito' AIRFLOW_CTX_EXECUTION_DATE='2026-05-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-05-23T00:00:00+00:00'
+[2026-05-23T11:40:33.535+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-23T11:40:33.554+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            cd /opt/***\n            mkdir -p data/raw\n            export DISPLAY=:99\n            python3 scrapers/spiders/avito_ma.py || echo "Avito done with warnings"\n        ']
+[2026-05-23T11:40:33.613+0000] {subprocess.py:86} INFO - Output:
+[2026-05-23T11:40:33.796+0000] {subprocess.py:93} INFO - python3: can't open file 'scrapers/spiders/avito_ma.py': [Errno 2] No such file or directory
+[2026-05-23T11:40:33.801+0000] {subprocess.py:93} INFO - Avito done with warnings
+[2026-05-23T11:40:33.808+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-05-23T11:40:33.987+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=scrape_avito, execution_date=20260523T000000, start_date=20260523T114032, end_date=20260523T114033
+[2026-05-23T11:40:34.160+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-05-23T11:40:34.354+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,25 @@
+[2026-05-05T20:39:49.435+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_electroplanet scheduled__2026-05-05T19:00:00+00:00 [queued]>
+[2026-05-05T20:39:49.451+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_electroplanet scheduled__2026-05-05T19:00:00+00:00 [queued]>
+[2026-05-05T20:39:49.453+0000] {taskinstance.py:2170} INFO - Starting attempt 3 of 3
+[2026-05-05T20:39:49.481+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_electroplanet> on 2026-05-05 19:00:00+00:00
+[2026-05-05T20:39:49.491+0000] {standard_task_runner.py:60} INFO - Started process 207 to run task
+[2026-05-05T20:39:49.499+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_electroplanet', 'scheduled__2026-05-05T19:00:00+00:00', '--job-id', '322', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpnfv36eke']
+[2026-05-05T20:39:49.505+0000] {standard_task_runner.py:88} INFO - Job 322: Subtask scrape_electroplanet
+[2026-05-05T20:39:49.696+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_electroplanet scheduled__2026-05-05T19:00:00+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-05T20:39:49.882+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_electroplanet' AIRFLOW_CTX_EXECUTION_DATE='2026-05-05T19:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='3' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-05-05T19:00:00+00:00'
+[2026-05-05T20:39:49.886+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-05T20:39:49.889+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            set -e\n            cd /opt/***\n            mkdir -p data/raw\n            scrapy crawl electroplanet_ma -o data/raw/electroplanet_ma.json --overwrite-output -s LOG_LEVEL=WARNING -s ROBOTSTXT_OBEY=False -s DOWNLOAD_DELAY=2\n            echo Electroplanet done\n        ']
+[2026-05-05T20:39:49.919+0000] {subprocess.py:86} INFO - Output:
+[2026-05-05T20:39:49.931+0000] {subprocess.py:93} INFO - /usr/bin/bash: line 5: scrapy: command not found
+[2026-05-05T20:39:49.932+0000] {subprocess.py:97} INFO - Command exited with return code 127
+[2026-05-05T20:39:49.962+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 428, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 127.
+[2026-05-05T20:39:49.968+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=price_intelligence_pipeline, task_id=scrape_electroplanet, execution_date=20260505T190000, start_date=20260505T203949, end_date=20260505T203949
+[2026-05-05T20:39:49.999+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 322 for task scrape_electroplanet (Bash command failed. The command returned a non-zero exit code 127.; 207)
+[2026-05-05T20:39:50.038+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-05-05T20:39:50.177+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

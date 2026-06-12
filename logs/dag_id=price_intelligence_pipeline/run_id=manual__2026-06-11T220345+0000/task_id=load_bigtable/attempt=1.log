@@ -1,0 +1,36 @@
+[2026-06-11T22:05:31.094+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.load_bigtable manual__2026-06-11T22:03:45+00:00 [queued]>
+[2026-06-11T22:05:31.105+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.load_bigtable manual__2026-06-11T22:03:45+00:00 [queued]>
+[2026-06-11T22:05:31.107+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 3
+[2026-06-11T22:05:31.126+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): load_bigtable> on 2026-06-11 22:03:45+00:00
+[2026-06-11T22:05:31.133+0000] {standard_task_runner.py:60} INFO - Started process 69318 to run task
+[2026-06-11T22:05:31.139+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'load_bigtable', 'manual__2026-06-11T22:03:45+00:00', '--job-id', '2036', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpdjiqdbwb']
+[2026-06-11T22:05:31.144+0000] {standard_task_runner.py:88} INFO - Job 2036: Subtask load_bigtable
+[2026-06-11T22:05:31.231+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.load_bigtable manual__2026-06-11T22:03:45+00:00 [running]> on host 91e0d3a0a233
+[2026-06-11T22:05:31.358+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='load_bigtable' AIRFLOW_CTX_EXECUTION_DATE='2026-06-11T22:03:45+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-06-11T22:03:45+00:00'
+[2026-06-11T22:05:31.361+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-06-11T22:05:31.363+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            set -e\n            cd /opt/***\n            export GOOGLE_APPLICATION_CREDENTIALS=/opt/***/gcp-credentials-new.json\n            python3 scripts/load_bigtable.py\n            echo Bigtable load done\n        ']
+[2026-06-11T22:05:31.378+0000] {subprocess.py:86} INFO - Output:
+[2026-06-11T22:13:49.021+0000] {subprocess.py:93} INFO - Found 6 files
+[2026-06-11T22:13:49.026+0000] {subprocess.py:93} INFO - [OK] amazon.ma: 897 produits, 3 price changes detected
+[2026-06-11T22:13:49.028+0000] {subprocess.py:93} INFO -   [DOWN] UPGRADED DA97-08693B Refrigerator Crisper Drawer C | 92.99 -> 88.79 MAD (-4.5%)
+[2026-06-11T22:13:49.032+0000] {subprocess.py:93} INFO -   [UP] Upgraded DA97-08693B Refrigerator Crisper Drawer C | 89.79 -> 91.99 MAD (+2.5%)
+[2026-06-11T22:13:49.037+0000] {subprocess.py:93} INFO -   [DOWN] Portable Washing Machine 20L —Small Foldable Washe | 59.99 -> 55.99 MAD (-6.7%)
+[2026-06-11T22:13:49.039+0000] {subprocess.py:93} INFO - [OK] avito.ma: 1692 produits, 0 price changes detected
+[2026-06-11T22:13:49.042+0000] {subprocess.py:93} INFO - [OK] connecto.ma: 3061 produits, 1 price changes detected
+[2026-06-11T22:13:49.045+0000] {subprocess.py:93} INFO -   [DOWN] Ordinateur De Bureau All In One Lenovo Ideacentre  | 10190.0 -> 9500.0 MAD (-6.8%)
+[2026-06-11T22:13:49.049+0000] {subprocess.py:93} INFO - [SKIP] /opt/***/data/raw/default.json is empty
+[2026-06-11T22:13:49.052+0000] {subprocess.py:93} INFO - [OK] electroplanet.ma: 0 produits, 0 price changes detected
+[2026-06-11T22:13:49.055+0000] {subprocess.py:93} INFO - [OK] jumia.ma: 7004 produits, 791 price changes detected
+[2026-06-11T22:13:49.058+0000] {subprocess.py:93} INFO -   [DOWN] Monster Ecouteurs Casque à oreilles ouvertes AC210 | 231.57 -> 190.0 MAD (-17.9%)
+[2026-06-11T22:13:49.061+0000] {subprocess.py:93} INFO -   [DOWN] Hp PC Portable EliteBook 840 - 14" - Intel Core i5 | 1999.0 -> 1799.0 MAD (-10.0%)
+[2026-06-11T22:13:49.066+0000] {subprocess.py:93} INFO -   [UP] Lenovo PC PORTABLE  Thinkpad L13 Core i5-10ème Gén | 2499.0 -> 2589.0 MAD (+3.6%)
+[2026-06-11T22:13:49.069+0000] {subprocess.py:93} INFO -   [DOWN] Hp PC Portable EliteBook 840 - 14" - Intel Core i5 | 1999.0 -> 1799.0 MAD (-10.0%)
+[2026-06-11T22:13:49.072+0000] {subprocess.py:93} INFO -   [DOWN] Hp PC BUREAU ProDesk 400-i5-16Go 256Go SSD souris+ | 1199.0 -> 1149.0 MAD (-4.2%)
+[2026-06-11T22:13:49.075+0000] {subprocess.py:93} INFO - 
+[2026-06-11T22:13:49.077+0000] {subprocess.py:93} INFO - TOTAL: 12083 rows written to Bigtable
+[2026-06-11T22:13:49.080+0000] {subprocess.py:93} INFO - TOTAL ALERTS: 795 price changes detected
+[2026-06-11T22:13:49.225+0000] {subprocess.py:93} INFO - Bigtable load done
+[2026-06-11T22:13:49.228+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-06-11T22:13:49.324+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=price_intelligence_pipeline, task_id=load_bigtable, execution_date=20260611T220345, start_date=20260611T220531, end_date=20260611T221349
+[2026-06-11T22:13:49.390+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-06-11T22:13:49.491+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

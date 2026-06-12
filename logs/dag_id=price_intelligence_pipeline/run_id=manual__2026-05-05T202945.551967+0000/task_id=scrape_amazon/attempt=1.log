@@ -1,0 +1,29 @@
+[2026-05-05T20:50:55.059+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_amazon manual__2026-05-05T20:29:45.551967+00:00 [queued]>
+[2026-05-05T20:50:55.092+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: price_intelligence_pipeline.scrape_amazon manual__2026-05-05T20:29:45.551967+00:00 [queued]>
+[2026-05-05T20:50:55.094+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 3
+[2026-05-05T20:50:55.129+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): scrape_amazon> on 2026-05-05 20:29:45.551967+00:00
+[2026-05-05T20:50:55.140+0000] {standard_task_runner.py:60} INFO - Started process 536 to run task
+[2026-05-05T20:50:55.154+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'price_intelligence_pipeline', 'scrape_amazon', 'manual__2026-05-05T20:29:45.551967+00:00', '--job-id', '329', '--raw', '--subdir', 'DAGS_FOLDER/price_intelligence_dag.py', '--cfg-path', '/tmp/tmpozdxjh48']
+[2026-05-05T20:50:55.163+0000] {standard_task_runner.py:88} INFO - Job 329: Subtask scrape_amazon
+[2026-05-05T20:50:55.341+0000] {task_command.py:423} INFO - Running <TaskInstance: price_intelligence_pipeline.scrape_amazon manual__2026-05-05T20:29:45.551967+00:00 [running]> on host 25ef6dfa8bdc
+[2026-05-05T20:50:55.584+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='price_intelligence_pipeline' AIRFLOW_CTX_TASK_ID='scrape_amazon' AIRFLOW_CTX_EXECUTION_DATE='2026-05-05T20:29:45.551967+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-05T20:29:45.551967+00:00'
+[2026-05-05T20:50:55.588+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-05T20:50:55.593+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n            set -e\n            cd /opt/***\n            mkdir -p data/raw\n            scrapy crawl amazon_ma -o data/raw/amazon_ma.json --overwrite-output -s LOG_LEVEL=WARNING -s ROBOTSTXT_OBEY=False -s DOWNLOAD_DELAY=3 -s RETRY_TIMES=5\n            echo Amazon done\n        ']
+[2026-05-05T20:50:55.620+0000] {subprocess.py:86} INFO - Output:
+[2026-05-05T20:50:57.418+0000] {subprocess.py:93} INFO - Scrapy 2.11.2 - no active project
+[2026-05-05T20:50:57.419+0000] {subprocess.py:93} INFO - 
+[2026-05-05T20:50:57.420+0000] {subprocess.py:93} INFO - Unknown command: crawl
+[2026-05-05T20:50:57.421+0000] {subprocess.py:93} INFO - 
+[2026-05-05T20:50:57.422+0000] {subprocess.py:93} INFO - Use "scrapy" to see available commands
+[2026-05-05T20:50:57.570+0000] {subprocess.py:97} INFO - Command exited with return code 2
+[2026-05-05T20:50:57.608+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 428, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 2.
+[2026-05-05T20:50:57.620+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=price_intelligence_pipeline, task_id=scrape_amazon, execution_date=20260505T202945, start_date=20260505T205055, end_date=20260505T205057
+[2026-05-05T20:50:57.654+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 329 for task scrape_amazon (Bash command failed. The command returned a non-zero exit code 2.; 536)
+[2026-05-05T20:50:57.711+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-05-05T20:50:57.857+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
